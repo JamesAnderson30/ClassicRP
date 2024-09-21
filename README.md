@@ -1,131 +1,424 @@
-# Flask React Project
+# ClassicRP
 
-This is the starter for the Flask React project.
+A platform to facilitate the cooperative writing hobby on forums of old. There's still a lot of interest but not a lot of good options for those who enjoy.
+This project should build a platform that is specificially tailored to facilitate many kinds of cooperative writing or roleplay. 
 
-## Getting started
+## API
 
-1. Clone this repository (only this branch).
+## Auth
+### All apis that require authentication
+All apis that require a current logged in user.
 
-2. Install dependencies.
+* Request: apis that require authentication
+* Error Response: Require authentication
+  * Status Code: 401
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-   ```bash
-   pipenv install -r requirements.txt
-   ```
+    ```json
+    {
+      "errors":
+      {
+        "message": "Unauthorized"
+      }
+    }
+    ```
 
-3. Create a __.env__ file based on the example with proper settings for your
-   development environment.
+### All apis that require proper authorization
+All apis that require authentication and the current user does not have the
+correct permission to view.
 
-4. Make sure the SQLite3 database connection URL is in the __.env__ file.
+* Request: apis that require proper authorization
+* Error Response: Require proper authorization
+  * Status Code: 403
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention.**
+    ```json
+    {
+      "message": "Forbidden"
+    }
+    ```
 
-6. Get into your pipenv, migrate your database, seed your database, and run your
-   Flask app:
+### Get all Users
+Returns the information about the all users
 
-   ```bash
-   pipenv shell
-   ```
+* Require Authentication: true
+* Request
+  * Method: GET
+  * URL: /api/users
+  * Body: none
 
-   ```bash
-   flask db upgrade
-   ```
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-   ```bash
-   flask seed all
-   ```
+    ```json
+    {
+      "users": [
+        {
+          "id": 1,
+          "email": "john.smith@gmail.com",
+          "username": "JohnSmith"
+        }
+      ]
+    }
+    ```
 
-   ```bash
-   flask run
-   ```
+### Get an User with Specific id
+Returns the information about a user of a specific id
 
-7. The React frontend has no styling applied. Copy the __.css__ files from your
-   Authenticate Me project into the corresponding locations in the
-   __react-vite__ folder to give your project a unique look.
+* Require Authentication: true
+* Request
+  * Method: GET
+  * URL: /api/users/:userId
+  * Body: none
 
-8. To run the React frontend in development, `cd` into the __react-vite__
-   directory and run `npm i` to install dependencies. Next, run `npm run build`
-   to create the `dist` folder. The starter has modified the `npm run build`
-   command to include the `--watch` flag. This flag will rebuild the __dist__
-   folder whenever you change your code, keeping the production version up to
-   date.
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-## Deployment through Render.com
+    ```json
+    {
+      "id": 1,
+      "email": "john.smith@gmail.com",
+      "username": "JohnSmith"
+    }
+    ```
 
-First, recall that Vite is a development dependency, so it will not be used in
-production. This means that you must already have the __dist__ folder located in
-the root of your __react-vite__ folder when you push to GitHub. This __dist__
-folder contains your React code and all necessary dependencies minified and
-bundled into a smaller footprint, ready to be served from your Python API.
+### Log In a User
+Logs in a current user with email and password and returns the user's information.
 
-Begin deployment by running `npm run build` in your __react-vite__ folder and
-pushing any changes to GitHub.
+* Require Authentication: false
+* Request
+  * Method: POST
+  * URL: /api/auth/login
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-Refer to your Render.com deployment articles for more detailed instructions
-about getting started with [Render.com], creating a production database, and
-deployment debugging tips.
+    ```json
+    {
+      "email": "john.smith@gmail.com",
+      "password": "secret password"
+    }
+    ```
 
-From the Render [Dashboard], click on the "New +" button in the navigation bar,
-and click on "Web Service" to create the application that will be deployed.
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-Select that you want to "Build and deploy from a Git repository" and click
-"Next". On the next page, find the name of the application repo you want to
-deploy and click the "Connect" button to the right of the name.
+    ```json
+    {
+      "id": 1,
+      "email": "john.smith@gmail.com",
+      "username": "JohnSmith"
+    }
+    ```
 
-Now you need to fill out the form to configure your app. Most of the setup will
-be handled by the __Dockerfile__, but you do need to fill in a few fields.
+* Error Response: Invalid credentials
+  * Status Code: 401
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-Start by giving your application a name.
+    ```json    {
+      "error": "No such user exists.",
+      // or
+      "error": "Password was incorrect."
+    }
+    ```
 
-Make sure the Region is set to the location closest to you, the Branch is set to
-"main", and Runtime is set to "Docker". You can leave the Root Directory field
-blank. (By default, Render will run commands from the root directory.)
+* Error response: Body validation errors
+  * Status Code: 400
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-Select "Free" as your Instance Type.
+    ```json
+    {
+      "message": "Bad Request",
+      "errors": {
+        "email": "email is required" /*or*/ "Email provided not found.",
+        "password": "password is required"
+      }
+    }
+    ```
 
-### Add environment variables
+### Log out
+Log the current user out.
 
-In the development environment, you have been securing your environment
-variables in a __.env__ file, which has been removed from source control (i.e.,
-the file is gitignored). In this step, you will need to input the keys and
-values for the environment variables you need for production into the Render
-GUI.
+* Require Authentication: false
+* Request
+  * Method: GET
+  * URL: /api/auth/logout
+  * Body: none
 
-Add the following keys and values in the Render GUI form:
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
+    ```json
+    {
+      "message": "User logged out"
+    }
+    ```
 
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
+### Sign Up a User
+Create a new user, log in, and return the user's information.
 
-Add the following keys and values:
+* Require Authentication: false
+* Request
+  * Method: POST
+  * URL: /api/auth/signup
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-- DATABASE_URL (copy value from the **External Database URL** field)
+    ```json
+    {
+      "username": "JohnSmith",
+      "email": "john.smith@gmail.com",
+      "password": "secret password"
+    }
+    ```
 
-**Note:** Add any other keys and values that may be present in your local
-__.env__ file. As you work to further develop your project, you may need to add
-more environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment.
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-### Deploy
+    ```json
+    {
+      "id": 1,
+      "email": "john.smith@gmail.com",
+      "username": "JohnSmith"
+    }
+    ```
 
-Now you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your Dockerfile
-commands being executed and any errors that occur.
+* Error response: Validation Errors
+  * Status Code: 401
+  * Headers:
+    * Content-Type: application/json
+  * Body:
 
-When deployment is complete, open your deployed site and check to see that you
-have successfully deployed your Flask application to Render! You can find the
-URL for your site just below the name of the Web Service at the top of the page.
+    ```json
+    {
+      "errors": {
+        "username": [
+          "This field is required", // or
+          "Username is already in use."
+        ], // and/or
+        "email": [
+          "This field is required", // or
+          "Email address is already in use."
+        ], // and/or
+        "password": [
+          "This field is required"
+        ]
+      }
+    }
+    ```
 
-**Note:** By default, Render will set Auto-Deploy for your project to true. This
-setting will cause Render to re-deploy your application every time you push to
-main, always keeping it up to date.
+## Category
+### Get Categories
+* Require Authentication: false
+* Request
+  * Method: GET
+  * URL: /api/categories
+  * Body: none
 
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+	"category":[
+		{
+			"id": 1,
+			"name": "Fantasy",
+			"description": "A place for stories steeped in technological fantasy",
+			"options": "{'Test_Option':'1'}"
+          "order": 2
+		}
+	]
+    }
+    ```
+
+### Get Category 
+* Require Authentication: false
+* Request
+  * Method: GET
+  * URL: /api/categories/:id
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+	   "category":{
+         "options": "{json}",
+             "Topics": [
+                "subject": "Test topic",
+                "user_id": "1",
+                "username": "demo-lition"
+             ]
+       }
+    }
+    ```
+
+## Topics
+### Get Topics
+    * Require Authentication: false
+* Request
+  * Method: GET
+  * URL: /api/topic/:id
+  * Body: none
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body:
+
+    ```json
+    {
+	   "topic":{
+         "id": 1,
+          "subject": "Fantasy Topic",
+          "body": "Writing a fantasy topic",
+          "user_id": 1,
+          "username": "Demo-lition",
+          "option": "{json}",
+          "category_id": 2,
+          "created_at": "datestring",
+          "Posts": [
+            {
+               "id": 3,
+                "body": "unicorns fly",
+                "user_id": 2,
+                "options": "{json}"
+             }
+          ]
+       }
+    }
+    ```
+### Create Topic
+    * Require Authentication: true
+* Request
+  * Method: POST
+  * URL: /api/topic/
+  * Body:
+  ```json
+  {
+     "subject": "Fantasy Topic",
+    "body": "Writing a fantasy topic",
+    "user_id": 1,
+    "option": "{json}",
+    "category_id": 2
+  }
+  ```
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body: None
+
+
+### Update Topic
+    * Require Authentication: true
+* Request
+  * Method: PUT
+  * URL: /api/topic/:id
+  * Body:
+  ```json
+  {
+     "subject": "Fantasy Topic",
+    "body": "Writing a fantasy topic",
+    "option": "{json}",
+    "category_id": 2
+  }
+  ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body: None
+ 
+### Delete Topic
+    * Require Authentication: true
+* Request
+  * Method: DELETE
+  * URL: /api/topic/:id
+  * Body: None
+ 
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body: None
+ 
+
+## Posts
+### Create Post
+    * Require Authentication: true
+* Request
+  * Method: POST
+  * URL: /api/post/
+  * Body:
+  ```json
+  {
+    "body": "Writing a fantasy topic",
+    "user_id": 1,
+    "option": "{json}",
+    "topic_id": 2
+  }
+  ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body: None
+ 
+### Update Post
+    * Require Authentication: true
+* Request
+  * Method: UPDATE
+  * URL: /api/post/:id
+  * Body:
+  ```json
+  {
+    "body": "Writing a fantasy topic",
+    "user_id": 1,
+    "option": "{json}",
+    "topic_id": 2
+  }
+  ```
+
+* Successful Response
+  * Status Code: 200
+  * Headers:
+    * Content-Type: application/json
+  * Body: None
+ 
+### 
