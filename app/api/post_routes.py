@@ -10,4 +10,7 @@ def post(id):
     post = Post.query.get(id)
     return jsonify(post.to_dict())
 
-
+# POST new Post Information
+@category_routes.route("/new")
+def new_post():
+    
