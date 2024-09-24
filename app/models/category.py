@@ -1,7 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
-
 class Category(db.Model):
     __tablename__ = 'category'
 
@@ -16,7 +15,14 @@ class Category(db.Model):
 
     Topic = db.relationship('Topic', back_populates='Category')
 
+    def to_dict(self):
 
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'options': self.options,
+        }
     # user = db.relationship('User', back_populates='questions')
     # answers = db.relationship('Answer', back_populates='question', cascade="all, delete-orphan")
     # # Uncomment When Quesion Comments is added

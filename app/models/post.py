@@ -21,6 +21,16 @@ class Post(db.Model):
     User = db.relationship('User', back_populates='Post')
     Topic = db.relationship('Topic', back_populates='Post')
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'body': self.body,
+            'options': self.options,
+            'user_id': self.user_id,
+            'username': self.User.username,
+            'topic_id': self.topic_id,
+            'created_at': self.created_at
+        }
     # # Uncomment When Quesion Comments is added
     # question_comments = db.relationship('QuestionComment', back_populates='question', cascade="all, delete-orphan")
     # question_following = db.relationship('QuestionFollowing', back_populates='question', cascade="all, delete-orphan")
