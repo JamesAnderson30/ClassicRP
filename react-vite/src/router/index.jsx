@@ -1,8 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
+import NewPostForm from '../components/Posts/Forms/NewPost';
 import Layout from './Layout';
 
+// The router really should be rewritten
 export const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -19,6 +21,10 @@ export const router = createBrowserRouter([
         path: "signup",
         element: <SignupFormPage />,
       },
+      {
+        path: "/post/new",
+        element: <NewPostForm />
+      }
     ],
   },
 ]);

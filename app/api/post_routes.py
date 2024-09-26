@@ -1,36 +1,34 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Post
+from app.models import Post, db
+from app.forms import PostForm
+from flask_login import current_user, login_user, logout_user, login_required
+import datetime
 
 
 post_routes = Blueprint('post', __name__)
 
 # Get Post Information
-@category_routes.route('/<int:id>')
+@post_routes.route('/<int:id>')
 def post(id):
     post = Post.query.get(id)
     return jsonify(post.to_dict())
 
 # POST new Post Information
-@category_routes.route("/new")
+@post_routes.route("/new", methods=['POST'])
 def new_post():
-     # Create Question
+     # Create Post
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         post = Post(
             body=form.data['body'],
-            subject=form.data['subject'],
-            user_id=current_user.id
+            topic_id=form.data['topic_id'],
+            user_id=current_user.id,
+            created_at=datetime.datetime.now()
         )
         db.session.add(post)
         db.session.commit()
-        res = {
-            "id": question.id,
-            "question": question.question,
-            "subject": question.subject,
-            "user_id": current_user.id
-        }
-        return jsonify(res), 201
+        return jsonify(post.id), 201
     else:
         return form.errors, 401
