@@ -9,6 +9,7 @@
 // const UPDATE_QUESTION = 'qustions/updateQuestion'
 const CREATE_POST = 'post/createQuestion'
 
+
 // // Action Creators
 const createPost = (post) =>({
     type: CREATE_POST,
@@ -63,13 +64,134 @@ const createPost = (post) =>({
 
 // // Thunks
 export const sendPost = (post) => async (dispatch) => {
-    console.log("post: ", post);
     const res = await fetch('/api/post/new', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(post)
     })
+    let newPost = {...post, id: await res.json()}
+    dispatch(createPost(newPost))
+    return JSON.stringify(newPost)
 }
+
+const initialState = {posts: {byId: {}, all:[]}}
+
+const postReducer = (state = initialState, action) =>{
+    let newPostState = {...state.posts}
+    switch(action.type){
+        case CREATE_POST:
+            console.log("action: ", action)
+            newPostState.byId[action.post.id] = action.post;
+            newPostState.all.push(action.post)
+            return {...state, posts: newPostState}
+
+        default:
+            return state;
+    }
+}
+
+export default postReducer;
+// const questionReducer = (state = initialState, action) => {
+//     let newState;
+//     switch (action.type) {
+//         case GET_QUESTIONS:
+//             newState = { ...state };
+//             // All Questions
+//             newState.allQuestions = action.payload.Questions;
+//             newState.tagName = {"tagName": action.payload.tagName};
+
+//             // byId
+//             console.log("action.payload: ", action.payload);
+//             newState.byId = action.payload.Questions.reduce((accumlator, question) => {
+//                 accumlator[question.id] = question
+//                 return accumlator;
+//             }, {})
+
+//             return newState;
+
+//         case GET_USER_QUESTIONS:
+//             newState = { ...state };
+//             // All User Questions
+//             newState.allQuestions = action.payload.Questions;
+
+//             // byId
+//             for (let question of action.payload.Questions) {
+//                 newState.byId[question.id] = question;
+//             }
+//             return newState;
+
+//         case LOAD_COMMENTS: {
+//             const updated = {
+//                 ...state,
+//                 questionComments: action.payload.QuestionComments.reduce(
+//                     (accumulator, comment) => {
+//                         accumulator[comment.id] = comment;
+
+//                         return accumulator;
+//                     },
+//                     {}
+//                 ),
+//             };
+
+//             return updated;
+//         }
+
+//         case LOAD_COMMENT: {
+//             const updated =  {
+//                 ...state,
+//                 questionComments: {...state.questionComments,},
+//             };
+
+//             // updated.questionComments[action.payload.id] = action.payload;
+//             //
+//             // console.log(LOAD_COMMENT, updated);
+
+//             return updated;
+//         }
+
+//         case DELETE_COMMENT: {
+//             const commentId = action.payload
+//             const newState = {...state}
+//             newState.questionComments ? {...newState.questionComments} : {}
+//             delete newState.questionComments[commentId]
+//             return newState;
+//         }
+
+//         case DELETE_QUESTION: {
+//             newState = { ...state };
+
+//             newState.allQuestions = newState.allQuestions.filter(
+//                 (question) => question.id !== action.payload.id
+//             );
+
+//             delete newState.byId[action.payload.id];
+
+//             return newState;
+//         }
+
+//         case UPDATE_QUESTION: {
+//             newState = {...state};
+
+//             const updatedQuestions = newState.allQuestions.map(question => {
+//                 if(question.id === action.payload.id) {
+//                     return action.payload;
+//                 } else {
+//                     return question
+//                 }
+//             })
+
+//             newState.allQuestions = updatedQuestions;
+//             newState.byId = {...newState.byId, [action.payload.id]: action.payload}
+
+//             return newState;
+//         }
+//         default:
+//             return state;
+//     }
+// }
+
+// export default questionReducer;
+
 // export const getQuestionsByTagThunk = (body) => async (dispatch) => {
 //   const {tagId} = body;
 
