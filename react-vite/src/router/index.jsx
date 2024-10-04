@@ -5,6 +5,8 @@ import NewPostForm from '../components/Posts/Forms/NewPost';
 import Layout from './Layout';
 import CategoryList from '../components/Categories/CategoryList';
 import TopicList from '../components/Topics/TopicList';
+import TopicMain from '../components/Topics/TopicMain';
+import CategorySingle from '../components/Categories/CategorySingle';
 
 // The router really should be rewritten
 export const router = createBrowserRouter([
@@ -33,7 +35,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/categories/:id",
-        element: <TopicList />
+        element: <CategorySingle />
+      },
+      {
+        path: "/topic/:id",
+        element: <TopicMain />
       }
     ],
   },

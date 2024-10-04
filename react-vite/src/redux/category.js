@@ -29,14 +29,18 @@ export const getCategories = () => async (dispatch) => {
     return categories.categories
 }
 
-const initialState = {categories:[]}
+const initialState = {categories:{byId:{}, all:[]}}
 
 const categoryReducer = (state = initialState, action) =>{
     let newCategoryState = {...state.categories}
     switch(action.type){
         case STORE_CATEGORIES:
-            newCategoryState = action.categories;
-            return {...state, categories:[...action.categories.categories]}
+            //console.log("action.categories.categories: ", action.categories.categories)
+            newCategoryState.all = action.categories.categories;
+            for(let topic of action.categories.categories){
+                newCategoryState.byId[topic.id] = topic;
+            }
+            return {...state, categories: newCategoryState}
         default:
             return state;
     }

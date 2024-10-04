@@ -20,11 +20,11 @@ function CategoryList(){
     if(!isLoaded) return (
         <Loading />
     )
-    console.log("Categories: ", categories)
+
     return (
         <div className="CategoryList">
         {
-            categories.map((category, idx)=>{
+            categories.all.map((category, idx)=>{
                 return (
                     <CategoryListComponent key={category.name+idx} category={category} />
                 )

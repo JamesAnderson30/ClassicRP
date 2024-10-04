@@ -1,34 +1,14 @@
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { getCategories } from "../../redux/category";
-import { useParams } from "react-router-dom";
-import { getCategoryTopics } from "../../redux/topic";
-import Loading from "../loading";
 
+import TopicListItem from "./TopicListItem";
 
-function TopicList(){
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [topicList, setTopicList] = useState([])
-    const dispatch = useDispatch()
-
-    const {id} = useParams();
-    //const categories = useSelector((store) => store.category.categories);
-
-    useEffect(()=>{
-        if(!isLoaded){
-            dispatch(getCategoryTopics(id))
-            setIsLoaded(true);
-        }
-    }, [dispatch, isLoaded])
-
-    if(!isLoaded) return (
-        <Loading />
-    )
+function TopicList(topics){
+    let {topic_list, category_id} = topics
     return (
-        <div className="TopicList">
-
-        </div>
+        <>
+            {topic_list[category_id].map((topic, idx)=>{
+                return(<TopicListItem key={"topic"+idx} topic={topic} />)
+            })}
+        </>
     )
 }
 

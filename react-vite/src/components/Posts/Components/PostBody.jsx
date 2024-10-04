@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 
-function PostBody(post){
+function PostBody({post}){
     if(post){
         return (
-            <h2>{post.body}</h2>
+            <h3>{post.body}</h3>
         )
     }
 }

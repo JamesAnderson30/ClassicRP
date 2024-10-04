@@ -1,9 +1,8 @@
 import { useState } from "react"
 import { sendPost } from "../../../redux/post";
 import { useDispatch } from "react-redux";
-function NewPostForm(){
-    let topic_id = -1;
-    console.log("topic_id: ", topic_id)
+function NewPostForm(topic_id){
+
     const [subject, setSubject] = useState("");
     const [body, setBody] = useState("");
     const dispatch = useDispatch()
@@ -18,7 +17,7 @@ function NewPostForm(){
                 Body
                 <input type="text" value={body} onChange={(e)=>setBody(e.target.value)} />
             </label>
-            <button type="submit"></button>
+            <button type="submit">Post!</button>
         </form>
     )
 }
