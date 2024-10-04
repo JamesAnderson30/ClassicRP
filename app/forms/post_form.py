@@ -6,3 +6,4 @@ from app.models import User, Post
 class PostForm(FlaskForm):
     body = StringField('body', validators=[DataRequired()])
     topic_id = StringField('topic_id')
+    id = StringField('id')

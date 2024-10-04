@@ -9,6 +9,7 @@ const searchTopicPosts = (topic_id) =>{
 
 
 const CREATE_POST = 'post/createPost'
+const UPDATE_POST = 'post/updatePost'
 const SAVE_POSTS = 'post/savePost'
 
 
@@ -23,6 +24,12 @@ const savePosts = (posts) => ({
     posts
 })
 
+// update post really just needs id and body for now
+
+const updatePost = (post) => ({
+    type: UPDATE_POST,
+    post
+})
 
 // // Thunks
 export const sendPost = (post) => async (dispatch) => {
@@ -37,8 +44,13 @@ export const sendPost = (post) => async (dispatch) => {
 }
 
 export const editPost = (post) => async (dispatch) =>{
-    console.log("edit Post: ", post);
-    //const res = await fetch(`/api/post/`)
+    const response = await fetch(`/api/post/${post.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(post)
+  });
+
+  dispatch(updatePost(await response.json()));
 }
 
 export const getPosts = (topic_id) => async (dispatch) =>{
@@ -63,6 +75,9 @@ const postReducer = (state = initialState, action) =>{
                 newPostState.byId[post.id] = post;
             }
             newPostState.all = [...(new Set(newPostState.all.concat(action.posts)))]
+            return {...state, posts: newPostState}
+        case UPDATE_POST:
+            newPostState.byId[action.post.id].body = action.post.body;
             return {...state, posts: newPostState}
         default:
             return state;

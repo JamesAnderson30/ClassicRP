@@ -5,8 +5,11 @@ import PostUserControls from "./PostUserControls";
 
 function TopicPost(id){
     const byId = useSelector((state) => state.post.posts.byId);
+    const [render, setRender] = useState(0)
     //get user status
     const user = useSelector(state=> state.session.user);
+
+
 
     if(byId[id.id]){
         let post = byId[id.id];

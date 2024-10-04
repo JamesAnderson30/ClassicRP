@@ -45,8 +45,14 @@ def edit_post(id):
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+
         id = form.data['id']
-        post = Post.query.filter_by(id = id)
+
+        post = Post.query.get(id)
+        
+        if not post:
+            return jsonify({'message': "Post not Found"}), 404
+
         if current_user.id != post.user_id:
             return jsonify({"message": "Unauthorized"}), 401
 
@@ -54,6 +60,7 @@ def edit_post(id):
 
         db.session.add(post)
         db.session.commit()
-        return jsonify(post.id), 201
+        return jsonify({'body': post.body, 'id': post.id}), 201
+        # return 201
     else:
         return form.errors, 401
