@@ -26,6 +26,17 @@ const storeTopic = (topic) => ({
 
 
 // // Thunks
+export const sendTopic = (topic) => async (dispatch) => {
+    const res = await fetch('/api/topic/new', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(topic)
+    })
+    let newPost = {...post, id: await res.json()}
+    dispatch(createPost(newPost))
+    return JSON.stringify(newPost)
+}
+
 export const getCategoryTopics = (category_id) => async (dispatch) => {
     const res = await fetch(`/api/category/${category_id}`, {
         method: 'GET'

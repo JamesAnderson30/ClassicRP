@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { editPost } from "../../../redux/post";
+import { deletePost, editPost } from "../../../redux/post";
 import {useNavigate} from 'react-router-dom';
 
 
 
-function PostUserControls({post, renderParent}){
-    console.log("renderParent", renderParent);
+function PostUserControls({post, setPost}){
     const [hideForm, setHideForm] = useState(true);
     const [body, setBody] = useState(post.body);
+    const [deleteButtonText, setDeleteButtonText] = useState("Delete");
+    const [hideDeleteButton, setHideDeleteButton] = useState(true)
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
 
     const editClick = () =>{
@@ -18,14 +18,27 @@ function PostUserControls({post, renderParent}){
         else setHideForm(false)
     }
 
-    const deletePost = () =>{
-        console.log("Delete Post: ", post);
+    const firstDeleteButton = () =>{
+        if(hideDeleteButton){
+            setHideDeleteButton(false);
+            setDeleteButtonText("No, keep it");
+        } else {
+            setHideDeleteButton(true);
+            setDeleteButtonText("Delete");
+        }
+    }
+
+    const confirmDelete = async () =>{
+        console.log("confirmDelete");
+        await dispatch(deletePost(post.id))
+        setPost(null)
     }
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
         await dispatch(editPost({body, 'topic_id': post.topic_id, 'id': post.id}));
-        navigate(`/topic/${post.id}`)
+        setPost({...post, body: body});
+        console.log("setPost: ", {...post, body: body});
         //renderParent();
     }
 
@@ -34,8 +47,11 @@ function PostUserControls({post, renderParent}){
             <button onClick={editClick} className="userControlButton">
                 Edit
             </button>
-            <button onClick={deletePost} className="userControlButton">
-                Delete
+            <button onClick={firstDeleteButton} className="userControlButton">
+                {deleteButtonText}
+            </button>
+            <button onClick={confirmDelete} hidden={hideDeleteButton} className="userControlButton confirm">
+                Yes, Delete!
             </button>
             <form hidden={hideForm} onSubmit={(e)=>handleSubmit(e)}>
                 <input type="hidden" name="topic_id" value={post.topic_id} />

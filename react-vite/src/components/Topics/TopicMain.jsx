@@ -10,7 +10,7 @@ import TopicPosts from "../Posts/TopicPosts";
 function TopicMain(){
     const {id} = useParams();
     const [isTopicLoaded, setIsTopicLoaded] = useState(false);
-    const [timeSinceLoaded, setTimeSinceLoaded] = useState(0);
+
     const [isPostLoaded, setIsPostLoaded] = useState(false);
     const topic = useSelector(state => state.topic.topics.byId[id]);
     const user = useSelector(state=> state.session.user);
@@ -33,7 +33,6 @@ function TopicMain(){
 
         }
         if(!isPostLoaded){
-            console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             getPostThunk(id)
         }
 

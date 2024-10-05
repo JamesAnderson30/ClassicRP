@@ -49,7 +49,7 @@ def edit_post(id):
         id = form.data['id']
 
         post = Post.query.get(id)
-        
+
         if not post:
             return jsonify({'message': "Post not Found"}), 404
 
@@ -64,3 +64,19 @@ def edit_post(id):
         # return 201
     else:
         return form.errors, 401
+
+@post_routes.route("/<int:id>", methods=['DELETE'])
+def delete_post(id):
+    # Create Post
+        post = Post.query.get(id)
+
+        if not post:
+            return jsonify({'message': "Post not Found"}), 404
+
+        if current_user.id != post.user_id:
+            return jsonify({"message": "Unauthorized"}), 401
+
+        db.session.delete(post)
+        db.session.commit()
+        return jsonify({'message': "Deleted"}), 201
+        # return 201

@@ -4,20 +4,18 @@ import { useSelector } from "react-redux"
 import PostUserControls from "./PostUserControls";
 
 function TopicPost(id){
-    const byId = useSelector((state) => state.post.posts.byId);
-    const [render, setRender] = useState(0)
-    //get user status
+    const byIdStart = useSelector((state) => state.post.posts.byId);
     const user = useSelector(state=> state.session.user);
+    const [post, setPost] = useState(byIdStart[id.id]);
+    if(byIdStart[id.id]){
 
 
-
-    if(byId[id.id]){
-        let post = byId[id.id];
+        //get user status
         return (
             <>
                 post
                 <PostBody post={post} />
-                {user && user.id == post.user_id && <PostUserControls post={post} />}
+                {user && post && user.id == post.user_id && <PostUserControls setPost={setPost} post={post} />}
             </>
         )
     }

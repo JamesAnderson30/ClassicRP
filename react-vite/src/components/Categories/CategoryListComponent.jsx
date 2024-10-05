@@ -1,7 +1,6 @@
-import { useState } from "react"
+
 import { NavLink } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
 function CategoryListComponent(category){
     let cat = category.category
     return (

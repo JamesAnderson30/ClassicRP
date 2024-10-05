@@ -1,9 +1,9 @@
 //Helper Function
 
-const searchTopicPosts = (topic_id) =>{
-    const posts = useSelector(state=> state.post.post.posts.all);
-    return posts.filter((post)=>{post.topic_id == topic_id})
-}
+// const searchTopicPosts = (topic_id) =>{
+//     const posts = useSelector(state=> state.post.post.posts.all);
+//     return posts.filter((post)=>{post.topic_id == topic_id})
+// }
 
 
 
@@ -11,7 +11,7 @@ const searchTopicPosts = (topic_id) =>{
 const CREATE_POST = 'post/createPost'
 const UPDATE_POST = 'post/updatePost'
 const SAVE_POSTS = 'post/savePost'
-
+const DELETE_POST = 'post/deletePost'
 
 // // Action Creators
 const createPost = (post) =>({
@@ -24,6 +24,11 @@ const savePosts = (posts) => ({
     posts
 })
 
+const removePost = (id) => ({
+    type: DELETE_POST,
+    id
+})
+
 // update post really just needs id and body for now
 
 const updatePost = (post) => ({
@@ -32,6 +37,13 @@ const updatePost = (post) => ({
 })
 
 // // Thunks
+export const deletePost = (id) => async (dispatch) =>{
+    await fetch(`/api/post/${id}`, {
+        method: 'DELETE',
+        headers: { "Content-Type": "application/json"}
+    })
+    dispatch(removePost(id))
+}
 export const sendPost = (post) => async (dispatch) => {
     const res = await fetch('/api/post/new', {
         method: 'POST',
@@ -78,6 +90,9 @@ const postReducer = (state = initialState, action) =>{
             return {...state, posts: newPostState}
         case UPDATE_POST:
             newPostState.byId[action.post.id].body = action.post.body;
+            return {...state, posts: newPostState}
+        case DELETE_POST:
+            delete newPostState.byId[action.id];
             return {...state, posts: newPostState}
         default:
             return state;

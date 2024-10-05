@@ -1,4 +1,4 @@
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function TopicListItem({topic}){
     return (
