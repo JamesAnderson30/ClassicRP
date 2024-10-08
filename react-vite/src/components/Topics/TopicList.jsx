@@ -1,14 +1,19 @@
 
+import { useState } from "react";
 import NewTopicForm from "./Forms/NewTopicForm";
 import TopicListItem from "./TopicListItem";
 
 function TopicList(topics){
-    let {topic_list, category_id} = topics
+    console.log("Topics: ", topics)
+    const [topic_list, setTopic_list] = useState(topics.topic_list[topics.category_id])
+    const [category_id, setCategory_id] = useState(topics.category_id)
+
+
     return (
         <>
             <NewTopicForm category_id={category_id} />
-            {topic_list[category_id].map((topic, idx)=>{
-                return(<TopicListItem key={"topic"+idx} topic={topic} />)
+            {topic_list.map((topic, idx)=>{
+                return(<TopicListItem key={idx} topic={topic} />)
             })}
         </>
     )
