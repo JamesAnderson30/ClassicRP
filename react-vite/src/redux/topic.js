@@ -110,17 +110,21 @@ const topicReducer = (state = initialState, action) =>{
             console.log("byCategoryId reducer: ", byCategoryId)
             console.log("newTopicState: ", newTopicState);
             return {...state, topics: newTopicState}
+        // This is specifically to story the topics that belong to a category
         case STORE_CATEGORYTOPICS:
+            newTopicState.byCategoryId[action.category_id] = [];
             for(let topic of action.topics){
                 newTopicState.byId[topic.id] = topic;
+                // Empty the state first
+
                 if(newTopicState.byCategoryId[topic.category_id]){
-                    // console.log("!!!!!!!!!!!!!")
-                    // console.log("if there is a category by id")
+                    console.log("!!!!!!!!!!!!!")
+                    console.log("if there is a category by id")
                     console.log(newTopicState.byCategoryId[topic.category_id])
                     newTopicState.byCategoryId[topic.category_id].push(topic)
                 } else {
-                    // console.log("!!!!!!!!");
-                    // console.log("and if not...")
+                    console.log("!!!!!!!!");
+                    console.log("and if not...")
                     console.log(newTopicState.byCategoryId[topic.category_id])
                     newTopicState.byCategoryId[topic.category_id] = [topic]
                     console.log(newTopicState.byCategoryId[topic.category_id])

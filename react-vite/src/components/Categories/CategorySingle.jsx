@@ -14,8 +14,11 @@ function CategorySingle(){
     const dispatch = useDispatch()
     const categories = useSelector(state => state.category.categories)
     const topicList = useSelector(state => state.topic.topics.byCategoryId);
-
     const {id} = useParams();
+
+
+
+
 
     //const categories = useSelector((store) => store.category.categories);
 
@@ -40,8 +43,18 @@ function CategorySingle(){
 
 
     return (
-            <div className="TopicList">
-                <TopicList topic_list={topicList} category_id={id} />
+            <div className="CategorySingle">
+                <div className="CategoryHeader">
+                    <div className="CategoryName">
+                        <h3>{categories.byId[id].name}</h3>
+                    </div>
+                    <div className="CategoryDescription">
+                        {categories.byId[id].description}
+                    </div>
+                </div>
+                <div className="TopicList">
+                    <TopicList topic_list={topicList} category_id={id} />
+                </div>
             </div>
         )
     }
