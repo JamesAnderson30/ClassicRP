@@ -2,6 +2,8 @@ import { useState } from "react"
 import PostBody from "./PostBody"
 import { useSelector } from "react-redux"
 import PostUserControls from "./PostUserControls";
+import PostUser from "./PostUser";
+import "./Post.css";
 
 function TopicPost(id){
     const byIdStart = useSelector((state) => state.post.posts.byId);
@@ -12,11 +14,15 @@ function TopicPost(id){
 
         //get user status
         return (
-            <>
-                post
-                <PostBody post={post} />
-                {user && post && user.id == post.user_id && <PostUserControls setPost={setPost} post={post} />}
-            </>
+            <div className="PostBody">
+                <div className="UserArea">
+                    <PostUser post={post} />
+                    {user && post && user.id == post.user_id && <PostUserControls setPost={setPost} post={post} />}
+                </div>
+                <div className="PostArea">
+                    <PostBody post={post} />
+                </div>
+            </div>
         )
     }
 }
