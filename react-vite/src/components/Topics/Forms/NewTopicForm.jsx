@@ -11,7 +11,7 @@ function NewTopicForm({category_id}){
     let handleSubmit = async (e) =>{
         e.preventDefault();
         let res = JSON.parse(await dispatch(sendTopic({body, category_id, subject})))
-        console.log("res: ", res);
+
         navigate(`/topic/${res.id}`)
     }
     return(

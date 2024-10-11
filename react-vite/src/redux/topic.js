@@ -78,7 +78,7 @@ export const getCategoryTopics = (category_id) => async (dispatch) => {
     })
 
     let result = await res.json()
-
+    console.log("result: ", result);
     dispatch(storeCategoryTopics(result.Topics, result.category.id))
     return result;
 }
@@ -88,7 +88,7 @@ export const getTopic = (topic_id) => async (dispatch) =>{
         method: 'GET'
     })
     let result = await res.json();
-
+    console.log("result: ", result);
     dispatch(storeTopic(result))
 }
 
@@ -114,20 +114,13 @@ const topicReducer = (state = initialState, action) =>{
         case STORE_CATEGORYTOPICS:
             newTopicState.byCategoryId[action.category_id] = [];
             for(let topic of action.topics){
+                console.log("Topic Thunk: ", topic)
                 newTopicState.byId[topic.id] = topic;
                 // Empty the state first
-
                 if(newTopicState.byCategoryId[topic.category_id]){
-                    console.log("!!!!!!!!!!!!!")
-                    console.log("if there is a category by id")
-                    console.log(newTopicState.byCategoryId[topic.category_id])
                     newTopicState.byCategoryId[topic.category_id].push(topic)
                 } else {
-                    console.log("!!!!!!!!");
-                    console.log("and if not...")
-                    console.log(newTopicState.byCategoryId[topic.category_id])
                     newTopicState.byCategoryId[topic.category_id] = [topic]
-                    console.log(newTopicState.byCategoryId[topic.category_id])
                 }
             }
             return {...state, topics: newTopicState}

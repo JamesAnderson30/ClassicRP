@@ -11,7 +11,6 @@ function CategoryList(){
     const categories = useSelector((store) => store.category.categories);
 
     useEffect(()=>{
-        console.log("categories: ", categories);
         if(categories.all.length < 1){
             dispatch(getCategories())
             setIsLoaded(true);

@@ -8,6 +8,7 @@ import { getPosts } from "../../redux/post";
 import NewPostForm from "../Posts/Forms/NewPost";
 import TopicPosts from "../Posts/TopicPosts";
 import TopicListUsertControl from "./Components/TopicUserControl";
+
 function TopicMain(){
     const {id} = useParams();
     let topic = useSelector(state => state.topic.topics.byId[id]);
@@ -17,18 +18,22 @@ function TopicMain(){
     const [subject, setSubject] = useState('');
     const [isPostLoaded, setIsPostLoaded] = useState(false);
 
+
     const dispatch = useDispatch();
+
 
     function setTopic({body, subject}){
         setBody(body);
         setSubject(subject);
     }
-    console.log("topic is loaded: ", isTopicLoaded)
+
+
+
     // if id is null or undefined, should throw error
     //check if post list is stale
     useEffect(()=>{
         let getTopicThunk = async (id) => {
-            console.log("GetTopicThunk: ", await dispatch(getTopic(id)));
+            await dispatch(getTopic(id))
             setIsTopicLoaded(true)
             setBody(topic.body);
             setSubject(topic.subject);
@@ -42,15 +47,13 @@ function TopicMain(){
 
             getPostThunk(id)
 
-
     }, [dispatch, isTopicLoaded, isPostLoaded])
-
+    console.log("isTopicLoaded ", isTopicLoaded)
     if(!isTopicLoaded){
         return(
             <Loading />
         )
     } else {
-
         return (
             <>
             <div id="TopicHeader">
@@ -71,7 +74,7 @@ function TopicMain(){
             <hr />
             {user != null && <NewPostForm topic_id={id} />}
             <div id="TopicPosts">
-                {isPostLoaded && <TopicPosts posts={topic.Posts} />}
+                {isPostLoaded && topic.Posts && <TopicPosts posts={topic.Posts} />}
                 {isPostLoaded || <Loading />}
             </div>
             </>

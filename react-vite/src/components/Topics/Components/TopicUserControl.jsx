@@ -34,7 +34,7 @@ function TopicUsertControl({topic, setTopic}){
     const confirmDelete = async () =>{
         // console.log("confirmDelete");
         let res = await dispatch(deleteTopic(topic))
-        console.log("res: ", res);
+
         if(res === true){
             navigate(`/categories/${topic.category_id}`)
         } else {
@@ -45,8 +45,7 @@ function TopicUsertControl({topic, setTopic}){
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
-        console.log("Click");
-        console.log(subject)
+
         await dispatch(editTopic({body, subject, id: topic.id, category_id: topic.category_id}));
         setTopic({...topic, body: body, subject: subject});
         // console.log("setPost: ", {...post, body: body});

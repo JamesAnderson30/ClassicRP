@@ -68,7 +68,6 @@ export const editPost = (post) => async (dispatch) =>{
 export const getPosts = (topic_id) => async (dispatch) =>{
     const res = await fetch(`/api/post/topic/${topic_id}`)
     let posts = await res.json();
-
     dispatch(savePosts(posts))
     return JSON.stringify(posts);
 }

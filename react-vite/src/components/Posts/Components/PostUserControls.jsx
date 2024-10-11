@@ -29,7 +29,6 @@ function PostUserControls({post, setPost}){
     }
 
     const confirmDelete = async () =>{
-        console.log("confirmDelete");
         await dispatch(deletePost(post.id))
         setPost(null)
     }
@@ -38,7 +37,7 @@ function PostUserControls({post, setPost}){
         e.preventDefault();
         await dispatch(editPost({body, 'topic_id': post.topic_id, 'id': post.id}));
         setPost({...post, body: body});
-        console.log("setPost: ", {...post, body: body});
+
         //renderParent();
     }
 
