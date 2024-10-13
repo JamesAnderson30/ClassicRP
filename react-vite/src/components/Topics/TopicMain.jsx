@@ -43,11 +43,10 @@ function TopicMain(){
             setIsPostLoaded(true)
         }
 
-            getTopicThunk(id)
+        if(!isTopicLoaded)getTopicThunk(id)
+        if(!isPostLoaded)getPostThunk(id)
 
-            getPostThunk(id)
-
-    }, [dispatch, isTopicLoaded, isPostLoaded])
+    }, [dispatch, isTopicLoaded, isPostLoaded, topic])
     console.log("isTopicLoaded ", isTopicLoaded)
     if(!isTopicLoaded){
         return(

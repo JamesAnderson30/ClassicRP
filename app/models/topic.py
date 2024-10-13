@@ -20,7 +20,7 @@ class Topic(db.Model):
 
     User = db.relationship('User', back_populates='Topic')
     Category = db.relationship('Category', back_populates='Topic')
-    Post = db.relationship('Post', back_populates='Topic')
+    Post = db.relationship('Post', cascade="all,delete", back_populates='Topic', )
 
     def to_dict(self):
         return {

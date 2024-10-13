@@ -16,7 +16,7 @@ def topic_id(id):
         return jsonify({'message': "Topic not Found"}), 404
     topic = topic_req.to_dict()
     topic['Posts'] = [post.to_dict() for post in topic_req.Post]
-    return jsonify(topic)
+    return jsonify(topic), 200
 
 # Edit Post Information
 @topic_routes.route("/<int:id>", methods=['PUT'])
@@ -45,6 +45,13 @@ def edit_topic(id):
         # return 201
     else:
         return form.errors, 401
+
+@topic_routes.route('/recent')
+def get_recents():
+    topics = Topic.query.limit(5).order_by(desc(Topic.id)).all()
+    print(jsonify(topics))
+    return jsonify(topics), 200
+
 
 @topic_routes.route('/<int:id>', methods=['DELETE'])
 def delete_topic(id):

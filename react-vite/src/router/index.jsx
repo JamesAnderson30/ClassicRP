@@ -7,6 +7,7 @@ import CategoryList from '../components/Categories/CategoryList';
 import TopicList from '../components/Topics/TopicList';
 import TopicMain from '../components/Topics/TopicMain';
 import CategorySingle from '../components/Categories/CategorySingle';
+import LandingPage from '../components/landingPage';
 
 // The router really should be rewritten
 export const router = createBrowserRouter([
@@ -15,7 +16,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <h1>Welcome!</h1>,
+        element: <LandingPage />,
       },
       {
         path: "login",

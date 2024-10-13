@@ -11,8 +11,11 @@ const STORE_CATEGORYTOPICS = 'topics/storeCategoryTopics'
 const STORE_TOPIC = 'topics/storeTopic'
 const UPDATE_TOPIC = 'topics/updateTopic'
 const REMOVE_TOPIC = 'topics/removeTopic'
+const STORE_TOPICS = 'topics/storeTopics'
 
 // // Action Creators
+
+
 const storeCategoryTopics = (topics, category_id) =>({
     type: STORE_CATEGORYTOPICS,
     topics,
@@ -34,10 +37,27 @@ const storeTopic = (topic) => ({
     topic
 })
 
+const storeTopics = (topics) => ({
+    type: STORE_CATEGORYTOPICS,
+    topics
+})
+
 
 
 
 // // Thunks
+export const getRecentTopics = () => async (dispatch) =>{
+    const res = await fetch(`/api/topic/recent/`,{
+        method:"GET"
+    })
+    if(res.ok){
+        let topics = await res.json()
+        dispatch(storeTopics(topics))
+        return topics
+
+    }
+}
+
 export const deleteTopic = (topic) => async (dispatch) =>{
     const res = await fetch(`/api/topic/${topic.id}`, {
         method: 'DELETE',
