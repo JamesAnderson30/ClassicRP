@@ -12,10 +12,14 @@ const STORE_TOPIC = 'topics/storeTopic'
 const UPDATE_TOPIC = 'topics/updateTopic'
 const REMOVE_TOPIC = 'topics/removeTopic'
 const STORE_TOPICS = 'topics/storeTopics'
+const STORE_TOPICPOST = 'topics/storeTopicPosts'
 
 // // Action Creators
 
-
+export const storeTopicPost = (post) => ({
+    type: STORE_TOPICPOST,
+    post
+})
 const storeCategoryTopics = (topics, category_id) =>({
     type: STORE_CATEGORYTOPICS,
     topics,
@@ -117,6 +121,9 @@ const initialState = {topics:{ byId:{}, byCategoryId:{}}}
 const topicReducer = (state = initialState, action) =>{
     let newTopicState = {...state.topics}
     switch(action.type){
+        case STORE_TOPICPOST:
+            newTopicState.byId[action.post.topic_id.topic_id].Posts.push({...action.post, topic_id: action.post.topic_id.topic_id})
+            return {...state, topics: newTopicState}
         case REMOVE_TOPIC:
             //remove from byId
             if(newTopicState.byId[action.topic.id]){

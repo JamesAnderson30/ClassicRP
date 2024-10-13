@@ -1,5 +1,7 @@
 //Helper Function
 
+import { storeTopicPost } from "./topic"
+
 // const searchTopicPosts = (topic_id) =>{
 //     const posts = useSelector(state=> state.post.post.posts.all);
 //     return posts.filter((post)=>{post.topic_id == topic_id})
@@ -52,6 +54,7 @@ export const sendPost = (post) => async (dispatch) => {
     })
     let newPost = {...post, id: await res.json()}
     dispatch(createPost(newPost))
+    dispatch(storeTopicPost(newPost))
     return JSON.stringify(newPost)
 }
 
@@ -79,7 +82,8 @@ const postReducer = (state = initialState, action) =>{
     switch(action.type){
         case CREATE_POST:
             newPostState.byId[action.post.id] = action.post;
-            newPostState.all.push(action.post)
+            newPostState.all = [...newPostState.all, action.post]
+            let newTopicState = {...state}
             return {...state, posts: newPostState}
         case SAVE_POSTS:
             for(let post of action.posts){

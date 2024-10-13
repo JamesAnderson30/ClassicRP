@@ -11,14 +11,14 @@ import TopicListUsertControl from "./Components/TopicUserControl";
 
 function TopicMain(){
     const {id} = useParams();
-    let topic = useSelector(state => state.topic.topics.byId[id]);
+    const topic = useSelector(state => state.topic.topics.byId[id]);
+    const post = useSelector(state=> state.post.posts.all)
     const user = useSelector(state=> state.session.user);
     const [isTopicLoaded, setIsTopicLoaded] = useState(false);
     const [body, setBody] = useState('');
     const [subject, setSubject] = useState('');
     const [isPostLoaded, setIsPostLoaded] = useState(false);
-
-
+    console.log("post: ", post);
     const dispatch = useDispatch();
 
 
@@ -45,9 +45,9 @@ function TopicMain(){
 
         if(!isTopicLoaded)getTopicThunk(id)
         if(!isPostLoaded)getPostThunk(id)
+        console.log("USEEFFECT");
 
     }, [dispatch, isTopicLoaded, isPostLoaded, topic])
-    console.log("isTopicLoaded ", isTopicLoaded)
     if(!isTopicLoaded){
         return(
             <Loading />
