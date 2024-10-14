@@ -55,7 +55,6 @@ function TopicMain(){
         return (
             <>
             <div id="TopicHeader">
-                {user != null && "<TopicControls topic={topic} />"}
                 <div className="TopicSubject">
                     <h4>{subject}</h4>
                 </div>
