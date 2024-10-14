@@ -9,9 +9,9 @@ function TopicPost(id){
     const byIdStart = useSelector((state) => state.post.posts.byId);
     const user = useSelector(state=> state.session.user);
     const [post, setPost] = useState(byIdStart[id.id]);
+    console.log("Post: ", post);
+    console.log("user Id: " , user.id)
     if(byIdStart[id.id]){
-
-
         //get user status
         return (
             <div className="PostBody">
