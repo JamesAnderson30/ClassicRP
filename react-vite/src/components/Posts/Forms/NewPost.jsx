@@ -3,7 +3,7 @@ import { sendPost } from "../../../redux/post";
 import { useDispatch } from "react-redux";
 function NewPostForm(topic_id){
 
-    const [isDisabled, setIsDisabled] = useState("");
+    const [isDisabled, setIsDisabled] = useState(true);
     const [body, setBody] = useState("");
     const [errors, setErrors] = useState([])
     const [errorsHidden, setErrorsHidden] = useState(true)
@@ -20,6 +20,7 @@ function NewPostForm(topic_id){
     }
 
     useEffect(()=>{
+        console.log("useEffect");
         if(body.length > 0) setIsDisabled(false)
         else setIsDisabled(true)
     }, [dispatch, body])
