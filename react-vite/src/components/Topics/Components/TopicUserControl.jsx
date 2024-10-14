@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {useNavigate} from 'react-router-dom';
 import { editTopic } from "../../../redux/topic";
@@ -10,10 +10,16 @@ function TopicUsertControl({topic, setTopic}){
     const [hideForm, setHideForm] = useState(true);
     const [body, setBody] = useState(topic.body);
     const [subject, setSubject] = useState(topic.subject)
-    const [deleteButtonText, setDeleteButtonText] = useState("Delete");
+    const [deleteButtonText, setDeleteButtonText] = useState("Delete my topic!");
     const [hideDeleteButton, setHideDeleteButton] = useState(true)
+    const [disableEditButton, setDisableEditButton] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(body.length > 0 && subject.length > 0) setDisableEditButton(false)
+        else setDisableEditButton(true)
+    },[body, subject])
 
     const editClick = () =>{
         if(!hideForm)setHideForm(true);
@@ -26,7 +32,7 @@ function TopicUsertControl({topic, setTopic}){
             setDeleteButtonText("No, keep it");
         } else {
             setHideDeleteButton(true);
-            setDeleteButtonText("Delete");
+            setDeleteButtonText("Delete topic");
         }
     }
 
@@ -54,7 +60,7 @@ function TopicUsertControl({topic, setTopic}){
     return(
         <div className="TopicUserControls">
             <button onClick={editClick} className="userControlButton">
-                Edit
+                Edit my Topic
             </button>
             <button onClick={firstDeleteButton} className="userControlButton">
                 {deleteButtonText}
@@ -73,7 +79,7 @@ function TopicUsertControl({topic, setTopic}){
                     Subject
                     <input type="text" value={subject} onChange={(e)=>setSubject(e.target.value)} />
                 </label>
-                <button type="submit">Post!</button>
+                <button disabled={disableEditButton} type="submit">Submit Edits!</button>
             </form>
         </div>
     )

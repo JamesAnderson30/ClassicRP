@@ -9,8 +9,13 @@ function PostUserControls({post, setPost}){
     const [body, setBody] = useState(post.body);
     const [deleteButtonText, setDeleteButtonText] = useState("Delete");
     const [hideDeleteButton, setHideDeleteButton] = useState(true)
+    const [disableEditButton, setDisableEditButton] = useState(false)
     const dispatch = useDispatch();
 
+    useEffect(()=>{
+        if(body.length > 0) setDisableEditButton(false)
+        else setDisableEditButton(true)
+    },[body, subject])
 
     const editClick = () =>{
         if(!hideForm)setHideForm(true);

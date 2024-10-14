@@ -45,7 +45,6 @@ function TopicMain(){
 
         if(!isTopicLoaded)getTopicThunk(id)
         if(!isPostLoaded)getPostThunk(id)
-        console.log("USEEFFECT");
 
     }, [dispatch, isTopicLoaded, isPostLoaded, topic])
     if(!isTopicLoaded){
@@ -66,7 +65,7 @@ function TopicMain(){
                 </div>
                 <hr />
                 <div className="TopicUser">
-                    username stuff
+                    Author: {topic.username}
                 </div>
                 {user != null && user.id == topic.user_id && <TopicListUsertControl setTopic={setTopic} topic={topic} />}
             </div>

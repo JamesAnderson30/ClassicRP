@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { sendPost } from "../../../redux/post";
 import { useDispatch } from "react-redux";
 function NewPostForm(topic_id){
-
+    const user = useSelector(state=> state.session.user);
     const [isDisabled, setIsDisabled] = useState(true);
     const [body, setBody] = useState("");
     const [errors, setErrors] = useState([])
@@ -15,7 +15,7 @@ function NewPostForm(topic_id){
         if(newErrors.length > 1) setErrorsHidden(false);
         else {
             setErrorsHidden(true)
-            await dispatch(sendPost({body, topic_id}))
+            await dispatch(sendPost({body, topic_id, user}))
         }
     }
 
