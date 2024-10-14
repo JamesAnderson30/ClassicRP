@@ -32,6 +32,7 @@ function NewTopicForm({category_id}){
                     <br />
                     <input type="text" name="subject" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
                 </label>
+                <br />
                 <label>
                     Body:
                     <br />
