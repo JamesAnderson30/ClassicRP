@@ -124,6 +124,7 @@ const topicReducer = (state = initialState, action) =>{
         case STORE_TOPICPOST:
             newTopicState.byId[action.post.topic_id.topic_id].Posts.push({...action.post,user_id: action.post.user.id, topic_id: action.post.topic_id.topic_id})
             console.log("action: ", action);
+            console.log(newTopicState);
             return {...state, topics: newTopicState}
         case REMOVE_TOPIC:
             //remove from byId
