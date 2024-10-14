@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { deletePost, editPost } from "../../../redux/post";
 
@@ -63,7 +63,7 @@ function PostUserControls({post, setPost}){
                     Body
                     <input type="text" value={body} onChange={(e)=>setBody(e.target.value)} />
                 </label>
-                <button type="submit">Post!</button>
+                <button disabled={disableEditButton} type="submit">Post!</button>
             </form>
         </div>
     )
