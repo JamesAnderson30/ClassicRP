@@ -81,8 +81,8 @@ const postReducer = (state = initialState, action) =>{
     let newPostState = {...state.posts}
     switch(action.type){
         case CREATE_POST:
-            newPostState.byId[action.post.id] = action.post;
-            newPostState.all = [...newPostState.all, action.post]
+            newPostState.byId[action.post.id] = {...action.post, user_id: action.post.user.id};
+            newPostState.all = [...newPostState.all, {...action.post, user_id: action.post.user.id}]
             let newTopicState = {...state}
             return {...state, posts: newPostState}
         case SAVE_POSTS:
