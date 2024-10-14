@@ -65,7 +65,7 @@ function TopicMain(){
                 </div>
                 <hr />
                 <div className="TopicUser">
-                    Author: {topic.username}
+
                 </div>
                 {user != null && user.id == topic.user_id && <TopicListUsertControl setTopic={setTopic} topic={topic} />}
             </div>
