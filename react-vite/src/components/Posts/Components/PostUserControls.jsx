@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deletePost, editPost } from "../../../redux/post";
-import {useNavigate} from 'react-router-dom';
 
 
 

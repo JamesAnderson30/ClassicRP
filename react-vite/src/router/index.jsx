@@ -7,7 +7,7 @@ import CategoryList from '../components/Categories/CategoryList';
 import TopicList from '../components/Topics/TopicList';
 import TopicMain from '../components/Topics/TopicMain';
 import CategorySingle from '../components/Categories/CategorySingle';
-import LandingPage from '../components/landingPage';
+import LandingPage from '../components/LandingPage'
 
 // The router really should be rewritten
 export const router = createBrowserRouter([

@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react"
 import { sendPost } from "../../../redux/post";
 import { useDispatch } from "react-redux";
-function NewPostForm(topic_id, addPost){
+function NewPostForm(topic_id){
 
-    const [subject, setSubject] = useState("");
     const [isDisabled, setIsDisabled] = useState("");
     const [body, setBody] = useState("");
     const [errors, setErrors] = useState([])

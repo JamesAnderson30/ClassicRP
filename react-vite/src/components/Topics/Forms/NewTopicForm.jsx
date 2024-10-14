@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { sendTopic } from "../../../redux/topic";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ function NewTopicForm({category_id}){
     useEffect(()=>{
         if(body.length > 0 && subject.length > 0) setIsDisabled(false)
         else setIsDisabled(true)
-    }, [dispatch, body])
+    }, [dispatch, body, subject])
     
     return(
         <>
