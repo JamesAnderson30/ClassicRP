@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function NewTopicForm({category_id}){
 
     const [subject, setSubject] = useState("");
+    const [isDisabled, setIsDisabled] = useState(true)
     const [body, setBody] = useState("");
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -14,6 +15,12 @@ function NewTopicForm({category_id}){
 
         navigate(`/topic/${res.id}`)
     }
+
+    useEffect(()=>{
+        if(body.length > 0 && subject.length > 0) setIsDisabled(false)
+        else setIsDisabled(true)
+    }, [dispatch, body])
+    
     return(
         <>
             <form onSubmit={handleSubmit}>
@@ -21,14 +28,16 @@ function NewTopicForm({category_id}){
                 Make a new topic
                 <br></br>
                 <label>
-                    Subject
+                    Subject:
+                    <br />
                     <input type="text" name="subject" value={subject} onChange={(e)=>setSubject(e.target.value)}/>
                 </label>
                 <label>
-                    Body
+                    Body:
+                    <br />
                     <input type="text" name="body" value={body} onChange={(e)=>setBody(e.target.value)} />
                 </label>
-                <button type="submit">Post!</button>
+                <button disabled={isDisabled} type="submit">Post!</button>
             </form>
             <hr />
         </>
