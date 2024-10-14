@@ -38,13 +38,13 @@ function TopicUsertControl({topic, setTopic}){
 
     const confirmDelete = async () =>{
         // console.log("confirmDelete");
-        let res = await dispatch(deleteTopic(topic))
+        let res =  dispatch(deleteTopic(topic))
 
-        if(res === true){
+        // if(res === true){
             navigate(`/categories/${topic.category_id}`)
-        } else {
-            alert("The delete wasn't possible!");
-        }
+        // } else {
+        //     alert("The delete wasn't possible!");
+        // }
         // setPost(null)
     }
 
