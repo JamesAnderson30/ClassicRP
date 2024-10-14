@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useSelector } from "react-redux";
 import { sendPost } from "../../../redux/post";
 import { useDispatch } from "react-redux";
 function NewPostForm(topic_id){
