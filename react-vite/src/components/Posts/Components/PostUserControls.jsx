@@ -15,7 +15,7 @@ function PostUserControls({post, setPost}){
     useEffect(()=>{
         if(body.length > 0) setDisableEditButton(false)
         else setDisableEditButton(true)
-    },[body, subject])
+    },[body])
 
     const editClick = () =>{
         if(!hideForm)setHideForm(true);
