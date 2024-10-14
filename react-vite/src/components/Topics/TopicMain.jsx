@@ -72,7 +72,7 @@ function TopicMain(){
             <hr />
             {user != null && <NewPostForm topic_id={id} />}
             <div id="TopicPosts">
-                {isPostLoaded && topic.Posts && <TopicPosts posts={topic.Posts} />}
+                {isPostLoaded && topic && topic.Posts && <TopicPosts posts={topic.Posts} />}
                 {isPostLoaded || <Loading />}
             </div>
             </>
