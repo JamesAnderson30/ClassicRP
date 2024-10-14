@@ -67,7 +67,7 @@ function TopicMain(){
                 <div className="TopicUser">
 
                 </div>
-                {user != null && user.id == topic.user_id && <TopicListUsertControl setTopic={setTopic} topic={topic} />}
+                {user != null && topic && user.id == topic.user_id && <TopicListUsertControl setTopic={setTopic} topic={topic} />}
             </div>
             <hr />
             {user != null && <NewPostForm topic_id={id} />}
