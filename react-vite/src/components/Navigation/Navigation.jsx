@@ -12,6 +12,10 @@ function Navigation() {
       <li>
         <ProfileButton />
       </li>
+
+      <li>
+        <NavLink to="/categories">Browse Categories</NavLink>
+      </li>
     </ul>
   );
 }

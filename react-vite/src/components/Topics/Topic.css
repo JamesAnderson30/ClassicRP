@@ -1,0 +1,28 @@
+.readImg{
+    height:100px;
+    grid-area: Image;
+}
+
+.topicLine{
+    display: grid;
+    grid-template-rows: 1fr 2fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "Image Subject Subject"
+        "Image Bottom Bottom";
+    justify-content: start;
+    border-bottom: 3px groove rgba(0,0,0,0.63);
+}
+
+.topicLineSubject{
+    grid-area: Subject;
+}
+
+.topicLineBottom{
+    grid-area: Bottom;
+}
+
+.TopicList{
+    border: 2px groove rgba(0,0,0,0.65);
+    background-color:white
+}
