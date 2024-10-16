@@ -5,7 +5,7 @@ import "./Navigation.css";
 function Navigation() {
   return (
     <div className="Navigation">
-      <span className="Logo">ClassicRP</span>
+      
       <ul className="NavigationList">
         <li>
           <NavLink to="/">Home</NavLink>
@@ -19,6 +19,7 @@ function Navigation() {
           <NavLink to="/categories">Browse Categories</NavLink>
         </li>
       </ul>
+      <span className="Logo">ClassicRP</span>
     </div>
   );
 }
