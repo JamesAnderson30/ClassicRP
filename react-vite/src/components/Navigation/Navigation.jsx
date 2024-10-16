@@ -26,13 +26,13 @@ function Navigation() {
           <li className="NavButton">
             Home
           </li>
-          <li>
+          <li className="NavButton"> 
             Browse Categories
           </li>
-          <li>
+          <li className="NavButton">
             Browse Topics
           </li>
-          <li>
+          <li className="NavButton">
             Chat
           </li>
         </ul>
