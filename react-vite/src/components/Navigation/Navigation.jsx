@@ -4,19 +4,22 @@ import "./Navigation.css";
 
 function Navigation() {
   return (
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
+    <div className="Navigation">
+      <span className="Logo">ClassicRP</span>
+      <ul className="NavigationList">
+        <li>
+          <NavLink to="/">Home</NavLink>
+        </li>
 
-      <li>
-        <ProfileButton />
-      </li>
+        <li>
+          <ProfileButton />
+        </li>
 
-      <li>
-        <NavLink to="/categories">Browse Categories</NavLink>
-      </li>
-    </ul>
+        <li>
+          <NavLink to="/categories">Browse Categories</NavLink>
+        </li>
+      </ul>
+    </div>
   );
 }
 
