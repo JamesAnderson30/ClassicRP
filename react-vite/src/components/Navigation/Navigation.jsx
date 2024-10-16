@@ -21,9 +21,7 @@ function Navigation() {
       </ul>
       <div className="Logo">ClassicRP</div>
       <div className="NavButtons">
-          <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-            <line x1="800" y1="800" x2="0" y2="0" stroke="#70AEDB" stroke-width="25"/>
-          </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"><line x1="800" y1="800" x2="0" y2="0" stroke="#000000" stroke-width="3"></line></svg>
         <ul className="NavList">
           <li className="NavButton">
             Test1
