@@ -19,7 +19,7 @@ function Navigation() {
           <NavLink to="/categories">Browse Categories</NavLink>
         </li>
       </ul>
-      <span className="Logo">ClassicRP</span>
+      <div className="Logo">ClassicRP</div>
     </div>
   );
 }
