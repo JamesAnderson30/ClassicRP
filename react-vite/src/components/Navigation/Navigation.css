@@ -9,4 +9,7 @@ body{
 .Logo{
   font-size: 100px;
   font-family: Trattatello;
+  line-height: 62px;
+  padding-top: 8px;
+  border-bottom: solid black;
 }

@@ -20,6 +20,16 @@ function Navigation() {
         </li>
       </ul>
       <div className="Logo">ClassicRP</div>
+      <div className="NavButtons">
+        <ul>
+          <li>
+            Test1
+          </li>
+          <li>
+            test2
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }
