@@ -13,7 +13,7 @@ function LoginSignup(){
     //IF USER IS
     return (
         <div id="UserInformation">
-            {sessionUser}
+            {sessionUser.email}
         </div>
     )
 }
