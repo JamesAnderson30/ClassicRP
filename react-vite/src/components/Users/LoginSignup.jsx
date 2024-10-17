@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+
 function LoginSignup(){
     const sessionUser = useSelector((state) => state.session.user);
     //IF USER NOT LOGGED IN

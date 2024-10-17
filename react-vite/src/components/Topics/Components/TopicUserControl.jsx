@@ -38,7 +38,7 @@ function TopicUsertControl({topic, setTopic}){
 
     const confirmDelete = async () =>{
         // console.log("confirmDelete");
-        let res =  dispatch(deleteTopic(topic))
+        dispatch(deleteTopic(topic))
 
 
         navigate(`/categories/${topic.category_id}`)

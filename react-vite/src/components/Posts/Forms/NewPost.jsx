@@ -6,7 +6,7 @@ function NewPostForm(topic_id){
     const user = useSelector(state=> state.session.user);
     const [isDisabled, setIsDisabled] = useState(true);
     const [body, setBody] = useState("");
-    const [errors, setErrors] = useState([])
+    const [errors] = useState([])
     const [errorsHidden, setErrorsHidden] = useState(true)
     const dispatch = useDispatch()
     let handleSubmit = async (e) =>{

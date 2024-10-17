@@ -4,7 +4,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import NewPostForm from '../components/Posts/Forms/NewPost';
 import Layout from './Layout';
 import CategoryList from '../components/Categories/CategoryList';
-import TopicList from '../components/Topics/TopicList';
+
 import TopicMain from '../components/Topics/TopicMain';
 import CategorySingle from '../components/Categories/CategorySingle';
 import LandingPage from '../components/LandingPage'
