@@ -6,17 +6,14 @@ function Navigation() {
   return (
     <div className="Navigation">
       
-      <ul className="NavigationList">
+      <ul className="NavigationUser">
+        <LoginFormPage />
         <li>
           <NavLink to="/">Home</NavLink>
         </li>
 
         <li>
           <ProfileButton />
-        </li>
-
-        <li>
-          <NavLink to="/categories">Browse Categories</NavLink>
         </li>
       </ul>
       <div className="Logo">ClassicRP</div>

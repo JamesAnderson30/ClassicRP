@@ -14,6 +14,11 @@ body{
   border-bottom: solid black;
 }
 
+.NavigationUser{
+  float:right;
+  margin-top: 12px;
+}
+
 .NavButtons > ul > li{
 
 }
