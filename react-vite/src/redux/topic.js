@@ -11,7 +11,7 @@ const STORE_CATEGORYTOPICS = 'topics/storeCategoryTopics'
 const STORE_TOPIC = 'topics/storeTopic'
 const UPDATE_TOPIC = 'topics/updateTopic'
 const REMOVE_TOPIC = 'topics/removeTopic'
-const STORE_TOPICS = 'topics/storeTopics'
+
 const STORE_TOPICPOST = 'topics/storeTopicPosts'
 
 // // Action Creators

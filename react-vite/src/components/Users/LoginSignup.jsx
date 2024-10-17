@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import defaultAvatar from "../../../media/default-user.png"
-
+import "./LoginSingup.css";
 function LoginSignup(){
     const user = useSelector((state) => state.session.user);
   

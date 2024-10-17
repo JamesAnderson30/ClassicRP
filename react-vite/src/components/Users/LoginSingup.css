@@ -1,0 +1,9 @@
+#LoginDiv{
+    float: right;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#loginDiv{
+    height: 63px
+}
