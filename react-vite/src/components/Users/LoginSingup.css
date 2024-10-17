@@ -1,9 +1,9 @@
-#LoginDiv{
+#UserInformation{
     float: right;
     display: flex;
     flex-direction: row-reverse;
 }
 
-#loginDiv{
+#UserInformation img{
     height: 63px
 }
