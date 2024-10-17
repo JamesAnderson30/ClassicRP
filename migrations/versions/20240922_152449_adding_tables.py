@@ -28,7 +28,7 @@ def upgrade():
     )
     with op.batch_alter_table('users', schema=None) as batch_op:
         batch_op.add_column(sa.Column('role', sa.String(length=40), nullable=True))
-
+        batch_op.add_column(sa.Column('profilePicture', sa.String(length=1000)))
     # ### end Alembic commands ###
     # Manual
     op.create_table('topic',
