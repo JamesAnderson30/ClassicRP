@@ -14,6 +14,11 @@ function LoginSignup(){
         dispatch(thunkLogout());
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        
+    }
+
     //IF USER NOT LOGGED IN
     if(!user){
         return (
