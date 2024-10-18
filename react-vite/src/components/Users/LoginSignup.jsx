@@ -37,8 +37,9 @@ function LoginSignup(){
     //IF USER NOT LOGGED IN
     if(!user){
         return (
-            <>
+            <div id="Login">
             <h1>Log In</h1>
+
             <form onSubmit={handleSubmit}>
               <label>
                 Email
@@ -48,7 +49,6 @@ function LoginSignup(){
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                {"email" in errors && errors.email[0]}
               </label>
               {errors.email && <p>{errors.email}</p>}
               <label>
@@ -59,12 +59,11 @@ function LoginSignup(){
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                {"password" in errors && errors.password[0]}
               </label>
               {errors.password && <p>{errors.password}</p>}
               <button type="submit">Log In</button>
             </form>
-          </>
+          </div>
         )
     }
     
