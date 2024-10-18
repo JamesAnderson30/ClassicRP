@@ -1,11 +1,10 @@
 #UserArea{
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    grid-template-rows: 1fr; 
-    gap: 0px 0px; 
-    grid-template-areas: 
-        "controls img"; 
-      
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas: "controls img";
+    float: right;
 }
 
 #UserArea img{
