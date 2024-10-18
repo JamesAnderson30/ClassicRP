@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import defaultAvatar from "../../../media/default-user.png"
+import { thunkLogout, thunkLogin } from "../../redux/session";
 import "./LoginSingup.css";
 function LoginSignup(){
     const [email, setEmail] = useState("");
