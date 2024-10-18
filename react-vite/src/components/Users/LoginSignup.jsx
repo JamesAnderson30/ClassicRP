@@ -26,6 +26,12 @@ function LoginSignup(){
             password,
           })
         );
+
+        if(!serverResponse.ok){
+            setErrors(serverResponse)
+        } else {
+            setErrors({})
+        }
     }
 
     //IF USER NOT LOGGED IN
@@ -33,8 +39,6 @@ function LoginSignup(){
         return (
             <>
             <h1>Log In</h1>
-            {errors.length > 0 &&
-              errors.map((message) => <p key={message}>{message}</p>)}
             <form onSubmit={handleSubmit}>
               <label>
                 Email
@@ -44,6 +48,7 @@ function LoginSignup(){
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
+                {"email" in errors && errors.email[0]}
               </label>
               {errors.email && <p>{errors.email}</p>}
               <label>
@@ -54,6 +59,7 @@ function LoginSignup(){
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+                {"password" in errors && errors.password[0]}
               </label>
               {errors.password && <p>{errors.password}</p>}
               <button type="submit">Log In</button>
