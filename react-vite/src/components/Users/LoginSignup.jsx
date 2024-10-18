@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import defaultAvatar from "../../../media/default-user.png"
 import "./LoginSingup.css";
@@ -7,6 +7,7 @@ function LoginSignup(){
      const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
     const user = useSelector((state) => state.session.user);
+    const dispatch = useDispatch();
     
     // Button Clicks
     const handleLogout = (e) =>{
