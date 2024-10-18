@@ -1,9 +1,18 @@
-#UserInformation{
-    float: right;
-    display: flex;
-    flex-direction: row-reverse;
+#UserArea{
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+        "controls img"; 
+      
 }
 
-#UserInformation img{
-    height: 63px
+#UserArea img{
+    height: 63px;
+    grid-area: img;
+}
+
+#UserInformation{
+    grid-area: controls;
 }

@@ -58,15 +58,18 @@ function LoginSignup(){
     
 
     return (
-        <div id="UserInformation">
+        <div id="UserArea">
+            <div id="UserInformation">
+                <p>Welcome {user.username}!</p>
+                <p><button onClick={handleLogout}>Logout</button></p>
+            </div>
             <img 
                 src={user.profilePicture}
                 onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
                 currentTarget.src=defaultAvatar;
              }} />
-            <p>Welcome {user.username}!</p>
-            <p><button onClick={handleLogout}>Logout</button></p>
+            
             
         </div>
     )
