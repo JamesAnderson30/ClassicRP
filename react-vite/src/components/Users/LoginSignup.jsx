@@ -6,6 +6,7 @@ import "./LoginSingup.css";
 function LoginSignup(){
     const [email, setEmail] = useState("");
      const [password, setPassword] = useState("");
+    const [loginHidden, setLoginHidden] = useState(true)
     const [errors, setErrors] = useState({});
     const user = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
@@ -16,6 +17,9 @@ function LoginSignup(){
         console.log("handle Logout")
         dispatch(thunkLogout());
     }
+
+    const showLoginForm = () => setLoginHidden(false)
+    const hideLoginForm = () => setLoginHidden(true)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -38,31 +42,32 @@ function LoginSignup(){
     if(!user){
         return (
             <div id="Login">
-            <h1>Log In</h1>
+            <button onClick={showLoginForm} id="LoginButton">Log In</button> or <button id="SignupButton">Sign Up!</button>
 
-            <form onSubmit={handleSubmit}>
-              <label>
-                Email
-                <input
-                  type="text"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </label>
-              {errors.email && <p>{errors.email}</p>}
-              <label>
-                Password
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </label>
-              {errors.password && <p>{errors.password}</p>}
-              <button type="submit">Log In</button>
-            </form>
+            
+            <form id="LoginForm" hidden={loginHidden} onSubmit={handleSubmit}>
+                <label>
+                    Email
+                    <input
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    />
+                </label>
+                {errors.email && <p>{errors.email}</p>}
+                <label>
+                    Password
+                    <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    />
+                </label>
+                {errors.password && <p>{errors.password}</p>}
+                <button type="submit">Log In</button>
+                </form>
           </div>
         )
     }
