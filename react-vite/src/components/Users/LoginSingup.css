@@ -5,6 +5,8 @@
     gap: 0px 0px;
     grid-template-areas: "controls img";
     float: right;
+    justify-items: center;
+    align-items: center;
 }
 
 #UserArea img{
@@ -14,4 +16,8 @@
 
 #UserInformation{
     grid-area: controls;
+}
+
+#UserInformation p{
+    margin:0;
 }
