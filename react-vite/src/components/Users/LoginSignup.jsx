@@ -17,9 +17,15 @@ function LoginSignup(){
         dispatch(thunkLogout());
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        const serverResponse = await dispatch(
+          thunkLogin({
+            email,
+            password,
+          })
+        );
     }
 
     //IF USER NOT LOGGED IN
