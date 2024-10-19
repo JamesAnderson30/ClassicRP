@@ -3,6 +3,7 @@
 // import LoginFormPage from "../LoginFormPage";
 import "./Navigation.css";
 import LoginSignup from "../Users/LoginSignup";
+import { NavLink } from "react-router-dom";
 
 function Navigation() {
   return (
@@ -24,10 +25,10 @@ function Navigation() {
       <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"><line x1="800" y1="800" x2="0" y2="0" stroke="#000000" strokeWidth="3"></line></svg>
         <ul className="NavList">
           <li className="NavButton">
-            Home
+            <NavLink to={'/'}>Home</NavLink>
           </li>
           <li className="NavButton"> 
-            Browse Categories
+            <NavLink to={`/categories`}>Browse Categories </NavLink>
           </li>
           <li className="NavButton">
             Browse Topics

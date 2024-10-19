@@ -2,6 +2,14 @@
   position: absolute;
 }
 
+div{
+  /* border-radius: 40px 10px 41px 10px;
+-webkit-border-radius: 40px 10px 41px 10px;
+-moz-border-radius: 40px 10px 41px 10px;
+
+border-color:purple; */
+}
+
 body{
   background-color: #E5D2AB
 }

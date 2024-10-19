@@ -14,6 +14,15 @@
     grid-area: img;
 }
 
+#Signup{
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas: ".";
+    display: grid;
+    justify-items: end;
+    float: right;
+}
 
 #UserInformation{
     grid-area: controls;
@@ -23,7 +32,7 @@
     margin:0;
 }
 
-.LoginForm{
+.SignupForm{
     position: fixed;
     top: 30%;
     left: calc(50% - 125px);
@@ -37,16 +46,16 @@
 .noMargin{
 margin:0;
 }
-.LoginForm h3{
+.SignupForm h3{
     margin-top: 5px;
     text-align: center;
 }
 
-.LoginEmailInput{
+.SignupEmailInput{
     width: 192px;
 } 
 
-.LoginForm form button{
+.SignupForm form button{
     margin-top: 17px;
     width: 100%;
 }
