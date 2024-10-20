@@ -23,6 +23,13 @@ class Topic(db.Model):
     Post = db.relationship('Post', cascade="all,delete", back_populates='Topic', )
 
     def to_dict(self):
+        print("!!!$$$$$$$!!!")
+        i = 0
+        print(vars(self.User))
+        for post in self.Post:
+            print(i)
+            i = i + 1
+            print(post)
         return {
             'id': self.id,
             'subject': self.subject,

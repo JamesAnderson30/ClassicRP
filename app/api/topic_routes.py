@@ -1,8 +1,13 @@
+
+import pprint
+from sqlalchemy.orm import joinedload
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Topic, Post, db
+from app.models import Topic, Post, db, User
 from app.forms import TopicForm
+from sqlalchemy import desc
 from flask_login import current_user, login_user, logout_user, login_required
+
 import datetime
 
 topic_routes = Blueprint('topic', __name__)
@@ -48,9 +53,20 @@ def edit_topic(id):
 
 @topic_routes.route('/recent')
 def get_recents():
-    topics = Topic.query.limit(5).order_by(desc(Topic.id)).all()
-    print(jsonify(topics))
-    return jsonify(topics), 200
+    topics = Topic.query.options(joinedload(Topic.Post)).order_by(desc(Topic.id)).limit(5).all()
+    
+        
+    results = []
+    
+    for topic in topics:
+        posts = topic.Post
+        result = topic.to_dict()
+        result['Post'] = []
+        for post in posts:
+            result['Post'].append(post.to_dict())
+        results.append(result)
+
+    return jsonify(results), 200
 
 
 @topic_routes.route('/<int:id>', methods=['DELETE'])
@@ -77,10 +93,10 @@ def new_topic():
     errors = []
 
     if not form.data['body']:
-        print('ERRRRRRRROR BODY')
+
         errors.append({'field': "body", "message": "body is required"})
     if not form.data['subject']:
-        print('ERRRRRRRROR subject')
+
         errors.append({'field': 'subject', 'message': 'subject is required'})
 
     if len(errors) == 0:

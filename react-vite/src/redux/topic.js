@@ -11,7 +11,7 @@ const STORE_CATEGORYTOPICS = 'topics/storeCategoryTopics'
 const STORE_TOPIC = 'topics/storeTopic'
 const UPDATE_TOPIC = 'topics/updateTopic'
 const REMOVE_TOPIC = 'topics/removeTopic'
-
+const RECENT_TOPICS = 'topics/getRecentTopis'
 const STORE_TOPICPOST = 'topics/storeTopicPosts'
 
 // // Action Creators
@@ -20,6 +20,9 @@ export const storeTopicPost = (post) => ({
     type: STORE_TOPICPOST,
     post
 })
+
+
+
 const storeCategoryTopics = (topics, category_id) =>({
     type: STORE_CATEGORYTOPICS,
     topics,
@@ -50,15 +53,20 @@ const storeTopics = (topics) => ({
 
 
 // // Thunks
+
+
 export const getRecentTopics = () => async (dispatch) =>{
-    const res = await fetch(`/api/topic/recent/`,{
+    const res = await fetch(`/api/topic/recent`,{
         method:"GET"
     })
     if(res.ok){
         let topics = await res.json()
         dispatch(storeTopics(topics))
-        return topics
 
+        return topics
+    } else {
+
+        return "Test";
     }
 }
 
@@ -92,7 +100,7 @@ export const editTopic = (topic) => async (dispatch) =>{
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(topic)
   });
-  console.log("topic thunk: ", topic);
+
   dispatch(updateTopic(await response.json()));
 }
 
@@ -102,7 +110,7 @@ export const getCategoryTopics = (category_id) => async (dispatch) => {
     })
 
     let result = await res.json()
-    console.log("result: ", result);
+
     dispatch(storeCategoryTopics(result.Topics, result.category.id))
     return result;
 }
@@ -112,7 +120,7 @@ export const getTopic = (topic_id) => async (dispatch) =>{
         method: 'GET'
     })
     let result = await res.json();
-    console.log("result: ", result);
+
     dispatch(storeTopic(result))
 }
 
@@ -123,8 +131,7 @@ const topicReducer = (state = initialState, action) =>{
     switch(action.type){
         case STORE_TOPICPOST:
             newTopicState.byId[action.post.topic_id.topic_id].Posts.push({...action.post,user_id: action.post.user.id, topic_id: action.post.topic_id.topic_id})
-            console.log("action: ", action);
-            console.log(newTopicState);
+
             return {...state, topics: newTopicState}
         case REMOVE_TOPIC:
             //remove from byId
@@ -136,14 +143,13 @@ const topicReducer = (state = initialState, action) =>{
             byCategoryId = byCategoryId.map((topic)=>{
                 if(topic.id != action.topic.id) return topic
             })
-            console.log("byCategoryId reducer: ", byCategoryId)
-            console.log("newTopicState: ", newTopicState);
+
             return {...state, topics: newTopicState}
         // This is specifically to story the topics that belong to a category
         case STORE_CATEGORYTOPICS:
             newTopicState.byCategoryId[action.category_id] = [];
             for(let topic of action.topics){
-                console.log("Topic Thunk: ", topic)
+
                 newTopicState.byId[topic.id] = topic;
                 // Empty the state first
                 if(newTopicState.byCategoryId[topic.category_id]){
@@ -155,11 +161,11 @@ const topicReducer = (state = initialState, action) =>{
             return {...state, topics: newTopicState}
         case STORE_TOPIC:
             let byCategory = newTopicState.byCategoryId[action.topic.category_id];
-            console.log("store_topic: byCategoryId: ", byCategory)
+
             if(byCategory == undefined){
                 byCategory = {}
                 byCategory[action.topic.category_id] = [action.topic]
-                console.log("after byCategory: ", byCategory);
+
             } else {
                 for(let i = 0; i < byCategory.length; i++){
                     let topic = byCategory[i];
@@ -168,7 +174,7 @@ const topicReducer = (state = initialState, action) =>{
                         break;
                     }
                 }
-                console.log("after for byCategory: ", byCategory)
+
             }
             newTopicState.byCategoryId[action.topic.category_id] = byCategory;
             newTopicState.byId[action.topic.id] = action.topic;

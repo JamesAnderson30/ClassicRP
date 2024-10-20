@@ -15,6 +15,7 @@ const UPDATE_POST = 'post/updatePost'
 const SAVE_POSTS = 'post/savePost'
 const DELETE_POST = 'post/deletePost'
 
+
 // // Action Creators
 const createPost = (post) =>({
     type: CREATE_POST,
@@ -39,6 +40,16 @@ const updatePost = (post) => ({
 })
 
 // // Thunks
+export const recentPosts = () => async (dispatch) =>{
+    const res = await fetch(`/api/post/recent`, {
+        method: 'GET',
+        headers: { "Content-Type": "application/json"}
+    })
+    let posts = await res.json();
+    return JSON.stringify(posts);
+    
+}
+
 export const deletePost = (id) => async (dispatch) =>{
     await fetch(`/api/post/${id}`, {
         method: 'DELETE',

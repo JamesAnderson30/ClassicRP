@@ -18,7 +18,7 @@ function TopicMain(){
     const [body, setBody] = useState('');
     const [subject, setSubject] = useState('');
     const [isPostLoaded, setIsPostLoaded] = useState(false);
-    console.log("post: ", post);
+
     const dispatch = useDispatch();
 
 

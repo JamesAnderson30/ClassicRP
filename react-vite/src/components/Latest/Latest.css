@@ -1,0 +1,39 @@
+.sideBySide {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: normal;
+    align-items: normal;
+    align-content: normal;
+
+    gap: 10px;
+  }
+
+.Latest{
+    border-radius: 40px 10px 41px 10px;
+    -webkit-border-radius: 40px 10px 41px 10px;
+    -moz-border-radius: 40px 10px 41px 10px;
+
+    border: solid;
+    padding: 13px;
+}
+
+  #LatestTopics {
+    width: 50%;
+    display: block;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+  }
+  
+  #LatestPosts {
+    width: 50%;
+    display: block;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+  }

@@ -34,7 +34,6 @@ function LoginSignup(){
     // Button Clicks
     const handleLogout = (e) =>{
         e.preventDefault();
-        console.log("handle Logout")
         dispatch(thunkLogout());
         hideLoginForm(e);
         hideSignupForm(e);

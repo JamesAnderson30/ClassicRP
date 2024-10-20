@@ -21,7 +21,7 @@ function NewPostForm(topic_id){
     }
 
     useEffect(()=>{
-        console.log("useEffect");
+
         if(body.length > 0) setIsDisabled(false)
         else setIsDisabled(true)
     }, [dispatch, body])
