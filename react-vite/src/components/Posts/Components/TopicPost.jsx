@@ -18,6 +18,9 @@ function TopicPost(id){
                     <PostUser post={post} />
                     {user && post && user.id == post.user_id && <PostUserControls setPost={setPost} post={post} />}
                 </div>
+                <div className="PostInfo">
+                    
+                </div>
                 <div className="PostArea">
                     <PostBody post={post} />
                 </div>

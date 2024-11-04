@@ -2,7 +2,7 @@
 function PostBody({post}){
     if(post){
         return (
-            <h3>{post.body}</h3>
+            <span className="Body">{post.body}</span>
         )
     }
 }
