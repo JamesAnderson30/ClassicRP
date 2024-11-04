@@ -1,1 +1,12 @@
 /* TODO: Add sitewide styles */
+#OuterContainer{
+    max-width:1140px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#InnerContainer{
+    max-width:840px;
+    margin-left:auto;
+    margin-right:auto;
+}

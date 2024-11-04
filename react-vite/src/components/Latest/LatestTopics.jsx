@@ -31,6 +31,8 @@ function LatestTopics(){
     return(
         <div className="sideBySide">
             <div className="Latest" id="LatestTopics">
+                <h3 className="headerText">Latest Topics</h3>
+                <hr/>
                 {isLoaded && topics.map((topic, idx)=>{
                     return (
                         <TopicListItem topic={topic} />
@@ -39,6 +41,8 @@ function LatestTopics(){
                 {!isLoaded && <Loading />}
             </div>
             <div className="Latest" id="LatestPosts">
+            <h3 className="headerText">Latest Posts</h3>
+            <hr/>
                 {isLoaded && posts.map((post, idx)=>{
                     return (
                         <PostListItem post={post} />
