@@ -37,7 +37,9 @@ class Topic(db.Model):
             'user_id': self.user_id,
             'username': self.User.username,
             'category_id': self.category_id,
-            'created_at': self.created_at
+            'created_at': self.created_at,
+            'user_profile_picture': self.User.profilePicture,
+            'topic_specific_profile_picture': "default"
         }
     # # Uncomment When Quesion Comments is added
     # question_comments = db.relationship('QuestionComment', back_populates='question', cascade="all, delete-orphan")

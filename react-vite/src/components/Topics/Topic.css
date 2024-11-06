@@ -3,6 +3,9 @@
     grid-area: Image;
 }
 
+/* !!!!!! BODY WIDTH OVERRIDE !!!!! */
+
+
 .topicLine{
     display: grid;
     grid-template-rows: 1fr 2fr;

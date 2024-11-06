@@ -1,12 +1,32 @@
 /* TODO: Add sitewide styles */
 #OuterContainer{
-    max-width:1140px;
-    margin-left:auto;
-    margin-right:auto;
+    min-height: calc(100vh - 124px);
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: lightgrey;
+    background-image: url("media/paper.jpg")
 }
 
 #InnerContainer{
-    max-width:840px;
-    margin-left:auto;
-    margin-right:auto;
+    border: 5px solid #4c2b81;
+    border-style: inset;
+    max-width: 890px;
+    margin-right: auto;
+    background-color: #ffffffc7;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-left: auto;
+    /* height: 100%; */
+    min-height: calc(100vh - 125px);
+}
+
+.large{
+    max-width:unset !important;
+    width:99% !important;
+    padding:unset !important;
+}
+
+body{
+    
 }

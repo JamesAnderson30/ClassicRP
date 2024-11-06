@@ -120,7 +120,7 @@ export const getTopic = (topic_id) => async (dispatch) =>{
         method: 'GET'
     })
     let result = await res.json();
-
+    console.log("result: ", result)
     dispatch(storeTopic(result))
 }
 

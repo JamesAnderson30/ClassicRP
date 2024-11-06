@@ -8,26 +8,42 @@ import { getPosts } from "../../redux/post";
 import NewPostForm from "../Posts/Forms/NewPost";
 import TopicPosts from "../Posts/TopicPosts";
 import TopicListUsertControl from "./Components/TopicUserControl";
+import topicStyling from './Topic.module.css'
 
 function TopicMain(){
     const {id} = useParams();
     const topic = useSelector(state => state.topic.topics.byId[id]);
-    const post = useSelector(state=> state.post.posts.all)
+    const post = useSelector(state=> state.post.posts.all);
     const user = useSelector(state=> state.session.user);
     const [isTopicLoaded, setIsTopicLoaded] = useState(false);
     const [body, setBody] = useState('');
     const [subject, setSubject] = useState('');
     const [isPostLoaded, setIsPostLoaded] = useState(false);
 
+
     const dispatch = useDispatch();
+
+    
 
 
     function setTopic({body, subject}){
         setBody(body);
         setSubject(subject);
     }
+    
+    let OuterContainer = document.getElementById("OuterContainer");
+    let InnerContainer = document.getElementById("InnerContainer")
+    OuterContainer.className = "large";
+    InnerContainer.className = "large"
 
+    function cleanUp(){
+        OuterContainer.className = "smol"
+        InnerContainer.className = "smol"
+    }
 
+    useEffect(()=>{
+        return cleanUp
+    }, [])
 
     // if id is null or undefined, should throw error
     //check if post list is stale
@@ -55,10 +71,16 @@ function TopicMain(){
         return (
             <>
             <div id="TopicHeader">
+                <div className="TopicOwner">
+                    {(topic.topic_specific_profile_picture && topic.topic_specific_profile_picture == "default") ? 
+                    <img className="Avatar" src={topic.user_profile_picture} /> :
+                    <img className="Avatar" src={topic.topic_specific_profile_picture} />}
+                    {topic.username}
+                    {topic.created_at}
+                </div>
                 <div className="TopicSubject">
                     <h4>{subject}</h4>
                 </div>
-                <hr />
                 <div className="TopicMain">
                     {body}
                 </div>
@@ -68,7 +90,6 @@ function TopicMain(){
                 </div>
                 {user != null && topic && user.id == topic.user_id && <TopicListUsertControl setTopic={setTopic} topic={topic} />}
             </div>
-            <hr />
             {user != null && <NewPostForm topic_id={id} />}
             <div id="TopicPosts">
                 {isPostLoaded && topic && topic.Posts && <TopicPosts posts={topic.Posts} />}
