@@ -45,6 +45,8 @@ function TopicMain(){
         return cleanUp
     }, [])
 
+
+
     // if id is null or undefined, should throw error
     //check if post list is stale
     useEffect(()=>{
@@ -68,21 +70,33 @@ function TopicMain(){
             <Loading />
         )
     } else {
+        function dateStringToEpoch(dateString) {
+            const date = new Date(dateString);
+            return date.getTime() / 1000; // Divide by 1000 to get seconds
+          }
+          
+          const epochTime = dateStringToEpoch(topic.created_at);
+          console.log("time: ", epochTime) 
         return (
             <>
             <div id="TopicHeader">
+                <div className="TopicMain">
+                    <h4>{subject}</h4>
+                    {body}
+                </div>
                 <div className="TopicOwner">
+                    {topic.username}
                     {(topic.topic_specific_profile_picture && topic.topic_specific_profile_picture == "default") ? 
                     <img className="Avatar" src={topic.user_profile_picture} /> :
                     <img className="Avatar" src={topic.topic_specific_profile_picture} />}
-                    {topic.username}
+                    
+                </div>
+                <div className="TopicDetails">
+                    {(Date.now() / 1000) - topic.created_at}
+                    <hr/>
                     {topic.created_at}
-                </div>
-                <div className="TopicSubject">
-                    <h4>{subject}</h4>
-                </div>
-                <div className="TopicMain">
-                    {body}
+                    <hr/>
+                    {Date.now()}
                 </div>
                 <hr />
                 <div className="TopicUser">

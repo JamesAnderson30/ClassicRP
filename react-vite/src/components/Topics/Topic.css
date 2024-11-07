@@ -29,3 +29,23 @@
     border: 2px groove rgba(0,0,0,0.65);
     background-color:white
 }
+
+#TopicHeader{
+    display: grid; 
+    grid-template-columns: 200px 1fr; 
+    grid-template-rows: 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "User Post"
+      "details details"; ; 
+}
+
+.TopicOwner{
+    grid-area: User;
+}
+.TopicMain{
+    grid-area: Post;
+}
+.TopicDetails{
+    grid-area:details;
+}

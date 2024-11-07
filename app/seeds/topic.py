@@ -1,6 +1,7 @@
 from app.models import db, Topic, environment, SCHEMA
 from sqlalchemy.sql import text
 import datetime
+import time
 
 
 # Adds a demo user, you can add other users here if you want
@@ -10,7 +11,9 @@ def seed_topic():
         body= 'This is a test topic. Here we will be posting test posts. Feel free to test out your posts here.',
         user_id= 1,
         category_id= 1,
-        created_at= datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") )
+        created_at = int(time.time())
+        # created_at= datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") )
+    )
 
     db.session.add(testTopic1)
     db.session.commit()
