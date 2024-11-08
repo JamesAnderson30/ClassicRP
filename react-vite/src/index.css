@@ -22,10 +22,22 @@
 }
 
 .large{
-    max-width:unset !important;
-    width:99% !important;
-    padding:unset !important;
+    max-width: unset !important;
+    width: calc(100vw - 17px) !important;
+    padding: unset !important;
+    border: none !important;
+    background-color: unset !important;
+    left: 0;
+    position: absolute;
+    min-height: calc(100vh - 105px) !important;
+    background-color: white !important;
+    border-top: 3px solid #b394c8 !important;
 }
+
+body{
+    background-color: #E5D2AB
+  }
+  
 
 body{
     

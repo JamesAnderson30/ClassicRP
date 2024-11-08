@@ -7,7 +7,7 @@ Create Date: 2024-09-22 15:24:49.401124
 """
 from alembic import op
 import sqlalchemy as sa
-
+import time
 
 # revision identifiers, used by Alembic.
 revision = '1161d2c32bab'
@@ -37,14 +37,14 @@ def upgrade():
     sa.Column('body', sa.String(length=10000), nullable=False),
     sa.Column('options', sa.String(length=5000), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('category_id', sa.Integer(), nullable=True),
+    sa.Column('category_id', sa.Integer(), nullable=True, default=int(time.time())),
     sa.Column('created_at', sa.String(250), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
 
     op.create_table('post',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('created_at', sa.String(length=250), nullable=False),
+    sa.Column('created_at', sa.String(length=250), nullable=False, default=int(time.time())),
     sa.Column('body', sa.String(length=10000), nullable=False),
     sa.Column('options', sa.String(length=5000), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),

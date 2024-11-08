@@ -120,8 +120,11 @@ export const getTopic = (topic_id) => async (dispatch) =>{
         method: 'GET'
     })
     let result = await res.json();
-    console.log("result: ", result)
-    dispatch(storeTopic(result))
+    if(result.message) return false;
+    else {
+        dispatch(storeTopic(result))
+        return true;
+    }
 }
 
 const initialState = {topics:{ byId:{}, byCategoryId:{}}}
