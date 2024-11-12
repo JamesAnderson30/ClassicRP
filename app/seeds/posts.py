@@ -10,8 +10,25 @@ def seed_posts():
         user_id= 1,
         topic_id= 1,
         created_at= datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") )
+    
+    testPost2 = Post(
+        body= 'This is a barbarian post',
+        user_id= 1,
+        topic_id= 1,
+        topic_profile_id = 1,
+        created_at= datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") )
+    
+    testPost3 = Post(
+        body= 'The guard leans against his big spear',
+        user_id= 1,
+        topic_id= 3,
+        topic_profile_id = 2,
+        created_at= datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") )
+        
 
     db.session.add(testPost1)
+    db.session.add(testPost2)
+    db.session.add(testPost3)
     db.session.commit()
 
 

@@ -16,15 +16,16 @@ function LatestTopics(){
         
         async function getRecent(){
             let result = await dispatch(getRecentTopics())
-            if(result.length) setTopics(result)
-            let resultPost = JSON.parse(await dispatch(recentPosts()))
-            if(resultPost.length) setPosts(resultPost)
-
+            if(result !== "error"){
+                setIsLoaded(true)
+                if(result.length) setTopics(result)
+                let resultPost = JSON.parse(await dispatch(recentPosts()))
+                if(resultPost.length) setPosts(resultPost)
+            }
         }
         if(!isLoaded){
             console.log("getting")
             getRecent();
-            setIsLoaded(true)
         }
     }, [isLoaded])
 

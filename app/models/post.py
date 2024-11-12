@@ -1,8 +1,8 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .category import Category
 from .user import User
-
-
+from .topic_profile import Topic_Profile
+import pprint
 
 class Post(db.Model):
     __tablename__ = 'post'
@@ -16,11 +16,12 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     topic_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("topic.id")), nullable=False)
     created_at = db.Column(db.String(250))
+    topic_profile_id = db.Column(db.String(250), db.ForeignKey(add_prefix_for_prod("topic_profile.id")))
 
 
     User = db.relationship('User', back_populates='Post')
     Topic = db.relationship('Topic', back_populates='Post')
-
+    Topic_Profile = db.relationship('Topic_Profile')
     def to_dict(self):
         return {
             'id': self.id,
@@ -29,7 +30,9 @@ class Post(db.Model):
             'user_id': self.user_id,
             'username': self.User.username,
             'topic_id': self.topic_id,
-            'created_at': self.created_at
+            'created_at': self.created_at,
+            'topic_profile_id': self.topic_profile_id,
+            
         }
     # # Uncomment When Quesion Comments is added
     # question_comments = db.relationship('QuestionComment', back_populates='question', cascade="all, delete-orphan")

@@ -39,6 +39,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('category_id', sa.Integer(), nullable=True, default=int(time.time())),
     sa.Column('created_at', sa.String(250), nullable=False),
+    sa.Column('privacy_level', sa.Integer(), default=0),
     sa.PrimaryKeyConstraint('id')
     )
 
@@ -49,6 +50,21 @@ def upgrade():
     sa.Column('options', sa.String(length=5000), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('topic_id', sa.Integer(), nullable=False),
+    sa.Column('topic_profile_id', sa.Integer(), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+
+    op.create_table('topic_profile',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.String(length=250), nullable=False, default=int(time.time())),
+    sa.Column('name', sa.String(length=1000), nullable=False),
+    sa.Column('body', sa.String(length=10000), nullable=False),
+    sa.Column('color', sa.String(length=10000), default="none"),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    # sa.Column('post_id', sa.Integer(), nullable=False),
+    sa.Column('topic_id', sa.Integer(), nullable=False),
+    sa.Column('avatar', sa.String(length=1000)),
+    sa.Column('approved', sa.Integer(), nullable=False, default=0),
     sa.PrimaryKeyConstraint('id')
     )
 
@@ -62,4 +78,5 @@ def downgrade():
     op.drop_table('category')
     op.drop_table('topic')
     op.drop_table('post')
+    op.drop_table('topic_profile')
     # ### end Alembic commands ###

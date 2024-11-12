@@ -66,7 +66,7 @@ export const getRecentTopics = () => async (dispatch) =>{
         return topics
     } else {
 
-        return "Test";
+        return "error";
     }
 }
 
@@ -84,6 +84,7 @@ export const deleteTopic = (topic) => async (dispatch) =>{
     }
 }
 export const sendTopic = (topic) => async (dispatch) => {
+    
     const res = await fetch('/api/topic/new', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -127,13 +128,24 @@ export const getTopic = (topic_id) => async (dispatch) =>{
     }
 }
 
+export const registerProfile = (profile, topic_id) => async (dispatch) =>{
+    const res = await fetch(`/api/topic/${topic_id}/register`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(profile)
+    })
+    let profile_id = await res.json();
+    return {...profile, "id": profile_id};
+}
+
 const initialState = {topics:{ byId:{}, byCategoryId:{}}}
 
 const topicReducer = (state = initialState, action) =>{
     let newTopicState = {...state.topics}
     switch(action.type){
         case STORE_TOPICPOST:
-            newTopicState.byId[action.post.topic_id.topic_id].Posts.push({...action.post,user_id: action.post.user.id, topic_id: action.post.topic_id.topic_id})
+
+            newTopicState.byId[action.post.topic_id].Posts.push({...action.post,user_id: action.post.user.id, topic_id: action.post.topic_id.topic_id})
 
             return {...state, topics: newTopicState}
         case REMOVE_TOPIC:
@@ -155,7 +167,8 @@ const topicReducer = (state = initialState, action) =>{
 
                 newTopicState.byId[topic.id] = topic;
                 // Empty the state first
-                if(newTopicState.byCategoryId[topic.category_id]){
+                //newTopicState.byCategoryId[topic.category_id] = the category byId state
+                if(typeof newTopicState.byCategoryId[topic.category_id] !== 'undefined'){
                     newTopicState.byCategoryId[topic.category_id].push(topic)
                 } else {
                     newTopicState.byCategoryId[topic.category_id] = [topic]
@@ -166,19 +179,20 @@ const topicReducer = (state = initialState, action) =>{
             let byCategory = newTopicState.byCategoryId[action.topic.category_id];
 
             if(byCategory == undefined){
-                byCategory = {}
+                byCategory = []
                 byCategory[action.topic.category_id] = [action.topic]
 
             } else {
                 for(let i = 0; i < byCategory.length; i++){
                     let topic = byCategory[i];
-                    if(topic.id == action.topic.id){
+                    if(topic?.id == action.topic.id){
                         byCategory[i] = action.topic
                         break;
                     }
                 }
 
             }
+            console.log("action: ", action);
             newTopicState.byCategoryId[action.topic.category_id] = byCategory;
             newTopicState.byId[action.topic.id] = action.topic;
             return {...state, topics: newTopicState}

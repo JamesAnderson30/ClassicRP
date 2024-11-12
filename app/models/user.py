@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .topic_profile import Topic_Profile
 
 
 class User(db.Model, UserMixin):
@@ -18,6 +19,7 @@ class User(db.Model, UserMixin):
 
     Post = db.relationship('Post', back_populates='User')
     Topic = db.relationship('Topic', back_populates='User')
+    Topic_Profile = db.relationship('Topic_Profile', back_populates='User')
     @property
     def password(self):
         return self.hashed_password

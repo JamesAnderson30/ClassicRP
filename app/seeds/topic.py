@@ -11,11 +11,33 @@ def seed_topic():
         body= 'This is a test topic. Here we will be posting test posts. Feel free to test out your posts here.',
         user_id= 1,
         category_id= 1,
-        created_at = int(time.time())
+        created_at = int(time.time()),
+        privacy_level=0
         # created_at= datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") )
     )
 
+    testTopic2 = Topic(
+        subject =  'Second Seed Topic',
+        body = 'This is a second seed topic, to help fill up things',
+        user_id = 2,
+        category_id=2,
+        created_at = int(time.time() - 100000),
+        privacy_level=1
+    )
+
+    testTopic3 = Topic(
+        subject =  'A typical DND adventure!',
+        body = "The village is a normal human one. A breeze passes through and a cow moos. A single guard sleepily watches the front gate.",
+        user_id = 2,
+        category_id=2,
+        created_at = int(time.time() - 150000),
+        privacy_level=2
+    )
+
+
     db.session.add(testTopic1)
+    db.session.add(testTopic2)
+    db.session.add(testTopic3)
     db.session.commit()
 
 

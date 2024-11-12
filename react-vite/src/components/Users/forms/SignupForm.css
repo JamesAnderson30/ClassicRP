@@ -33,6 +33,7 @@
 }
 
 .SignupForm{
+    z-index: 1;
     position: fixed;
     top: 30%;
     left: calc(50% - 125px);

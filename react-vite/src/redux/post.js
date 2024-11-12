@@ -64,6 +64,12 @@ export const sendPost = (post) => async (dispatch) => {
         body: JSON.stringify(post)
     })
     let newPost = {...post, id: await res.json()}
+    if(post.topic_profile_id !== null){
+        const Topic_Profile_Res = await fetch(`/api/post/topic_profile/${post.topic_profile_id}`)
+        let Topic_Profile = await Topic_Profile_Res.json()
+        newPost['Topic_Profile'] = Topic_Profile;
+    }
+    
     dispatch(createPost(newPost))
     dispatch(storeTopicPost(newPost))
     return JSON.stringify(newPost)
@@ -82,6 +88,7 @@ export const editPost = (post) => async (dispatch) =>{
 export const getPosts = (topic_id) => async (dispatch) =>{
     const res = await fetch(`/api/post/topic/${topic_id}`)
     let posts = await res.json();
+    console.log("Posts: ", posts)
     dispatch(savePosts(posts))
     return JSON.stringify(posts);
 }
@@ -94,7 +101,8 @@ const postReducer = (state = initialState, action) =>{
         case CREATE_POST:
             newPostState.byId[action.post.id] = {...action.post, user_id: action.post.user.id};
             newPostState.all = [...newPostState.all, {...action.post, user_id: action.post.user.id}]
-
+            console.log("Check this son of a bitch")
+            console.log(action)
             return {...state, posts: newPostState}
         case SAVE_POSTS:
             for(let post of action.posts){

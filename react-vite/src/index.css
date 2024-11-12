@@ -1,4 +1,6 @@
 /* TODO: Add sitewide styles */
+
+
 #OuterContainer{
     min-height: calc(100vh - 124px);
     max-width: 1140px;
@@ -6,6 +8,10 @@
     margin-right: auto;
     background-color: lightgrey;
     background-image: url("media/paper.jpg")
+}
+
+.smol{
+    /* background-image:inherit */
 }
 
 #InnerContainer{
@@ -20,6 +26,7 @@
     /* height: 100%; */
     min-height: calc(100vh - 125px);
 }
+
 
 .large{
     max-width: unset !important;

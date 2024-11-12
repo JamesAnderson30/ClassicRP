@@ -27,10 +27,6 @@ export const router = createBrowserRouter([
         element: <SignupFormPage />,
       },
       {
-        path: "/post/new",
-        element: <NewPostForm />
-      },
-      {
         path: "/categories",
         element: <CategoryList />
       },

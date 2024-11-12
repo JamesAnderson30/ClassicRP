@@ -19,10 +19,38 @@ function TopicMain(){
     const [body, setBody] = useState('');
     const [subject, setSubject] = useState('');
     const [isPostLoaded, setIsPostLoaded] = useState(false);
-    const [timeSeconds, setTimeSeconds] = useState(0)
+    const [timeSeconds, setTimeSeconds] = useState("")
+    const [allowPost, setAllowPost] = useState(false)
     const uNavigate = useNavigate()
     
-
+    function getTimeFormated(times){
+        let time = Math.trunc(times);
+        let unit = "";
+        let number = 0;
+        if(time < 60){
+            return `less than a minute ago`
+        } else if(time < 3600){
+            number = Math.trunc(time / 60);
+            unit = "minute";
+        } else if (time < 86400){
+            number = Math.trunc(time / 3600);
+            unit = "hour";
+        } else if (time < 604800){
+            number = Math.trunc(time/86400);
+            unit = "day";
+        } else if (time < 2419200) {
+            number = Math.trunc(time/604800);
+            unit = "week";
+        } else if (time < 29030400) {
+            number = Math.trunc(time / 2419200);
+            unit = "month";
+        } else {
+            number = Math.trunc(time / 29030400)
+            unit = "year";
+        }
+        // Ternary just adds an 's' for plural
+        return `Posted ${number} ${(number === 1 ? unit : `${unit}s`)} ago`
+    }
 
     const dispatch = useDispatch();
 
@@ -34,11 +62,14 @@ function TopicMain(){
     let OuterContainer = document.getElementById("OuterContainer");
     let InnerContainer = document.getElementById("InnerContainer")
     OuterContainer.className = "large";
+    OuterContainer.style.backgroundImage = 'unset'; 
     InnerContainer.className = "large"
 
     function cleanUp(){
         OuterContainer.className = "smol"
+        OuterContainer.style.backgroundImage = 'url("media/paper.jpg")'; 
         InnerContainer.className = "smol"
+
     }
 
     useEffect(()=>{
@@ -55,7 +86,8 @@ function TopicMain(){
                 setIsTopicLoaded(true)
                 setBody(topic.body);
                 setSubject(topic.subject);
-                setTimeSeconds(Math.trunc((Date.now() / 1000) - topic.created_at))
+                setTimeSeconds(getTimeFormated(Math.trunc((Date.now() / 1000) - topic.created_at)))
+
             } else {
                 uNavigate('/')
             }
@@ -81,8 +113,8 @@ function TopicMain(){
             <>
             <div id="TopicHeader">
                 <div className="TopicMain">
-                    <h3>{subject}</h3>
-                    <hr/>
+                    <h3 className="">{subject}</h3>
+
                     {body}
                 </div>
                 <div className="TopicOwner">
@@ -93,6 +125,11 @@ function TopicMain(){
                     
                 </div>
                 <div className="TopicDetails">
+                    {timeSeconds}
+                    <br/>
+                    {topic.privacy_level == 0 && "Anyone can post"}
+                    {topic.privacy_level == 1 && "Only users with profiles may post"}
+                    {topic.privacy_level == 2 && "Only approved users may post"}
                 </div>
                 <hr />
                 <div className="TopicUser">
@@ -100,6 +137,7 @@ function TopicMain(){
                 </div>
                 {user != null && topic && user.id == topic.user_id && <TopicListUsertControl setTopic={setTopic} topic={topic} />}
             </div>
+            {/* NEW POST FORM/BUTTON */}
             {user != null && <NewPostForm topic_id={id} />}
             <div id="TopicPosts">
                 {isPostLoaded && topic && topic.Posts && <TopicPosts posts={topic.Posts} />}
