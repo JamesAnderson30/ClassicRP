@@ -3,27 +3,31 @@ import { useSelector } from "react-redux";
 import { sendPost } from "../../../redux/post";
 import { useDispatch } from "react-redux";
 import { getTopic, registerProfile } from "../../../redux/topic";
+import './NewPost.css'
 function NewPostForm({topic_id}){
     const user = useSelector(state=> state.session.user);
     const topics = useSelector((store) => store.topic.topics);
     const [isDisabled, setIsDisabled] = useState(true);
-    const [showForm, setShowForm] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true)
-    const [showSignupForm, setShowSignUpForm] = useState(false)
     const [isLoaded, setIsLoaded] = useState(false);
     const [topicProfiles, setTopicProfiles] = useState([])
     const [errors] = useState([])
     const [errorsHidden, setErrorsHidden] = useState(true)
     const dispatch = useDispatch()
     // New Post form variables
+    const [showForm, setShowForm] = useState(false);
     const [body, setBody] = useState("");
     const [profilePick, setProfilePick] = useState("none")
+    const [profileName, setProfileName] = useState(user.username)
+    let userAvatar = user.profilePicture;
+    const [profileAvatar, setProfileAvatar] = useState(userAvatar)
 
     // Sign up form variables
     const [aName, setaName] = useState("");
     const [aBody, setaBody] = useState("");
     const [aColor, setaColor] = useState("");
     const [aAvatar, setaAvatar] = useState("");
+    const [showSignupForm, setShowSignUpForm] = useState(false)
     
     function handleShowFormButton(){
         setShowForm(!showForm)
@@ -33,6 +37,22 @@ function NewPostForm({topic_id}){
     function handleShowSignupButton(){
         setShowSignUpForm(!showSignupForm)
         setShowForm(false);
+    }
+
+    function handleProfilePick(e){
+        setProfilePick(e.target.value);
+        // Get profile name of the selected profile
+        let profile = topics.byId[topic_id].Topic_Profiles.find((profile)=>profile.id == e.target.value);
+        let avatar = ""
+        if(profile == undefined){
+            profile = {'name':user.username};
+            avatar = user.profilePicture
+        } else {
+            avatar = profile.avatar
+        }
+        console.log(avatar)
+        setProfileAvatar(avatar);
+        setProfileName(profile.name)
     }
 
     // Handle NEW POST submit
@@ -51,6 +71,7 @@ function NewPostForm({topic_id}){
             setBody("")
             let element = document.querySelector('.PostBody:last-of-type')
             element.scrollIntoView()
+            //setShowForm(false)
         }
     }
 
@@ -92,7 +113,6 @@ function NewPostForm({topic_id}){
             }
         } 
         setTopicProfiles(topics.byId[topic_id].Topic_Profiles)
-        console.log('useEffect', topicProfiles)
     }, [dispatch, topicProfiles, isLoaded,topics])
     
     if(isLoaded){
@@ -106,21 +126,36 @@ function NewPostForm({topic_id}){
                     </button>
 
                     {showForm && 
-                    <form onSubmit={handleSubmit}>
+                    <form id="newPostForm" onSubmit={handleSubmit}>
 
-                        <input type="hidden" name="topic_id" value={topic_id} />
-                        <label>
-                            Author a new Post: 
-                            <textarea value={body} onChange={(e)=>setBody(e.target.value)} />
-                        </label>
-                        <select value={profilePick} id="profilePicker" onChange={(e)=>setProfilePick(e.target.value)}>
-                            <option value="none">None (User profile)</option>
-                            {topicProfiles.map((profile)=>{
-                                if(profile.user_id == user.id) return <option key={profile.id} value={profile.id}>{profile.name}</option>
-                            })}
-                        </select>
-                        <button disabled={isDisabled} type="submit">Post!</button>
-                        <span hidden={errorsHidden}>{errors.map((error)=>{return <span>{error}</span>})}</span>
+                        <div className="postAvatarPreview">
+                            <input type="hidden" name="topic_id" value={topic_id} />
+                            <img className="Avatar" src={profileAvatar} />
+                        </div>
+
+                        <div className="postProfilePicker">
+                            Posting as {profileName}
+                            <select value={profilePick} id="profilePicker" onChange={(e)=>handleProfilePick(e)}>
+                                <option value="none">None (User profile)</option>
+                                {topicProfiles.map((profile)=>{
+                                    if(profile.user_id == user.id) return <option key={profile.id} name={profile.name} value={profile.id}>{profile.name}</option>
+                                })}
+                            </select>
+                        </div>
+
+                        <div className="postBodyArea">
+                            <input type="hidden" name="topic_id" value={topic_id} />
+                            <label>
+                                Author a new Post: 
+                                <textarea value={body} onChange={(e)=>setBody(e.target.value)} />
+                            </label>
+                        </div>
+
+                        <div className="postButton">
+                            <button disabled={isDisabled} type="submit">Post!</button>
+                            <span hidden={errorsHidden}>{errors.map((error)=>{return <span>{error}</span>})}</span>
+                        </div>
+                        
                     </form>
                     }
                     {/* Because the new post and the profile sign up forms have very similar inputs

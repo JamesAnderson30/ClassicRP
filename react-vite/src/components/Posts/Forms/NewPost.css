@@ -1,0 +1,12 @@
+#newPostForm {
+    display: grid; 
+    grid-template-columns: 200px 1fr; 
+    grid-template-rows: 1fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "postAvatarPreview postProfilePicker"
+      "postBodyArea postBodyArea"; 
+  }
+  .postAvatarPreview { grid-area: postAvatarPreview; }
+  .postProfilePicker { grid-area: postProfilePicker; }
+  .postBodyArea { grid-area: postBodyArea; }
