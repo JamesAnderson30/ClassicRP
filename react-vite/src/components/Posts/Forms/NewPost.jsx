@@ -134,26 +134,22 @@ function NewPostForm({topic_id}){
                         </div>
 
                         <div className="postProfilePicker">
-                            Posting as {profileName}
-                            <select value={profilePick} id="profilePicker" onChange={(e)=>handleProfilePick(e)}>
-                                <option value="none">None (User profile)</option>
-                                {topicProfiles.map((profile)=>{
-                                    if(profile.user_id == user.id) return <option key={profile.id} name={profile.name} value={profile.id}>{profile.name}</option>
-                                })}
-                            </select>
+                            <label>
+                                Posting as {profileName}
+                                <select value={profilePick} id="profilePicker" onChange={(e)=>handleProfilePick(e)}>
+                                    <option value="none">None (User profile)</option>
+                                    {topicProfiles.map((profile)=>{
+                                        if(profile.user_id == user.id) return <option key={profile.id} name={profile.name} value={profile.id}>{profile.name}</option>
+                                    })}
+                                </select>
+                            </label>
+                            <button id="postButton" disabled={isDisabled} type="submit">Post!</button>
                         </div>
-
+                        
                         <div className="postBodyArea">
                             <input type="hidden" name="topic_id" value={topic_id} />
-                            <label>
-                                Author a new Post: 
                                 <textarea value={body} onChange={(e)=>setBody(e.target.value)} />
-                            </label>
-                        </div>
-
-                        <div className="postButton">
-                            <button disabled={isDisabled} type="submit">Post!</button>
-                            <span hidden={errorsHidden}>{errors.map((error)=>{return <span>{error}</span>})}</span>
+                            
                         </div>
                         
                     </form>

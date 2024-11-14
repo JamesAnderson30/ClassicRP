@@ -11,6 +11,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 import time
 
+
 topic_routes = Blueprint('topic', __name__)
 
 
