@@ -66,11 +66,11 @@ function TopicUsertControl({topic, setTopic}){
             <button onClick={confirmDelete} hidden={hideDeleteButton} className="userControlButton confirm">
                 Yes, Delete!
             </button>
-            <form hidden={hideForm} onSubmit={(e)=>handleSubmit(e)}>
+            <form hidden={hideForm} className="editForm" onSubmit={(e)=>handleSubmit(e)}>
                 <input type="hidden" value={topic.category_id} name="category_id" />
                 <label>
                     Body
-                    <input type="text" value={body} onChange={(e)=>setBody(e.target.value)} />
+                    <textarea id="editPostForm" type="text" value={body} onChange={(e)=>setBody(e.target.value)} />
                 </label>
                 <br/>
                 <label>
