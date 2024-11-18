@@ -22,7 +22,7 @@ const createPost = (post) =>({
     post
 })
 
-const savePosts = (posts) => ({
+export const savePosts = (posts) => ({
     type: SAVE_POSTS,
     posts
 })
@@ -88,7 +88,6 @@ export const editPost = (post) => async (dispatch) =>{
 export const getPosts = (topic_id) => async (dispatch) =>{
     const res = await fetch(`/api/post/topic/${topic_id}`)
     let posts = await res.json();
-    console.log("Posts: ", posts)
     dispatch(savePosts(posts))
     return JSON.stringify(posts);
 }
@@ -101,8 +100,6 @@ const postReducer = (state = initialState, action) =>{
         case CREATE_POST:
             newPostState.byId[action.post.id] = {...action.post, user_id: action.post.user.id};
             newPostState.all = [...newPostState.all, {...action.post, user_id: action.post.user.id}]
-            console.log("Check this son of a bitch")
-            console.log(action)
             return {...state, posts: newPostState}
         case SAVE_POSTS:
             for(let post of action.posts){

@@ -9,12 +9,14 @@ import sessionReducer from "./session";
 import postReducer from "./post";
 import categoryReducer from "./category";
 import topicReducer from "./topic";
+import profileReducer from "./topic_profile";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   post: postReducer,
   category: categoryReducer,
-  topic: topicReducer
+  topic: topicReducer,
+  profile: profileReducer
 });
 
 let enhancer;

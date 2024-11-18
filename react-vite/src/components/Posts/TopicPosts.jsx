@@ -1,7 +1,7 @@
 import TopicPost from "./Components/TopicPost";
 
 function TopicPosts(posts){
-    console.log("posts: ", posts)
+
     return (
         <div className="TopicPostList">
             {posts.posts.map((post)=>{

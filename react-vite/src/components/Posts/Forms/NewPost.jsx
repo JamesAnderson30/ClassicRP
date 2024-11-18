@@ -50,7 +50,6 @@ function NewPostForm({topic_id}){
         } else {
             avatar = profile.avatar
         }
-        console.log(avatar)
         setProfileAvatar(avatar);
         setProfileName(profile.name)
     }
@@ -77,7 +76,7 @@ function NewPostForm({topic_id}){
 
     let handleSignupSubmit = async (e) =>{
         e.preventDefault()
-        let profile = {aBody, topic_id, aName, aColor, aAvatar, user}
+        let profile = {'body': aBody, topic_id, 'name': aName, 'color': aColor, 'avatar': aAvatar, user}
         let res = await dispatch(registerProfile(profile, topic_id));
         if(res){
             setaBody("")

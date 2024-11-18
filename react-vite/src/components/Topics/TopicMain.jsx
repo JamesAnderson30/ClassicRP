@@ -22,7 +22,7 @@ function TopicMain(){
     const [timeSeconds, setTimeSeconds] = useState("")
     const [allowPost, setAllowPost] = useState(false)
     const uNavigate = useNavigate()
-    
+
     function getTimeFormated(times){
         let time = Math.trunc(times);
         let unit = "";
@@ -82,12 +82,21 @@ function TopicMain(){
     //check if post list is stale
     useEffect(()=>{
         let getTopicThunk = async (id) => {
+            //Just scroll function
             if(await dispatch(getTopic(id))){
                 setIsTopicLoaded(true)
                 setBody(topic.body);
                 setSubject(topic.subject);
-                setTimeSeconds(getTimeFormated(Math.trunc((Date.now() / 1000) - topic.created_at)))
-
+                setTimeSeconds(getTimeFormated(Math.trunc((Date.now() / 1000) - topic.created_at)))               
+                if(location.hash.length > 0){
+                    let hash = location.hash
+                    let target_post = document.getElementById(hash.substring(1))
+                    target_post.scrollIntoView()
+                    console.log("target_post: ", target_post);
+                    //target_post.scrollIntoView();
+                } else {
+                    console.log("else: ", location.hash)
+                }
             } else {
                 uNavigate('/')
             }

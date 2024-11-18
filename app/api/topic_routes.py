@@ -124,11 +124,11 @@ def register_profile(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     errors = []
 
-    if not form.data['aBody']:
+    if not form.data['body']:
         errors.append({'field': "body", "message": "Description is required"})
-    if not form.data['aName']:
+    if not form.data['name']:
         errors.append({'field': 'name', 'message': 'Name is required'})
-    if not form.data['aAvatar']:
+    if not form.data['avatar']:
         errors.append({'field': 'avatar', 'message': 'avatar is required'})
 
     if len(errors) == 0:

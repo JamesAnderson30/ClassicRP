@@ -43,11 +43,9 @@ function LoginSignup(){
     }
 
     const showLoginForm = (e) => {
-        console.log("show")
         e.preventDefault()
         setSignupHidden(true)
         setLoginHidden(false)
-        console.log(loginHidden)
     }
     const hideLoginForm = (e) => {
         e.preventDefault(); 

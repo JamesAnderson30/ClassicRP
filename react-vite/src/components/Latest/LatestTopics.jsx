@@ -24,7 +24,6 @@ function LatestTopics(){
             }
         }
         if(!isLoaded){
-            console.log("getting")
             getRecent();
         }
     }, [isLoaded])

@@ -6,16 +6,17 @@ import PostUser from "./PostUser";
 import "./Post.css";
 
 function TopicPost(id){
-    id = id.id.charAt(4); // We expect the id to be 'post1' so we just want the number
+    id = id.id.substring(4); // We expect the id to be 'post1' so we just want the number
     const byIdStart = useSelector((state) => state.post.posts.byId);
     const user = useSelector(state=> state.session.user);
     const [post, setPost] = useState(byIdStart[id]);
 
     
+    
     if(byIdStart[id]){
         //get user status
         return (
-            <div className="PostBody">
+            <div id={`post${id}`} className="PostBody">
                 <div className="UserArea">
                     <PostUser post={post} />
                     {user && post && user.id == post.user_id && <PostUserControls setPost={setPost} post={post} />}
