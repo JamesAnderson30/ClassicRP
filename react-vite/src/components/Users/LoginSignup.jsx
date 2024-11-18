@@ -4,11 +4,14 @@ import defaultAvatar from "../../../media/default-user.png"
 import { thunkLogout } from "../../redux/session";
 import LoginForm from "./forms/LoginForm";
 import SignupForm from "./forms/SignupForm";
+import { NavLink } from "react-router-dom";
 import "./LoginSingup.css";
+import { useNavigate } from "react-router-dom";
 function LoginSignup(){
 
     const [loginHidden, setLoginHidden] = useState(true)
     const [signupHidden, setSignupHidden] = useState(true)
+    const navigate = useNavigate();
 
     const user = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
@@ -86,7 +89,7 @@ function LoginSignup(){
     return (
         <div id="UserArea">
             <div id="UserInformation">
-                <p>Welcome {user.username}!</p>
+                <p>Welcome <NavLink to={`/user/${user.id}`}>{user.username}!</NavLink></p>
                 <p><button onClick={handleLogout}>Logout</button></p>
             </div>
             <img 

@@ -69,14 +69,15 @@ function TopicUsertControl({topic, setTopic}){
             <form hidden={hideForm} className="editForm" onSubmit={(e)=>handleSubmit(e)}>
                 <input type="hidden" value={topic.category_id} name="category_id" />
                 <label>
-                    Body
-                    <textarea id="editPostForm" type="text" value={body} onChange={(e)=>setBody(e.target.value)} />
+                    Subject: <input id="editPostSubjectForm" type="text" value={subject} onChange={(e)=>setSubject(e.target.value)} />
+                </label>
+                <br />
+                <br />
+                <label>
+                    Body: <textarea id="editPostForm" type="text" value={body} onChange={(e)=>setBody(e.target.value)} />
                 </label>
                 <br/>
-                <label>
-                    Subject
-                    <input type="text" value={subject} onChange={(e)=>setSubject(e.target.value)} />
-                </label>
+
                 <button disabled={disableEditButton} type="submit">Submit Edits!</button>
             </form>
         </div>

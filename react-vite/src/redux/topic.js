@@ -144,7 +144,7 @@ const topicReducer = (state = initialState, action) =>{
     let newTopicState = {...state.topics}
     switch(action.type){
         case STORE_TOPICPOST:
-
+            console.log("newTopicState: ", newTopicState)
             newTopicState.byId[action.post.topic_id].Posts.push({...action.post,user_id: action.post.user.id, topic_id: action.post.topic_id.topic_id})
 
             return {...state, topics: newTopicState}
@@ -160,8 +160,9 @@ const topicReducer = (state = initialState, action) =>{
             })
 
             return {...state, topics: newTopicState}
-        // This is specifically to story the topics that belong to a category
+        // This is specifically to store the topics that belong to a category
         case STORE_CATEGORYTOPICS:
+             console.log("newTopicState: ", newTopicState)
             newTopicState.byCategoryId[action.category_id] = [];
             for(let topic of action.topics){
 
@@ -176,12 +177,11 @@ const topicReducer = (state = initialState, action) =>{
             }
             return {...state, topics: newTopicState}
         case STORE_TOPIC:
+            console.log("newTopicState: ", newTopicState)
             let byCategory = newTopicState.byCategoryId[action.topic.category_id];
-
             if(byCategory == undefined){
                 byCategory = []
-                byCategory[action.topic.category_id] = [action.topic]
-
+                byCategory.push(action.topic);
             } else {
                 for(let i = 0; i < byCategory.length; i++){
                     let topic = byCategory[i];
@@ -190,18 +190,18 @@ const topicReducer = (state = initialState, action) =>{
                         break;
                     }
                 }
-
             }
-            console.log("action: ", action);
             newTopicState.byCategoryId[action.topic.category_id] = byCategory;
             newTopicState.byId[action.topic.id] = action.topic;
             return {...state, topics: newTopicState}
         case UPDATE_TOPIC:
+            console.log("newTopicState: ", newTopicState)
             newTopicState.byId[action.topic.id].body = action.topic.body;
             newTopicState.byId[action.topic.id].subject = action.topic.subject;
             let categoryArray = newTopicState.byCategoryId[action.topic.category_id];
             for(let i = 0; i < categoryArray.length; i++){
                 let topic = categoryArray[i];
+                console.log("categoryArray", categoryArray);
                 if(topic.id == action.topic.id){
                     newTopicState.byCategoryId[action.topic.category_id] = action.topic
                 }

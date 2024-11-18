@@ -7,7 +7,7 @@
     margin-left: auto;
     margin-right: auto;
     background-color: lightgrey;
-    background-image: url("media/paper.jpg")
+    background-image: url("/media/paper.jpg")
 }
 
 .smol{

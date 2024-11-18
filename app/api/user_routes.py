@@ -22,4 +22,29 @@ def user(id):
     Query for a user by id and returns that user in a dictionary
     """
     user = User.query.get(id)
-    return user.to_dict()
+    if not user:
+        return "User Not Found",404
+    
+    topicList = []
+    postList = []
+    profileList = []
+    if user.Topic:
+        for topic in user.Topic:
+            topicList.append(topic.to_dict())
+    
+    if user.Post:
+        for post in user.Post:
+            postList.append(post.to_dict())
+
+    if user.Topic_Profile:
+        for profile in user.Topic_Profile:
+            profileList.append(profile.to_dict())
+    
+    user = user.to_dict()
+    user["Topics"] = topicList
+    user["Posts"] = postList
+    user["Topic_Profiles"] = profileList
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print(user)
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    return user

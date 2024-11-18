@@ -67,7 +67,7 @@ function TopicMain(){
 
     function cleanUp(){
         OuterContainer.className = "smol"
-        OuterContainer.style.backgroundImage = 'url("media/paper.jpg")'; 
+        OuterContainer.style.backgroundImage = 'url("/media/paper.jpg")'; 
         InnerContainer.className = "smol"
 
     }

@@ -157,15 +157,14 @@ function NewPostForm({topic_id}){
                     {/* Because the new post and the profile sign up forms have very similar inputs
                     we will prepend 'a' to the names of the controlled input variables */}
                     {showSignupForm && 
-                        <form onSubmit={handleSignupSubmit}>
+                        <form id="newProfileForm" onSubmit={handleSignupSubmit}>
                             <input type="hidden" name="topic_id" value={topic_id} />
+
                             <label>Character Name:</label>
                             <input required type="text" value={aName} onChange={(e)=>setaName(e.target.value)} />
-                            <br/>
 
                             <label>Character Description: </label>
                             <input  required type="text" value={aBody} onChange={(e)=>setaBody(e.target.value)} />
-                            <br/>
 
                             <label>Outline Color</label>
                             <select value={aColor} onChange={(e)=>setaColor(e.target.value)} >
@@ -175,11 +174,14 @@ function NewPostForm({topic_id}){
                                 <option value={"green"}>Green</option>
                                 <option value={"brown"}>Brown</option>
                             </select>
-                            <br/>
-
-                            <label>Character avatar (External URL for now)</label>
+                            
+                            <label>Character avatar</label>
                             <input  required type="text" value={aAvatar} onChange={(e)=>setaAvatar(e.target.value)} />
-                            <button type="submit">Post!</button>
+
+                            <label>Character Description: </label>
+                            <textarea  required type="text" value={aBody} onChange={(e)=>setaBody(e.target.value)} />
+
+                            <button className="button" type="submit">Post!</button>
                             <span hidden={errorsHidden}>{errors.map((error)=>{return <span>{error}</span>})}</span>
                         </form>
                     }

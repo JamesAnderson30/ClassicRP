@@ -46,3 +46,24 @@
     border-top: none;
   }
   .postButton { grid-area: postButton}
+
+  #newProfileForm{
+    display: grid; 
+    grid-auto-columns: 1fr; 
+    grid-template-columns: 155px 1fr; 
+    grid-template-rows: 1fr 1fr 1fr 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+        ". ."
+        ". ."
+        ". ."
+        ". ."
+        ". ."
+        "button button"; 
+    padding:10px;
+    padding-top:15px;
+}
+
+.button{
+  grid-area:button;
+}

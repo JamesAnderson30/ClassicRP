@@ -40,11 +40,16 @@
       "details details"
       ". ."
       "TopicUserControls TopicUserControls"; 
-    padding:20px
+    padding:20px;
+    border-bottom: 6px solid #b394c8 !important;
+    margin-bottom: 10px;
 }
 .TopicUserControls{
     grid-area: TopicUserControls;
+
 }
+
+
 .TopicOwner{
     display: flex;
     flex-direction: column;
@@ -69,8 +74,19 @@
 
 .editForm{
     margin-top: 10px;
+    padding-bottom: 3px;
 }
 
 #editPostForm{
-    
+    width: 100%;
+    border-top: 1px double black;
+    border-right: none;
+    border-bottom: none;
+}
+#editPostSubjectForm{
+    width: 100%;
+    border-bottom: none;
+    border-right: none;
+    border-top: 1px double black;
+    border-left: 1px double black;
 }

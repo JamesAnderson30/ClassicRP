@@ -40,6 +40,7 @@ const categoryReducer = (state = initialState, action) =>{
             for(let topic of action.categories.categories){
                 newCategoryState.byId[topic.id] = topic;
             }
+            //console.log("newCategoryState: ", newCategoryState)
             return {...state, categories: newCategoryState}
         default:
             return state;
