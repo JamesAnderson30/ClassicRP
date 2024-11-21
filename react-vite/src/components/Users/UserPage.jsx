@@ -16,6 +16,12 @@ function UserPage(){
     const [isPostHidden, setIsPostHidden] = useState(true)
     const [isTopicHidden, setIsTopicHidden] = useState(false)
     const [isProfileHidden, setIsProfileHIdden] = useState(true)
+    const [showLabel, setShowLabel] = useState(true);
+
+    const [username, setUsername]= useState('loading...')
+    const [email, setEmail] = useState('loading...')
+    const [formUsername, setFormUsername] = useState('')
+    const [formEmail, setFormEmail] = useState('');
 
     const [topicCount, setTopicCount] = useState(0)
     const [postCount, setPostCount] = useState(0)
@@ -35,12 +41,16 @@ function UserPage(){
         async function fetchUser(id) {
             let res = await dispatch(getUser(id))
             if(res !== false){
-                
+                console.log("res: ", res)
                 setIsLoaded(true);
                 setAvatar(res.profilePicture);
                 setTopicCount(res.Topics.length);
                 setPostCount(res.Posts.length);
-                setProfileCount(res.Topic_Profiles.length)
+                setProfileCount(res.Topic_Profiles.length);
+                setUsername(res.username);
+                setEmail(res.email)
+                setFormUsername(res.username);
+                setFormEmail(res.email)
             } else {
                 navigate("/")
             }
@@ -56,6 +66,11 @@ function UserPage(){
         setIsPostHidden(true);
         setIsTopicHidden(true);
         setIsProfileHIdden(true);
+    }
+    function showEditForm(e){
+        e.preventDefault();
+        e.stopPropagation();
+        setShowLabel(!showLabel)
     }
     function showInfo(target, e){
         e.stopPropagation();
@@ -85,11 +100,25 @@ function UserPage(){
                 <div id="AvatarStats">
                     <img src={avatar} />
                     <div id="UserStats">
-                        {`Topics Posted: ${topicCount}, Posts Posted: ${postCount}, Profiles Created: ${profileCount}`}
+                        {`Topics Posted: ${topicCount}`}<br/>{`Posts Posted: ${postCount} `}<br/>{` Profiles Created: ${profileCount}`}
                     </div>
                 </div>
-                <div id="UserDescription">
-                    description
+                <div id="UserInformation">
+                    <button onClick={(e)=>{showEditForm(e)}}>Edit my information</button>
+                    <form>
+                        <div id="UserUsername">
+                            <p>
+                                Username: {showLabel && username}
+                                <input value={formUsername} onChange={(e)=>{setFormUsername(e.target.value)}} hidden={showLabel} />
+                            </p>
+                        </div>
+                        <div id="UserEmail">
+                            <p>
+                                Email: {showLabel && email}
+                                <input value={formEmail} hidden={showLabel} onChange={(e)=>{setFormEmail(e.target.value)}}/>
+                            </p>
+                        </div>
+                    </form>
                 </div>
                 <div id="UserMediaList">
                     <div id="UserMediaPicker">
