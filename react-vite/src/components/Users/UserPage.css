@@ -1,8 +1,22 @@
 .UserPage{
+    display: grid; 
+    grid-auto-columns: 1fr; 
+    grid-template-columns: min-content 1fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 10px 10px;
+    margin-top: 10px;
+    grid-template-areas: 
+      "AvatarStats UserInformation"
+      "AvatarStats UserInformation"
+      "UserMediaList UserMediaList"; 
+  }
+  #AvatarStats { grid-area: AvatarStats; }
+  #UserProfileInfo { grid-area: UserInformation; }
+  #UserMediaList { grid-area: UserMediaList; }
 
-}
 
 .UserPage img{
     width:150px;
     height:150px
 }
+

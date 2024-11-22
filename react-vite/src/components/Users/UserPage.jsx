@@ -22,6 +22,7 @@ function UserPage(){
     const [email, setEmail] = useState('loading...')
     const [formUsername, setFormUsername] = useState('')
     const [formEmail, setFormEmail] = useState('');
+    const [formAvatar, setFormAvatar] = useState('')
 
     const [topicCount, setTopicCount] = useState(0)
     const [postCount, setPostCount] = useState(0)
@@ -51,6 +52,7 @@ function UserPage(){
                 setEmail(res.email)
                 setFormUsername(res.username);
                 setFormEmail(res.email)
+                setFormAvatar(res.profilePicture)
             } else {
                 navigate("/")
             }
@@ -103,7 +105,7 @@ function UserPage(){
                         {`Topics Posted: ${topicCount}`}<br/>{`Posts Posted: ${postCount} `}<br/>{` Profiles Created: ${profileCount}`}
                     </div>
                 </div>
-                <div id="UserInformation">
+                <div id="UserProfileInfo">
                     <button onClick={(e)=>{showEditForm(e)}}>Edit my information</button>
                     <form>
                         <div id="UserUsername">
@@ -118,6 +120,15 @@ function UserPage(){
                                 <input value={formEmail} hidden={showLabel} onChange={(e)=>{setFormEmail(e.target.value)}}/>
                             </p>
                         </div>
+                        <div id="UserAvatar">
+                            {!showLabel && <p>
+                                Avatar image URL: <input value={formAvatar} onChange={(e)=>{setFormAvatar(e.target.value)}} />
+                            </p>}
+                        </div>
+
+                        {!showLabel &&
+                        <button onClick={(e)=>handleEditSubmit(e.target.value)}>Submit Changes</button>
+                        }
                     </form>
                 </div>
                 <div id="UserMediaList">
