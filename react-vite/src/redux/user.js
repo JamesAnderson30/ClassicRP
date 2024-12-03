@@ -29,6 +29,7 @@ export const getUser = (id) => async (dispatch) => {
         }
 
         if(typeof user.Posts !== undefined){
+            console.log("user.Posts: ", user.Posts);
             dispatch(savePosts(user.Posts))
         }
         return user

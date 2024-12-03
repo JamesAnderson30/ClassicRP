@@ -54,7 +54,25 @@ export const storeTopics = (topics) => ({
 
 // // Thunks
 
+//I decided to make this a post merely because I didn't like the idea of a really long set being in the url
+export const getTheseTopics = (topic_ids) => async (dispatch) =>{
+    if(topic_ids < 1){
+        return  {"error": "Empty request"}
+    } else{
+        console.log("Topic_ids: ", topic_ids);
 
+        const res = await fetch(`/api/topic/these`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify(Array.from(topic_ids))
+        })
+        if(res.ok){
+            let topics = await res.json()
+            dispatch(storeTopics(topics))
+        }
+        
+    }
+}
 export const getRecentTopics = () => async (dispatch) =>{
     const res = await fetch(`/api/topic/recent`,{
         method:"GET"

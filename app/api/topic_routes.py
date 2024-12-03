@@ -14,7 +14,15 @@ import time
 
 topic_routes = Blueprint('topic', __name__)
 
+@topic_routes.route('/these', methods=["POST"])
+def these_topics():
+    topic_ids = request.get_json()
+    topic_req  = Topic.query.filter(Topic.id.in_(topic_ids)).all()
+    topics = []
+    for topic in topic_req:
+        topics.append(topic.to_dict())
 
+    return jsonify(topics), 200
 
 @topic_routes.route('/<int:id>',)
 def topic_id(id):

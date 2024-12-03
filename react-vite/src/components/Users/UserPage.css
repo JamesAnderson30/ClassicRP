@@ -2,7 +2,7 @@
     display: grid; 
     grid-auto-columns: 1fr; 
     grid-template-columns: min-content 1fr; 
-    grid-template-rows: 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr; 
     gap: 10px 10px;
     margin-top: 10px;
     grid-template-areas: 
@@ -14,7 +14,24 @@
   #UserProfileInfo { grid-area: UserInformation; }
   #UserMediaList { grid-area: UserMediaList; }
 
+.userPost{
+  border: black 1px solid;
+  background-color: white;
+  padding: 5px;
+  margin-bottom: 5px;
+}
 
+.userPost div{
+  
+}
+
+.userPost .userPostBody{
+
+}
+
+.userPost .userPostHeader{
+
+}
 .UserPage img{
     width:150px;
     height:150px

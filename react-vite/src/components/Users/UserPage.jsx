@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { getUser } from "../../redux/user";
+import { getTheseTopics } from "../../redux/topic";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -36,7 +37,21 @@ function UserPage(){
     //EVENT HANDLERS
 
     // END EVENT HANDLERS
+    function checkPostTopicRelationships(){
+        let loadTheseTopics = new Set();
+        for(let [post_id, post] of Object.entries(posts.byId)){
+            if(topics.byId[post.topic_id] == undefined){
+                loadTheseTopics.add(post.topic_id)
+            }
+        }
 
+        if(loadTheseTopics.size > 0){
+            console.log(dispatch(getTheseTopics(loadTheseTopics)));
+        } else {
+            console.log("nogo");
+        }
+
+    }
 
     useEffect(()=>{       
         async function fetchUser(id) {
@@ -53,6 +68,8 @@ function UserPage(){
                 setFormUsername(res.username);
                 setFormEmail(res.email)
                 setFormAvatar(res.profilePicture)
+
+                checkPostTopicRelationships();
             } else {
                 navigate("/")
             }
@@ -159,10 +176,16 @@ function UserPage(){
                     <div className="userMedia item" hidden={isPostHidden}>
                     {Object.keys(posts.byId).map((key)=>{
                             let post = posts.byId[key]
+                            //console.log("topics.byId[post.topic_id]", topics.byId[post.topic_id])
                             if(post.user_id == id){
                                 return (
                                     <div key={`postId${post.id}`} onClick={(e)=>{navigate(`/topic/${post.topic_id}#post${post.id}`)}} className="userPost">
-                                        <div>
+                                        <div className="userPostHeader">
+                                            {topics.byId[post.topic_id] !== undefined && "Found"}
+                                            {topics.byId[post.topic_id] !== undefined || "Not Found"}
+                                        </div>
+                                        
+                                        <div className="userPostBody">
                                             {post.body}
                                         </div>
                                     </div>
