@@ -14,15 +14,21 @@
   #UserProfileInfo { grid-area: UserInformation; }
   #UserMediaList { grid-area: UserMediaList; }
 
-.userPost{
+#UserMediaPicker{
+  margin-bottom:10px;
+}
+
+.mediaItem{
   border: black 1px solid;
   background-color: white;
   padding: 5px;
   margin-bottom: 5px;
+  height: 4lh;
+  overflow-y: hidden;
 }
 
 .userPost div{
-  
+
 }
 
 .userPost .userPostBody{

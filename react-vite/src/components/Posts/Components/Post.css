@@ -1,18 +1,21 @@
 .PostBody {
   display: grid;
-  grid-template-columns: 250px 1fr;
-  grid-template-rows: 30px 1fr;
-  gap: 0px 10px;
-  grid-template-areas:
-      "UserArea PostInfo"
-      "UserArea PostArea";
-  margin: 5px 10px 10px 10px;
-  background-color: #c3b9a0;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: 30px 1fr;
+    gap: 0px 10px;
+    grid-template-areas:
+        "UserArea PostInfo"
+        "UserArea PostArea";
+    margin: 5px 10px 10px 10px;
+    border-bottom: 1px black solid;
+    /* background-color: #c3b9a0; */
+    padding-bottom: 10px;
   }
 .UserArea {
     text-align:center;
     grid-area: UserArea;
     border-right: 1px grey groove;
+    min-height: 16lh;
   }
 .PostArea {
   background-color: #ffffffeb;

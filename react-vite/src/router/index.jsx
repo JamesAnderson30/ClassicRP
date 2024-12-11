@@ -9,6 +9,7 @@ import TopicMain from '../components/Topics/TopicMain';
 import CategorySingle from '../components/Categories/CategorySingle';
 import LandingPage from '../components/LandingPage'
 import UserPage from '../components/Users/UserPage'
+import DocManage from '../components/Documents/DocManage';
 
 // The router really should be rewritten
 export const router = createBrowserRouter([
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "/user/:id",
         element: <UserPage />
+      },
+      {
+        path: "/documents/manage",
+        element: <DocManage />
       }
     ],
   },

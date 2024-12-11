@@ -22,7 +22,7 @@ function TopicPost(id){
                     {user && post && user.id == post.user_id && <PostUserControls setPost={setPost} post={post} />}
                 </div>
                 <div className="PostInfo">
-                    
+                    {post && new Date(post.created_at).toLocaleString()}
                 </div>
                 <div className="PostArea">
                     <PostBody post={post} />

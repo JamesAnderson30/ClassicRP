@@ -118,40 +118,44 @@ function NewPostForm({topic_id}){
         
         return(
                 <>
-                    <button onClick={(e)=>handleShowFormButton(e)}>Make a new post!</button>
-                    <button onClick={(e)=>handleShowSignupButton(e)}>                                
+                    <button className={"newButtons"} onClick={(e)=>handleShowFormButton(e)}>Make a new post!</button>
+                    <button className={"newButtons"} onClick={(e)=>handleShowSignupButton(e)}>                                
                         {topics.byId[topic_id].privacy_level == 2 && "Submit character application"}
                         {topics.byId[topic_id].privacy_level < 2 && "Submit character profile"}
                     </button>
 
                     {showForm && 
-                    <form id="newPostForm" onSubmit={handleSubmit}>
+                    <>
+                        <h2>Submit a new post:</h2>
+                        <form id="newPostForm" onSubmit={handleSubmit}>
 
-                        <div className="postAvatarPreview">
-                            <input type="hidden" name="topic_id" value={topic_id} />
-                            <img className="Avatar" src={profileAvatar} />
-                        </div>
+                            <div className="postAvatarPreview">
+                                <input type="hidden" name="topic_id" value={topic_id} />
+                                <span>Avatar preview</span>
+                                <img className="Avatar" src={profileAvatar} />
+                            </div>
 
-                        <div className="postProfilePicker">
-                            <label>
-                                Posting as {profileName}
-                                <select value={profilePick} id="profilePicker" onChange={(e)=>handleProfilePick(e)}>
-                                    <option value="none">None (User profile)</option>
-                                    {topicProfiles.map((profile)=>{
-                                        if(profile.user_id == user.id) return <option key={profile.id} name={profile.name} value={profile.id}>{profile.name}</option>
-                                    })}
-                                </select>
-                            </label>
-                            <button id="postButton" disabled={isDisabled} type="submit">Post!</button>
-                        </div>
-                        
-                        <div className="postBodyArea">
-                            <input type="hidden" name="topic_id" value={topic_id} />
-                                <textarea value={body} onChange={(e)=>setBody(e.target.value)} />
+                            <div className="postProfilePicker">
+                                <label>
+                                    Posting as {profileName}
+                                    <select value={profilePick} id="profilePicker" onChange={(e)=>handleProfilePick(e)}>
+                                        <option value="none">None (User profile)</option>
+                                        {topicProfiles.map((profile)=>{
+                                            if(profile.user_id == user.id) return <option key={profile.id} name={profile.name} value={profile.id}>{profile.name}</option>
+                                        })}
+                                    </select>
+                                </label>
+                                <button id="postButton" disabled={isDisabled} type="submit">Post!</button>
+                            </div>
                             
-                        </div>
-                        
-                    </form>
+                            <div className="postBodyArea">
+                                <input type="hidden" name="topic_id" value={topic_id} />
+                                    <textarea value={body} onChange={(e)=>setBody(e.target.value)} />
+                                
+                            </div>
+                            
+                        </form>
+                    </>
                     }
                     {/* Because the new post and the profile sign up forms have very similar inputs
                     we will prepend 'a' to the names of the controlled input variables */}

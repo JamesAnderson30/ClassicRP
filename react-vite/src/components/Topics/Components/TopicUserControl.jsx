@@ -57,6 +57,9 @@ function TopicUsertControl({topic, setTopic}){
 
     return(
         <div className="TopicUserControls">
+            <div>
+                This is your topic!
+            </div>
             <button onClick={editClick} className="userControlButton">
                 Edit my Topic
             </button>

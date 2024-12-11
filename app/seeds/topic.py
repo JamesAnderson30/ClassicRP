@@ -11,7 +11,7 @@ def seed_topic():
         body= 'This is a test topic. Here we will be posting test posts. Feel free to test out your posts here.',
         user_id= 1,
         category_id= 1,
-        created_at = int(time.time()),
+        created_at = "2024-11-16 11:17:49.755796",
         privacy_level=0
         # created_at= datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") )
     )
@@ -21,7 +21,7 @@ def seed_topic():
         body = 'This is a second seed topic, to help fill up things',
         user_id = 2,
         category_id=2,
-        created_at = int(time.time() - 100000),
+        created_at = "2024-11-17 14:46:59.176038",
         privacy_level=1
     )
 
@@ -30,7 +30,7 @@ def seed_topic():
         body = "The village is a normal human one. A breeze passes through and a cow moos. A single guard sleepily watches the front gate.",
         user_id = 2,
         category_id=2,
-        created_at = int(time.time() - 150000),
+        created_at = "2024-12-02 20:08:39.184674",
         privacy_level=2
     )
 

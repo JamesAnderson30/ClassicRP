@@ -38,11 +38,12 @@ function UserPage(){
 
     // END EVENT HANDLERS
     function checkPostTopicRelationships(){
+        
         let loadTheseTopics = new Set();
         for(let [post_id, post] of Object.entries(posts.byId)){
             if(topics.byId[post.topic_id] == undefined){
                 loadTheseTopics.add(post.topic_id)
-            }
+            }            
         }
 
         if(loadTheseTopics.size > 0){
@@ -160,10 +161,11 @@ function UserPage(){
                             let topic = topics.byId[key]
                             if(topic.user_id == id){
                                 return (
-                                    <div key={`topicId${topic.id}`} onClick={(e)=>{navigate(`/topic/${topic.id}`)}} className="userTopic">
+                                    <div key={`topicId${topic.id}`} onClick={(e)=>{navigate(`/topic/${topic.id}`)}} className="mediaItem">
                                         <div>
                                             {topic.subject}
                                         </div>
+                                        Posted on: {new Date(topic.created_at).toLocaleString()}
                                         <div>
                                             {topic.body}
                                         </div>
@@ -179,10 +181,14 @@ function UserPage(){
                             //console.log("topics.byId[post.topic_id]", topics.byId[post.topic_id])
                             if(post.user_id == id){
                                 return (
-                                    <div key={`postId${post.id}`} onClick={(e)=>{navigate(`/topic/${post.topic_id}#post${post.id}`)}} className="userPost">
+                                    <div key={`postId${post.id}`} onClick={(e)=>{navigate(`/topic/${post.topic_id}#post${post.id}`)}} className="mediaItem">
                                         <div className="userPostHeader">
-                                            {topics.byId[post.topic_id] !== undefined && "Found"}
-                                            {topics.byId[post.topic_id] !== undefined || "Not Found"}
+                                            <div>
+                                                {topics.byId[post.topic_id] !== undefined && topics.byId[post.topic_id].subject}
+                                            </div>
+                                            <div>
+                                                Posted on: {new Date(post.created_at).toLocaleString()}
+                                            </div>
                                         </div>
                                         
                                         <div className="userPostBody">
@@ -199,7 +205,7 @@ function UserPage(){
                                 let profile = profiles[key]
                                 if(profile.user_id == id){
                                     return (
-                                        <div key={`profileId${profile.id}`} onClick={(e)=>{navigate(`/topic/${profile.topic_id}`)}} className="userProfile item">
+                                        <div key={`profileId${profile.id}`} onClick={(e)=>{navigate(`/topic/${profile.topic_id}`)}} className="mediaItem item">
                                             <div>
                                                 {profile.name}
                                             </div>

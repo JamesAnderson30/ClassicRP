@@ -31,7 +31,7 @@ function Navigation() {
             <NavLink to={`/categories`}>Browse Categories </NavLink>
           </li>
           <li className="NavButton">
-            Browse Topics
+            <NavLink to={'/documents/manage'}>Manage Documents</NavLink>
           </li>
           <li className="NavButton">
             Chat

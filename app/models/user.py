@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     Post = db.relationship('Post', back_populates='User')
     Topic = db.relationship('Topic', back_populates='User')
     Topic_Profile = db.relationship('Topic_Profile', back_populates='User')
+    
     @property
     def password(self):
         return self.hashed_password

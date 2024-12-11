@@ -10,13 +10,15 @@ import postReducer from "./post";
 import categoryReducer from "./category";
 import topicReducer from "./topic";
 import profileReducer from "./topic_profile";
+import documentReducer from "./document";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   post: postReducer,
   category: categoryReducer,
   topic: topicReducer,
-  profile: profileReducer
+  profile: profileReducer,
+  document: documentReducer
 });
 
 let enhancer;

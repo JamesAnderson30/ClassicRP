@@ -1,15 +1,25 @@
 #newPostForm {
-    display: grid; 
-    grid-template-columns: 250px 1fr; 
-    grid-template-rows: 22px 1fr; 
-    gap: 0px 0px; 
-    grid-template-areas: 
-      "postAvatarPreview postProfilePicker"
-      "postAvatarPreview postBodyArea"; 
-
-      padding-right: 12px;
+  display: grid;
+      grid-template-columns: 250px 1fr;
+      grid-template-rows: 22px 1fr;
+      gap: 0px 0px;
+      grid-template-areas:
+          "postAvatarPreview postProfilePicker"
+          "postAvatarPreview postBodyArea";
+      /* padding-right: 12px; */
       margin-top: 12px;
+      padding: 12px;
+      border: 1px black solid;
+      border-radius: 31px;
+      margin-left: 10px;
+      margin-right: 10px;
 
+  }
+  h2{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 0px;
   }
   #postButton{
     margin-right: 7px;
@@ -20,6 +30,16 @@
     grid-area: postAvatarPreview; 
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .newButtons{
+    margin-left:10px
+  }
+
+  .postAvatarPreview span{
+    display: block;
+    text-align: center;
+
   }
   .postProfilePicker { 
     grid-area: postProfilePicker; 
