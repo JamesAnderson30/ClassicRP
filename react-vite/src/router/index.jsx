@@ -10,6 +10,10 @@ import CategorySingle from '../components/Categories/CategorySingle';
 import LandingPage from '../components/LandingPage'
 import UserPage from '../components/Users/UserPage'
 import DocManage from '../components/Documents/DocManage';
+import DocWrite from '../components/Documents/DocWrite';
+import DocEdit from '../components/Documents/DocEdit';
+
+import NotFound from '../components/Error/404';
 
 // The router really should be rewritten
 export const router = createBrowserRouter([
@@ -47,6 +51,18 @@ export const router = createBrowserRouter([
       {
         path: "/documents/manage",
         element: <DocManage />
+      },
+      {
+        path: "/documents/new",
+        element: <DocWrite />
+      },
+      {
+        path: "/documents/:id/edit",
+        element: <DocEdit />
+      },
+      {
+        path: '/404',
+        element: <NotFound />
       }
     ],
   },

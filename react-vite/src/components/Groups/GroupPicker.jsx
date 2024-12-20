@@ -16,9 +16,9 @@ function GroupPicker({groups,def/*ault*/, handler}){
             onChange={(e)=>{handleChange(e)}}
         >
             <option value={"default"}>{def}</option>
-            {groups.map((group)=>{
+            {groups.map((group, i)=>{
                 return (
-                    <option value={group.id}>
+                    <option key={i * group.id}value={group.id}>
                         {group.name}
                     </option>
                 )

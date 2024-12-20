@@ -3,9 +3,21 @@
 // import LoginFormPage from "../LoginFormPage";
 import "./Navigation.css";
 import LoginSignup from "../Users/LoginSignup";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Navigation() {
+  const user = useSelector(state=> state.session.user);
+  const navigate = useNavigate()
+  function checkLogin(e, to){
+    e.preventDefault()
+    e.stopPropagation()
+    if(user){
+      navigate(to)
+    } else {
+      alert("Login or create an account to save and manage your own roleplaying docs!")
+    }
+  }
   return (
     <div className="Navigation">
       <LoginSignup />
@@ -31,7 +43,7 @@ function Navigation() {
             <NavLink to={`/categories`}>Browse Categories </NavLink>
           </li>
           <li className="NavButton">
-            <NavLink to={'/documents/manage'}>Manage Documents</NavLink>
+            <NavLink onClick={(e)=>{checkLogin(e,'/documents/manage')}}to={'/documents/manage'}>Manage Documents</NavLink>
           </li>
           <li className="NavButton">
             Chat

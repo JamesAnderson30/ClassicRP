@@ -21,5 +21,6 @@ class Document(db.Model):
             'id': self.id,
             'subject': self.subject,
             'body': self.body,
-            'group': self.body
+            'group': self.body,
+            'user_id': self.user_id
         }
