@@ -59,7 +59,7 @@ export const getDocument = (id) => async (dispatch) => {
     })
     let message = await res.json();
     if(res.ok){
-        dispatch(storeDocument(document))
+        dispatch(storeDocument(message))
         return message
     }  else {
         return false
@@ -87,7 +87,7 @@ export const deleteDocument = (id) => async (dispatch) =>{
         headers: { "Content-Type": "application/json"}
     })
     if(res.ok){
-        dispatch(removeDocument(id))
+        // dispatch(removeDocument(id))
         return true
     } else {
         return false
@@ -98,6 +98,7 @@ export const deleteDocument = (id) => async (dispatch) =>{
 const initialState = {byId: {}, all: []}
 
 const documentReducer = (state = initialState, action) =>{
+
     let newDocumentState = {...state}
     let newById = {}
     switch(action.type){
@@ -113,7 +114,7 @@ const documentReducer = (state = initialState, action) =>{
 
         case STORE_DOCUMENT:
             let doc = action.document
-            
+            console.log("STATE: ", state)
             return {
                 ...state,
                 all: [
@@ -136,16 +137,16 @@ const documentReducer = (state = initialState, action) =>{
             }
 
         case DELETE_DOCUMENT:
-            for(let doc of state.byId){
-                if(doc.id !== action.id) newById[doc.id] = doc
-            }
-            return {
-                ...state,
-                byId: newById,
-                all: [
-                    state.all.filter((doc)=>{doc.id !== action.id})
-                ]
-            }
+            // for(let doc of state.byId){
+            //     if(doc.id !== action.id) newById[doc.id] = doc
+            // }
+            // return {
+            //     ...state,
+            //     byId: newById,
+            //     all: [
+            //         state.all.filter((doc)=>{doc.id !== action.id})
+            //     ]
+            // }
         default:
             return state;
     }

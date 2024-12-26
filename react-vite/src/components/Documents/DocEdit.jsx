@@ -14,6 +14,7 @@ import CopyMeInput from "../Input/CopyMeInput";
 import LeftButton from "../Button/LeftButton";
 import RightButton from "../Button/RightButton";
 import DeleteConfirmButton from "../Button/DeleteConfirmButton";
+import Loading from "../loading";
 
 function DocEdit(){
     const [isLoaded, setIsLoaded] = useState(false)
@@ -47,18 +48,21 @@ function DocEdit(){
         async function loadDocument(){
             //If no document was found or some other error, redirect to 404
             let result = await dispatch(getDocument(id))
+            console.log("result: ", result)
             if(!result){
                 navigate("/404")
             }
             setSubject(result.subject);
             setBody(result.body);
+
+        }
+        if(!isLoaded){
+            loadDocument()
             setIsLoaded(true)
         }
-        if(documentsById[id] === undefined && !isLoaded){
-            loadDocument()
-        }
-	}, [])
+	}, [isLoaded])
 
+    if(isLoaded){
     return (
     	<>
           			<div>
@@ -78,6 +82,11 @@ function DocEdit(){
                     <DeleteConfirmButton reverse={true} deleteText="Delete Document" callBack={handleDelete}/>
       </>
     )
+    }else {
+        return(
+            <Loading />
+        )
+    }
 }
 
 export default DocEdit

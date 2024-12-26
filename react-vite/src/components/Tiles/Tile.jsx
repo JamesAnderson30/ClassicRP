@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom"
 import './Tile.css';
 function Tile({header, body, img, footer, link, key}){
     return(
-        <a href={link}>
+        <NavLink to={link}>
             <div className={"tile"} key={key}>
 
                 {header && 
@@ -30,7 +30,7 @@ function Tile({header, body, img, footer, link, key}){
                 }
 
             </div>
-        </a>
+        </NavLink>
     )
 }
 
