@@ -37,7 +37,7 @@
     left: 0;
     position: absolute;
     min-height: calc(100vh - 105px) !important;
-    background-color: white !important;
+    /* background-color: white !important; */
     border-top: 3px solid #b394c8 !important;
 }
 
@@ -45,7 +45,24 @@ body{
     background-color: #E5D2AB
   }
   
-
+.littleArrowLeft{
+        position: absolute;
+    top: 30px;
+    /* float: right; */
+    left: 155px;
+    border: 20px solid #00000000;
+    border-left-width: 0;
+    border-right-color: #808080;
+}
+.littleArrowLeft:after{
+    position: absolute;
+    top: -17px;
+    right: -20px;
+    content: "";
+    border: 17px solid transparent;
+    border-left-width: 0;
+    border-right-color: #fefefe;
+}
 body{
     
 }

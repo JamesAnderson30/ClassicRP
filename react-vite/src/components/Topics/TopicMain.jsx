@@ -9,7 +9,7 @@ import NewPostForm from "../Posts/Forms/NewPost";
 import TopicPosts from "../Posts/TopicPosts";
 import TopicListUsertControl from "./Components/TopicUserControl";
 import topicStyling from './Topic.module.css'
-
+//https://forumweb.hosting/876-what-is-the-best-forum-template-have-you-ever-seen.html4
 function TopicMain(){
     const {id} = useParams();
     const topic = useSelector(state => state.topic.topics.byId[id]);

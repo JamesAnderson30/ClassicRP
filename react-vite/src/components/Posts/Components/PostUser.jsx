@@ -3,7 +3,7 @@ function PostUser({post}){
     if(typeof post.Topic_Profile === "undefined"){
         return (
             <div className="PostUserArea">
-
+                <span className="littleArrowLeft"></span>
                 <div>
                     {post.username}
                 </div>
@@ -13,7 +13,7 @@ function PostUser({post}){
     } else {
         return(
             <div className="PostUserArea">
-
+                <span className="littleArrowLeft"></span>
                 <div>
                     {post.Topic_Profile.name}
                 </div>
