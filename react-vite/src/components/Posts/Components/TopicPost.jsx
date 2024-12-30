@@ -16,12 +16,12 @@ function TopicPost(id){
     if(byIdStart[id]){
         //get user status
         return (
-            <div id={`post${id}`} className="PostBody">
+            <div id={`post${id}`} className="PostBody beigeBorder">
                 <div className="UserArea">
                     <PostUser post={post} />
                     {user && post && user.id == post.user_id && <PostUserControls setPost={setPost} post={post} />}
                 </div>
-                <div className="PostInfo">
+                <div className="PostInfo suppressedText">
                     {post && new Date(post.created_at).toLocaleString()}
                 </div>
                 <div className="PostArea">

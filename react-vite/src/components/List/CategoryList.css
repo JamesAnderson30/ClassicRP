@@ -1,0 +1,22 @@
+.ListItemScifi{
+    background-image:url(https://i.ibb.co/h78r3Xg/scifi.png);
+}
+
+.ListItemFantasy{
+    background-image:url(https://i.ibb.co/WHG06Sj/fantasy.png);
+}
+
+.ListBoxItem{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.ListItemLink{
+    font-size: 2em;
+    font-weight: 700;
+}
+
+.ListBoxItem span{
+    
+}

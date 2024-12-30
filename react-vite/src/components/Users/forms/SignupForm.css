@@ -53,10 +53,14 @@ margin:0;
 }
 
 .SignupEmailInput{
-    width: 192px;
+    width: 100%;
 } 
 
 .SignupForm form button{
     margin-top: 17px;
     width: 100%;
+}
+
+.Navigation input{
+    width:100% !important;
 }

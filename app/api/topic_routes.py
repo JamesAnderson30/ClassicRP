@@ -63,6 +63,10 @@ def edit_topic(id):
         return form.errors, 401
 
 
+@topic_routes.route('/count')
+def get_count():
+    count = Topic.query.count()
+    return jsonify(count)
 
 @topic_routes.route('/recent')
 def get_recents():

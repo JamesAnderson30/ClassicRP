@@ -1,0 +1,9 @@
+.ListBoxItem{
+    background-color: white;
+    padding: 5px;
+    border: 2px inset #98aacf;
+    margin-top: 5px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+}

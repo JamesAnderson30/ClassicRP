@@ -44,7 +44,7 @@ margin:0;
 }
 
 .LoginEmailInput{
-    width: 192px;
+    width: 100%;
 } 
 
 .LoginForm form button{

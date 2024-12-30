@@ -134,6 +134,14 @@ export const getCategoryTopics = (category_id) => async (dispatch) => {
     return result;
 }
 
+export const countTopics = () => async (dispatch) => {
+    const res = await fetch('/api/topic/count', {
+        method:'GET'
+    })
+    let count = await res.json();
+    return count;
+}
+
 export const getTopic = (topic_id) => async (dispatch) =>{
     const res = await fetch(`/api/topic/${topic_id}`, {
         method: 'GET'

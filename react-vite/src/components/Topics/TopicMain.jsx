@@ -67,7 +67,7 @@ function TopicMain(){
 
     function cleanUp(){
         OuterContainer.className = "smol"
-        OuterContainer.style.backgroundImage = 'url("/media/paper.jpg")'; 
+        // OuterContainer.style.backgroundImage = 'url(https://i.ibb.co/bPvTK9t/background.png)'; 
         InnerContainer.className = "smol"
 
     }
@@ -120,38 +120,34 @@ function TopicMain(){
 
         return (
             <>
-            <div id="TopicHeader">
+            <div className="TopicHeader">
+                <h3>{subject}</h3>
+                <div className="TopicDetails suppressedText">
+                        {timeSeconds}
+                        &#183;
+                        {topic.privacy_level == 0 && "Anyone can post"}
+                        {topic.privacy_level == 1 && "Only users with profiles may post"}
+                        {topic.privacy_level == 2 && "Only approved users may post"}
+                </div>
+            </div>
+            <div id="TopicHeader" className="beigeBorder">
                 <div className="TopicMain">
-                    <h3 className="">{subject}</h3>
-
                     {body}
                 </div>
                 <div className="TopicOwner">
-                    {topic.username}
+                    <span class="littleArrowLeft"></span>
+                    
                     {(topic.topic_specific_profile_picture && topic.topic_specific_profile_picture == "default") ? 
                     <img className="Avatar" src={topic.user_profile_picture} /> :
                     <img className="Avatar" src={topic.topic_specific_profile_picture} />}
-                    
-                </div>
-                <div className="TopicDetails">
-                    {timeSeconds}
-                    <br/>
-                    {topic.privacy_level == 0 && "Anyone can post"}
-                    {topic.privacy_level == 1 && "Only users with profiles may post"}
-                    {topic.privacy_level == 2 && "Only approved users may post"}
-                </div>
-                <hr />
-                <div className="TopicUser">
-
+                    <div className="userName">{topic.username}</div>
                 </div>
                 {user != null && topic && user.id == topic.user_id && <TopicListUsertControl setTopic={setTopic} topic={topic} />}
             </div>
             {/* NEW POST FORM/BUTTON */}
             {user != null && <NewPostForm topic_id={id} />}
-            <div id="TopicPosts">
-                {isPostLoaded && topic && topic.Posts && <TopicPosts posts={topic.Posts} />}
-                {isPostLoaded || <Loading />}
-            </div>
+            {isPostLoaded && topic && topic.Posts && <div id="TopicPosts"><TopicPosts posts={topic.Posts}/></div>}
+            {isPostLoaded || <Loading />}
             </>
         )
     }
