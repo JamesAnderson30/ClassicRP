@@ -8,7 +8,7 @@ function LoginForm({loginHidden}){
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch()
-
+    const opacityClass = loginHidden ? "noOpacity" : "opacity";
 
 
     const handleSubmit = async (e) => {
@@ -29,7 +29,7 @@ function LoginForm({loginHidden}){
 
     }
     return(
-            <div hidden={loginHidden} className="LoginForm">
+            <div hidden={loginHidden} className={`LoginForm ${opacityClass}`}>
                 <h3>Welcome Back! c:</h3>
                 <form id="LoginForm"  onSubmit={handleSubmit}>
                     <label>
@@ -48,6 +48,7 @@ function LoginForm({loginHidden}){
                         Password
                         <input
                         type="password"
+                        className="LoginPasswordInput"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required

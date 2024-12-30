@@ -63,7 +63,10 @@ function LoginSignup(){
         setSignupHidden(true)
     }
 
-
+    let hideFancyBorder = true;
+    
+    if(loginHidden == false || signupHidden == false) hideFancyBorder = false;
+    const opacityClass = hideFancyBorder ? "noOpacity" : "opacity";
     //IF USER NOT LOGGED IN
     if(!user){
         return (
@@ -75,7 +78,10 @@ function LoginSignup(){
             </div>
             <LoginForm loginHidden={loginHidden}/>
             <SignupForm signupHidden={signupHidden} />
-          </div>
+            <div hidden={hideFancyBorder} className={opacityClass} id="LoginFancyBorder">
+
+            </div>
+        </div>
         
         )
     }

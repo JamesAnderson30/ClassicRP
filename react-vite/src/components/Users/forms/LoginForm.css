@@ -32,17 +32,37 @@
     margin:0;
 }
 
-.LoginForm{
-    position: fixed;
-    top: 30%;
-    left: calc(50% - 125px);
-    bottom: 50%;
-    background-color: white;
-    width: 250px;
-    height: 166px;
-    padding: 10px;
+#LoginForm{
+    margin-bottom: 20%;
+    width: 60%;
+    min-width: 200px;
+    margin-bottom: 20%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+.LoginForm{
+    z-index: 1;
+    position: fixed;
+    top: 0%;
+    /* left: calc(50% - 125px); */
+    left: 0px;
+    bottom: unset;
+    background-color: #fffffff5;
+    width: 50%;
+    height: 100%;
+    padding: 0px;
+    align-content: center;
+}
+#LoginFancyBorder{
+    position: fixed;
+    width: 50%;
+    height: 100%;
+    background-color: #e8f0fe9c;
+    z-index: 1;
+    right: 0;
+    top: 0;
+}
 .noMargin{
 margin:0;
 }
@@ -52,10 +72,33 @@ margin:0;
 }
 
 .LoginEmailInput{
-    width: 192px;
+    width: 100%;
 } 
+
+.LoginPasswordInput{
+    width:100%
+}
 
 .LoginForm form button{
     margin-top: 17px;
     width: 100%;
+}
+
+.noOpacity{
+    opacity:0;
+}
+
+.opacity{
+    opacity:100;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn{
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
