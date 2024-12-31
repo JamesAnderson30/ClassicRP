@@ -88,9 +88,10 @@ def downgrade():
     #     batch_op.drop_column('role')
     #     batch_op.drop_column('profilePicture')
 
-    op.drop_table('category')
-    op.drop_table('topic')
-    op.drop_table('topic_profile')
-    op.drop_table('post')
-    op.drop_table('document')
+    # op.drop_table('category')
+    # op.drop_table('topic')
+    # op.drop_table('topic_profile')
+    # op.drop_table('post')
+    # op.drop_table('document')
+    pass
     # ### end Alembic commands ###
