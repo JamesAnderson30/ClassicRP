@@ -93,5 +93,5 @@ def downgrade():
     op.drop_table('topic_profile')
     op.drop_table('post')
     op.drop_table('document')
-    # op.drop_table('topic_profile')
+    op.drop_table('topic_profile')
     # ### end Alembic commands ###
