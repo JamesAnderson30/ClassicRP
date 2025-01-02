@@ -70,7 +70,7 @@
   #newProfileForm{
     display: grid; 
     grid-auto-columns: 1fr; 
-    grid-template-columns: 155px 1fr; 
+    grid-template-columns: 175px 1fr; 
     grid-template-rows: 1fr 1fr 1fr 1fr; 
     gap: 0px 0px; 
     grid-template-areas: 

@@ -12,6 +12,7 @@ import UserPage from '../components/Users/UserPage'
 import DocManage from '../components/Documents/DocManage';
 import DocWrite from '../components/Documents/DocWrite';
 import DocEdit from '../components/Documents/DocEdit';
+import TopicNew from '../components/Topics/TopicNew';
 
 import NotFound from '../components/Error/404';
 
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: "/topic/:id",
         element: <TopicMain />
+      },
+      {
+        path: "/topic/new/:id",
+        element: <TopicNew />
       },
       {
         path: "/user/:id",

@@ -42,7 +42,7 @@ def edit_topic(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
 
-        id = formData['id']
+        id = form['id']
 
         topic = Topic.query.get(id)
 
@@ -52,8 +52,8 @@ def edit_topic(id):
         if current_user.id != topic.user_id:
             return jsonify({"message": "Unauthorized"}), 401
 
-        topic.body=formData['body']
-        topic.subject=formData['subject']
+        topic.body=form['body']
+        topic.subject=form['subject']
 
         db.session.add(topic)
         db.session.commit()
@@ -108,47 +108,46 @@ def new_topic():
     form['csrf_token'].data = request.cookies['csrf_token']
     errors = []
 
-    if not formData['body']:
-
-        errors.append({'field': "body", "message": "body is required"})
-    if not formData['subject']:
-
-        errors.append({'field': 'subject', 'message': 'subject is required'})
-
-    if len(errors) == 0:
+    # if not form['body']:
+    #     errors.append({'field': "body", "message": "body is required"})
+    # if not form['subject']:
+    #     errors.append({'field': 'subject', 'message': 'subject is required'})
+    
+    if form.validate_on_submit():
         topic = Topic(
-            body=formData['body'],
-            category_id=formData['category_id'],
-            subject=formData['subject'],
+            body=form.data['body'],
+            category_id=form.data['category_id'],
+            subject=form.data['subject'],
             user_id=current_user.id,
             created_at=int(time.time())
         )
         db.session.add(topic)
         db.session.commit()
         return jsonify(topic.id), 201
-    else:
-        return jsonify(errors), 401
+    return form.errors, 401
+
+
 
 @topic_routes.route('/<int:id>/register', methods=['POST'])
 def register_profile(id):
      # Create Post
  
     errors = []
-    formData = request.get_json()
+    form = request.get_json()
 
-    if not formData['body']:
+    if not form['body']:
         errors.append({'field': "body", "message": "Description is required"})
-    if not formData['name']:
+    if not form['name']:
         errors.append({'field': 'name', 'message': 'Name is required'})
-    if not formData['avatar']:
+    if not form['avatar']:
         errors.append({'field': 'avatar', 'message': 'avatar is required'})
 
     if len(errors) == 0:
         topic_profile = Topic_Profile(
-            body=formData['body'],
-            name=formData['name'],
+            body=form['body'],
+            name=form['name'],
             color="orange",
-            avatar=formData['avatar'],
+            avatar=form['avatar'],
             topic_id=id,
             approved=0,
             user_id=current_user.id,
