@@ -27,10 +27,10 @@ function DeleteConfirmButton({callBack, reverse = false, classString = "ConfirmD
             <div className={classString}>
                 {reverse && 
                     <>
-                        <button onClick={(e)=>{callBack(e)}} hidden={hideDeleteButton} className="ConfirmDeleteButton confirm">
+                        <button onClick={(e)=>{callBack(e)}} hidden={hideDeleteButton} className="ConfirmDeleteButton wide confirm">
                             {confirmDeleteButtonText}
                         </button>
-                        <button onClick={FirstDeleteButton} className="FirstDeleteButton">
+                        <button onClick={FirstDeleteButton} className="FirstDeleteButton wide">
                             {deleteButtonText}
                         </button>
                     </>

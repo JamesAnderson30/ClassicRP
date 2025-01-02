@@ -1,7 +1,7 @@
 import "./Input.css";
-function BigInput({value, setValue, required = false}){
+function BigInput({value, setValue, required = false, extraClass = ""}){
     return(
-        <textarea className={"BigInput"} required={required} value={value} onChange={(e)=>{setValue(e.target.value)}} />
+        <textarea className={`BigInput ${extraClass}`} required={required} value={value} onChange={(e)=>{setValue(e.target.value)}} />
     )
 }
 

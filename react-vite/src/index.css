@@ -99,3 +99,22 @@ body{
 .noBottomMargin{
     margin-bottom:0px !important;
 }
+
+.minusButton{
+    height:calc(100% - 21px)
+}
+
+.wide{
+    width:100%;
+}
+
+.bigButton{
+    background-color: #ccbc9b;
+    font-weight: 500;
+    font-size: larger;
+    margin:0;
+}
+
+.minusBigButton{
+    height:calc(100% - 28px)
+}

@@ -76,13 +76,17 @@ export const sendPost = (post) => async (dispatch) => {
 }
 
 export const editPost = (post) => async (dispatch) =>{
-    const response = await fetch(`/api/post/${post.id}`, {
+    const res = await fetch(`/api/post/${post.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(post)
   });
-
-  dispatch(updatePost(await response.json()));
+  if(res.ok){
+    dispatch(updatePost(await res.json()));
+    return true;
+  } else {
+    return false;
+  }
 }
 
 export const getPosts = (topic_id) => async (dispatch) =>{
