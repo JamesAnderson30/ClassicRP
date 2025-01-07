@@ -1,1 +1,120 @@
 /* TODO: Add sitewide styles */
+
+
+#OuterContainer{
+    min-height: calc(100vh - 124px);
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #98aacf82;
+    /* background-image: url("/media/paper.jpg")*/
+} 
+
+.smol{
+    /* background-image:inherit */
+}
+
+#InnerContainer{
+    /* border: 5px solid #4c2b81; */
+    /* border-style: inset; */
+    padding-top: 1px;
+    max-width: 890px;
+    margin-right: auto;
+    background-color: #fff8eb;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-left: auto;
+    /* height: 100%; */
+    min-height: calc(100vh - 125px);
+}
+
+a{
+    /* color:#abbee5 */
+    
+}
+
+.large{
+    max-width: unset !important;
+    width: calc(100vw - 17px) !important;
+    padding: unset !important;
+    border: none !important;
+    background-color: unset !important;
+    left: 0;
+    position: absolute;
+    min-height: calc(100vh - 105px) !important;
+    background-color: #dddddda3 !important;
+    /* background-color: white !important; */
+    /* border-top: 3px solid #b394c8 !important; */
+}
+
+body{
+    background-color: #98aacf;
+    font-family: sans-serif, 'Segoe UI';
+    margin:0px;
+    background-image:url(https://i.ibb.co/bPvTK9t/background.png);
+  }
+  
+.littleArrowLeft{
+        position: absolute;
+    top: 30px;
+    /* float: right; */
+    left: 155px;
+    border: 20px solid #00000000;
+    border-left-width: 0;
+    border-right-color: #808080;
+}
+.littleArrowLeft:after{
+    position: absolute;
+    top: -17px;
+    right: -20px;
+    content: "";
+    border: 17px solid transparent;
+    border-left-width: 0;
+    border-right-color: #fefefe;
+}
+body{
+    
+}
+
+.beigeBorder{
+    border: 3px solid;
+    border-top-color: rgb(204, 188, 155);
+    border-right-color: rgb(191, 176, 145);
+    border-left-color: rgb(204, 188, 155);
+    border-bottom-color: rgb(178, 164, 135);
+    border-radius:12px
+}
+
+.suppressedText{
+    font-size: 13px;
+    color: #8c8c8c;
+}
+
+.userName{
+    font-weight: 700;
+    font-size: inherit;
+    text-align: center;
+}
+
+.noBottomMargin{
+    margin-bottom:0px !important;
+}
+
+.minusButton{
+    height:calc(100% - 21px)
+}
+
+.wide{
+    width:100%;
+}
+
+.bigButton{
+    background-color: #ccbc9b;
+    font-weight: 500;
+    font-size: larger;
+    margin:0;
+}
+
+.minusBigButton{
+    height:calc(100% - 28px)
+}

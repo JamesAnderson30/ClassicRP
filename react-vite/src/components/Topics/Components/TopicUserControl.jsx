@@ -38,7 +38,7 @@ function TopicUsertControl({topic, setTopic}){
 
     const confirmDelete = async () =>{
         // console.log("confirmDelete");
-        let res =  dispatch(deleteTopic(topic))
+        dispatch(deleteTopic(topic))
 
 
         navigate(`/categories/${topic.category_id}`)
@@ -57,6 +57,9 @@ function TopicUsertControl({topic, setTopic}){
 
     return(
         <div className="TopicUserControls">
+            <div>
+                This is your topic!
+            </div>
             <button onClick={editClick} className="userControlButton">
                 Edit my Topic
             </button>
@@ -66,17 +69,18 @@ function TopicUsertControl({topic, setTopic}){
             <button onClick={confirmDelete} hidden={hideDeleteButton} className="userControlButton confirm">
                 Yes, Delete!
             </button>
-            <form hidden={hideForm} onSubmit={(e)=>handleSubmit(e)}>
+            <form hidden={hideForm} className="editForm" onSubmit={(e)=>handleSubmit(e)}>
                 <input type="hidden" value={topic.category_id} name="category_id" />
                 <label>
-                    Body
-                    <input type="text" value={body} onChange={(e)=>setBody(e.target.value)} />
+                    Subject: <input id="editPostSubjectForm" type="text" value={subject} onChange={(e)=>setSubject(e.target.value)} />
+                </label>
+                <br />
+                <br />
+                <label>
+                    Body: <textarea id="editPostForm" type="text" value={body} onChange={(e)=>setBody(e.target.value)} />
                 </label>
                 <br/>
-                <label>
-                    Subject
-                    <input type="text" value={subject} onChange={(e)=>setSubject(e.target.value)} />
-                </label>
+
                 <button disabled={disableEditButton} type="submit">Submit Edits!</button>
             </form>
         </div>

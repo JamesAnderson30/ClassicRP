@@ -6,8 +6,12 @@ from sqlalchemy.sql import text
 def seed_categories():
     Scifi = Category(
         name='Scifi', description='Forum RP centered around a technological prowess')
+    
+    Fantasy = Category(
+        name='Fantasy', description="Forum RP centered around a fantastical past")
 
     db.session.add(Scifi)
+    db.session.add(Fantasy)
     db.session.commit()
 
 

@@ -12,7 +12,7 @@ function TopicListItem({topic}){
         e.preventDefault();
         setVisited(true)}
     return (
-        <div className="topicLine">
+        <div key={`${topic.id}${topic.subject.substring(0,3)}`} className="topicLine">
             {visited}
             {topic.visited && <img src={read} className="readImg" />}
             {!topic.visited && <img src={unread} className="readImg" />}

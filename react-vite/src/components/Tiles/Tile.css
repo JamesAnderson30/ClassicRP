@@ -1,0 +1,25 @@
+.tile{
+    background-color: white;
+    margin-bottom: 10px;
+    width: 200px;
+    max-width: 25%;
+    height: 175px;
+    display: inline-block;
+    margin-right: 1%;
+    border: 2px solid black;
+    padding: 1em;
+}
+
+.tileSubject{
+    border-bottom: 1px solid black;
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-family: monospace;
+    overflow:hidden;
+}
+
+.tileBody{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.8em;
+    height: 100%;
+    overflow:hidden;
+}

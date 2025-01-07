@@ -1,0 +1,29 @@
+.BigInput{
+    height: 100%;
+    width: 100%;
+}
+
+#MessageBubble{
+    
+    
+}
+.MessageBubbleFade{
+    visibility: visible;
+    animation: MessageBubbleFade 2s ease 0s 1 normal forwards;
+}
+@keyframes MessageBubbleFade {
+	0% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateY(-50px);
+	}
+}
+
+.hidden{
+    visibility:hidden;
+    animation:none;
+}

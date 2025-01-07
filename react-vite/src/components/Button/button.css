@@ -1,0 +1,16 @@
+.button{
+    /* margin-right:5px;
+    margin-left:5px; */
+}
+
+.ConfirmDelete{
+    display: inline-block;
+    float: right;
+    position: relative;
+    width: 100%;
+}
+
+.ConfirmDelete button{
+    /* margin-left: 3px;
+    margin-right: 2px; */
+}

@@ -9,9 +9,26 @@ def seed_posts():
         body= 'This is the first seed post. It should belong to a topic, under a category, and belong to a user',
         user_id= 1,
         topic_id= 1,
-        created_at= datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") )
+        created_at= "2024-11-16 11:17:49.755796")
+    
+    testPost2 = Post(
+        body= 'This is a barbarian post',
+        user_id= 1,
+        topic_id= 1,
+        topic_profile_id = 1,
+        created_at= "2024-11-17 14:46:59.176038")
+    
+    testPost3 = Post(
+        body= 'The guard leans against his big spear',
+        user_id= 1,
+        topic_id= 3,
+        topic_profile_id = 2,
+        created_at= "2024-12-02 20:08:39.184674")
+        
 
     db.session.add(testPost1)
+    db.session.add(testPost2)
+    db.session.add(testPost3)
     db.session.commit()
 
 

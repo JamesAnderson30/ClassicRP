@@ -15,13 +15,14 @@ const UPDATE_POST = 'post/updatePost'
 const SAVE_POSTS = 'post/savePost'
 const DELETE_POST = 'post/deletePost'
 
+
 // // Action Creators
 const createPost = (post) =>({
     type: CREATE_POST,
     post
 })
 
-const savePosts = (posts) => ({
+export const savePosts = (posts) => ({
     type: SAVE_POSTS,
     posts
 })
@@ -39,6 +40,16 @@ const updatePost = (post) => ({
 })
 
 // // Thunks
+export const recentPosts = () => async (dispatch) =>{
+    const res = await fetch(`/api/post/recent`, {
+        method: 'GET',
+        headers: { "Content-Type": "application/json"}
+    })
+    let posts = await res.json();
+    return JSON.stringify(posts);
+    
+}
+
 export const deletePost = (id) => async (dispatch) =>{
     await fetch(`/api/post/${id}`, {
         method: 'DELETE',
@@ -53,19 +64,29 @@ export const sendPost = (post) => async (dispatch) => {
         body: JSON.stringify(post)
     })
     let newPost = {...post, id: await res.json()}
+    if(post.topic_profile_id !== null){
+        const Topic_Profile_Res = await fetch(`/api/post/topic_profile/${post.topic_profile_id}`)
+        let Topic_Profile = await Topic_Profile_Res.json()
+        newPost['Topic_Profile'] = Topic_Profile;
+    }
+    
     dispatch(createPost(newPost))
     dispatch(storeTopicPost(newPost))
     return JSON.stringify(newPost)
 }
 
 export const editPost = (post) => async (dispatch) =>{
-    const response = await fetch(`/api/post/${post.id}`, {
+    const res = await fetch(`/api/post/${post.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(post)
   });
-
-  dispatch(updatePost(await response.json()));
+  if(res.ok){
+    dispatch(updatePost(await res.json()));
+    return true;
+  } else {
+    return false;
+  }
 }
 
 export const getPosts = (topic_id) => async (dispatch) =>{
@@ -83,7 +104,6 @@ const postReducer = (state = initialState, action) =>{
         case CREATE_POST:
             newPostState.byId[action.post.id] = {...action.post, user_id: action.post.user.id};
             newPostState.all = [...newPostState.all, {...action.post, user_id: action.post.user.id}]
-            let newTopicState = {...state}
             return {...state, posts: newPostState}
         case SAVE_POSTS:
             for(let post of action.posts){

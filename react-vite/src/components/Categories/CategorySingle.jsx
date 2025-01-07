@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import NewTopicForm from "../Topics/Forms/NewTopicForm";
 import Loading from "../loading";
 import TopicList from "../Topics/TopicList";
+import LinkButton from "../Button/LinkButton";
 
 
 function CategorySingle(){
@@ -53,7 +54,7 @@ function CategorySingle(){
                             {categories.byId[id].description}
                         </div>
                     </div>
-                    {user != null && <NewTopicForm category_id={id} />}
+                    {user != null && <LinkButton label={"Author a new Topic!"} url={`/topic/new/${id}`} classNameVar={"NewTopicButton"} />}
                     <div className="TopicList">
                         <TopicList topic_list={topicList} category_id={id} />
                     </div>

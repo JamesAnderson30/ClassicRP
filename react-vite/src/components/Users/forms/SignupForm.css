@@ -1,0 +1,66 @@
+#UserArea{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas: "controls img";
+    float: right;
+    justify-items: center;
+    align-items: center;
+}
+
+#UserArea img{
+    height: 63px;
+    grid-area: img;
+}
+
+#Signup{
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas: ".";
+    display: grid;
+    justify-items: end;
+    float: right;
+}
+
+#UserInformation{
+    grid-area: controls;
+}
+
+#UserInformation p{
+    margin:0;
+}
+
+.SignupForm{
+    z-index: 1;
+    position: fixed;
+    top: 30%;
+    left: calc(50% - 125px);
+    bottom: 50%;
+    background-color: white;
+    width: 250px;
+    height: 166px;
+    padding: 10px;
+}
+
+.noMargin{
+margin:0;
+}
+.SignupForm h3{
+    margin-top: 5px;
+    text-align: center;
+}
+
+.SignupEmailInput{
+    width: 100%;
+} 
+
+.SignupForm form button{
+    margin-top: 17px;
+    width: 100%;
+}
+
+.Navigation input{
+    width:100% !important;
+}

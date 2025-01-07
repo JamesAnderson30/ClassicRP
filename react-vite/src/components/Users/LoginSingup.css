@@ -1,0 +1,53 @@
+#UserArea{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas: "controls img";
+    float: right;
+    justify-items: center;
+    align-items: center;
+}
+
+#UserArea img{
+    height: 63px;
+    grid-area: img;
+}
+
+
+#UserInformation{
+    grid-area: controls;
+}
+
+#UserInformation p{
+    margin:0;
+}
+
+/* .LoginForm{
+    z-index: 1;
+    position: fixed;
+    top: 30%;
+    left: calc(50% - 125px);
+    bottom: 50%;
+    background-color: white;
+    width: 250px;
+    height: 166px;
+    padding: 10px;
+} */
+
+.noMargin{
+margin:0;
+}
+.LoginForm h3{
+    margin-top: 5px;
+    text-align: center;
+}
+
+.LoginEmailInput{
+    width: 100%;
+} 
+
+.LoginForm form button{
+    margin-top: 17px;
+    width: 100%;
+}

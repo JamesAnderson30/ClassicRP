@@ -2,7 +2,9 @@ from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .topic import seed_topic, undo_topic
 from .posts import seed_posts, undo_posts
+from .topic_profile import seed_topic_profile, undo_topic_profile
 from .categories import seed_categories, undo_categories
+from .documents import seed_documents, undo_documents
 
 from app.models.db import db, environment, SCHEMA
 
@@ -23,10 +25,15 @@ def seed():
         undo_topic()
         undo_categories()
         undo_users()
+        undo_topic_profile()
+        undo_documents()
+
     seed_users()
     seed_categories()
     seed_topic()
     seed_posts()
+    seed_topic_profile()
+    seed_documents()
     # Add other seed functions here
 
 
@@ -37,4 +44,5 @@ def undo():
     undo_topic()
     undo_categories()
     undo_users()
+    undo_topic_profile()
     # Add other undo functions here

@@ -1,0 +1,57 @@
+.sideBySide {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: normal;
+    align-items: normal;
+    align-content: normal;
+
+    gap: 10px;
+  }
+
+  @font-face { font-family: Delicious; src: url('fonts/fantasy/ITCAvantGardePro-Md.ttf'); } 
+
+  .sideBySide > div{
+    background-color: #fffffff0;   
+  }
+
+  .headerText{
+    font-family: Delicious;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    /* background-color: lightblue; */
+    /* padding-top: 1em; */
+    /* padding-bottom: 1em; */
+    /* margin-top: 0;*/
+  }
+
+.Latest{
+    border-radius: 40px 10px 41px 10px;
+    -webkit-border-radius: 40px 10px 41px 10px;
+    -moz-border-radius: 40px 10px 41px 10px;
+
+    border: solid;
+    padding: 13px;
+}
+
+  #LatestTopics {
+    width: 50%;
+    display: block;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+
+  
+  }
+  
+  #LatestPosts {
+    width: 50%;
+    display: block;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+  }
