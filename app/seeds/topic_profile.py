@@ -44,7 +44,7 @@ def seed_topic_profile():
         user_id = 2,
         approved = 1, 
         topic_id = 4,
-        avvatar = "https://clipart-library.com/2023/kisspng-american-frontier-horse-cartoon-clip-art-5b2fa5c6def234.0126638515298492869132.jpg",
+        avatar = "https://clipart-library.com/2023/kisspng-american-frontier-horse-cartoon-clip-art-5b2fa5c6def234.0126638515298492869132.jpg",
         created_at = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
     )
     
