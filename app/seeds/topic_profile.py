@@ -51,6 +51,8 @@ def seed_topic_profile():
 
     db.session.add(topic_profile)
     db.session.add(topic_profile2)
+    db.session.add(topic_profile_historical_1)
+    db.session.add(topic_profile_historical_2)
     db.session.commit()
 
 
