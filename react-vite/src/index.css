@@ -105,16 +105,48 @@ body{
 }
 
 .wide{
-    width:100%;
+    margin-left: 5%;
+    margin-right: 5%;
+    width:90%;
 }
 
 .bigButton{
     background-color: #ccbc9b;
     font-weight: 500;
     font-size: larger;
-    margin:0;
+
 }
 
 .minusBigButton{
-    height:calc(100% - 28px)
+    height: calc(100% - 28px);
+    min-height: calc(100% - 28px) !important;
+}
+
+.wideNoMargin{
+    width:100%;
+}
+
+.squeeze{
+    display:flex;
+}
+
+.spaceContents > *{
+    margin-left:5px;
+    margin-right:5px;
+}
+
+.littleMarginBottom{
+    margin-bottom:5px;
+}
+.squeeze > button{
+    width:24% !important;
+}
+
+.squeeze div{
+    width:25% !important;
+}
+
+button{
+    background-color: #ccbc9b;
+
 }

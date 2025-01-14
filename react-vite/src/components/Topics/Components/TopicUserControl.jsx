@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import {useNavigate} from 'react-router-dom';
 import { editTopic } from "../../../redux/topic";
 import { deleteTopic } from "../../../redux/topic";
+import BigInput from "../../Input/BigInput";
 
 
 
@@ -77,7 +78,8 @@ function TopicUsertControl({topic, setTopic}){
                 <br />
                 <br />
                 <label>
-                    Body: <textarea id="editPostForm" type="text" value={body} onChange={(e)=>setBody(e.target.value)} />
+                    Body: <BigInput value={body} setValue={setBody} />
+                    {/* <textarea id="editPostForm" type="text" value={body} onChange={(e)=>setBody(e.target.value)} /> */}
                 </label>
                 <br/>
 

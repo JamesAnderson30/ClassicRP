@@ -63,13 +63,15 @@ export const sendPost = (post) => async (dispatch) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(post)
     })
+
     let newPost = {...post, id: await res.json()}
     if(post.topic_profile_id !== null){
         const Topic_Profile_Res = await fetch(`/api/post/topic_profile/${post.topic_profile_id}`)
         let Topic_Profile = await Topic_Profile_Res.json()
         newPost['Topic_Profile'] = Topic_Profile;
     }
-    
+    console.log("newPost", newPost)
+    newPost["username"] = newPost.user.username;
     dispatch(createPost(newPost))
     dispatch(storeTopicPost(newPost))
     return JSON.stringify(newPost)

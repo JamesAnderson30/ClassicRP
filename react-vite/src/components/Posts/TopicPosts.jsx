@@ -1,10 +1,11 @@
 import TopicPost from "./Components/TopicPost";
 
-function TopicPosts(posts){
-
+function TopicPosts({posts}){
+    console.log("posts: ", posts)
     return (
         <div className="TopicPostList">
-            {posts.posts.map((post)=>{
+            {posts.map((post)=>{
+                console.log("post: ", post.id)
                 return (
                     <TopicPost id={`post${post.id}`}key={`post${post.id}`} />
                 )

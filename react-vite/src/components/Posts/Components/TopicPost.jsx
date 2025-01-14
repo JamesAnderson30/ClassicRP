@@ -12,6 +12,7 @@ import BigInput from "../../Input/BigInput";
 import { editPost } from "../../../redux/post";
 
 function TopicPost(id){
+    console.log("id: ", id)
     id = id.id.substring(4); // We expect the id to be 'post1' so we just want the number
     const byIdStart = useSelector((state) => state.post.posts.byId);
     const user = useSelector(state=> state.session.user);
@@ -19,6 +20,10 @@ function TopicPost(id){
     const [postBody, setPostBody] = useState(post.body);
     const [isEditing, setIsEditing] = useState(false)
     const dispatch = useDispatch()
+    
+    let date = new Date(post.created_at).toLocaleString();
+    if(date == "Invalid Date") date = new Date().toLocaleString();
+    console.log("date: ", date);
 
     async function handleDelete(){
         await dispatch(deletePost(post.id))
@@ -41,7 +46,6 @@ function TopicPost(id){
     }
 
     
-    
     if(byIdStart[id]){
         //get user status
         return (
@@ -51,12 +55,12 @@ function TopicPost(id){
                     {user && post && user.id == post.user_id && 
                         <div className="PostUserControl">
                             <Button text="Edit Post" extraClass={"wide"} callBack={showEditForm} />
-                            <DeleteConfirmButton reverse={true} deleteText="Delete Document" callBack={handleDelete}/>
+                            <DeleteConfirmButton reverse={false} extraClass={"wideNoMargin"} deleteText="Delete Post" callBack={handleDelete}/>
                         </div>
                     }
                 </div>
                 <div className="PostInfo suppressedText">
-                    {post && new Date(post.created_at).toLocaleString()}
+                    {post && date}
                 </div>
                 <div className="PostArea">
                     {!isEditing && <PostBody post={post} />}

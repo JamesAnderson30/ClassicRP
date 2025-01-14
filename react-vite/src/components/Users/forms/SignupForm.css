@@ -24,6 +24,36 @@
     float: right;
 }
 
+.noOpacity{
+    opacity:0;
+    animation: fadeOut 0.5s ease-out;
+}
+
+.opacity{
+    opacity:100;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn{
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut{
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
 #UserInformation{
     grid-area: controls;
 }
@@ -35,13 +65,15 @@
 .SignupForm{
     z-index: 1;
     position: fixed;
-    top: 30%;
-    left: calc(50% - 125px);
-    bottom: 50%;
-    background-color: white;
-    width: 250px;
-    height: 166px;
-    padding: 10px;
+    top: 0%;
+    /* left: calc(50% - 125px); */
+    left: 0px;
+    bottom: unset;
+    background-color: #fffffff5;
+    width: 50%;
+    height: 100%;
+    padding: 0px;
+    align-content: center;
 }
 
 .noMargin{

@@ -1,7 +1,7 @@
 import avatar from "../../../../media/default-user.png";
 import NoStyleLink from "../../Link/NoStyleLink";
 function PostUser({post}){
-    console.log("post: ", post);
+
     if(typeof post.Topic_Profile === "undefined"){
         return (
             <div className="PostUserArea">

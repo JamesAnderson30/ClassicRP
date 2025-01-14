@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux";
-import { sendPost } from "../../../redux/post";
+import { getPosts, sendPost } from "../../../redux/post";
 import { useDispatch } from "react-redux";
 import { getTopic, registerProfile } from "../../../redux/topic";
 import './NewPost.css'
+import BigInput from "../../Input/BigInput";
 function NewPostForm({topic_id}){
     const user = useSelector(state=> state.session.user);
     const topics = useSelector((store) => store.topic.topics);
@@ -67,6 +68,7 @@ function NewPostForm({topic_id}){
         else {
             setErrorsHidden(true)
             await dispatch(sendPost({body, topic_id, user, 'topic_profile_id': profileId}))
+            await dispatch(getPosts(topic_id))
             setBody("")
             let element = document.querySelector('.PostBody:last-of-type')
             element.scrollIntoView()
@@ -117,13 +119,15 @@ function NewPostForm({topic_id}){
     if(isLoaded){
         
         return(
-                <>
-                    <button className={"newButtons"} onClick={(e)=>handleShowFormButton(e)}>Make a new post!</button>
-                    <button className={"newButtons"} onClick={(e)=>handleShowSignupButton(e)}>                                
-                        {topics.byId[topic_id].privacy_level == 2 && "Submit character application"}
-                        {topics.byId[topic_id].privacy_level < 2 && "Submit character profile"}
-                    </button>
-
+                <><div className={"NewPostButtons spaceContents beigeBorder"}>
+                    <div className={"squeeze spaceContents"}>
+                        <button onClick={(e)=>handleShowFormButton(e)}>Make a new post!</button>
+                        <button onClick={(e)=>handleShowSignupButton(e)}>                                
+                            {topics.byId[topic_id].privacy_level == 2 && "Submit character application"}
+                            {topics.byId[topic_id].privacy_level < 2 && "Submit character profile"}
+                        </button>
+                    </div>
+                    
                     {showForm && 
                     <>
                         <h2>Submit a new post:</h2>
@@ -148,9 +152,10 @@ function NewPostForm({topic_id}){
                                 <button id="postButton" disabled={isDisabled} type="submit">Post!</button>
                             </div>
                             
-                            <div className="postBodyArea">
+                            <div className="postBodyArea beigeBorder">
                                 <input type="hidden" name="topic_id" value={topic_id} />
-                                    <textarea value={body} onChange={(e)=>setBody(e.target.value)} />
+                                    {/* <textarea value={body} onChange={(e)=>setBody(e.target.value)} /> */}
+                                    <BigInput value={body} setValue={setBody} />
                                 
                             </div>
                             
@@ -188,7 +193,7 @@ function NewPostForm({topic_id}){
                             <span hidden={errorsHidden}>{errors.map((error)=>{return <span>{error}</span>})}</span>
                         </form>
                     }
-                    
+                    </div>
                 </>
         )
     }

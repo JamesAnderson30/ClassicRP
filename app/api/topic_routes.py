@@ -42,7 +42,7 @@ def edit_topic(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
 
-        id = form['id']
+        id = form.data['id']
 
         topic = Topic.query.get(id)
 
@@ -52,8 +52,8 @@ def edit_topic(id):
         if current_user.id != topic.user_id:
             return jsonify({"message": "Unauthorized"}), 401
 
-        topic.body=form['body']
-        topic.subject=form['subject']
+        topic.body=form.data['body']
+        topic.subject=form.data['subject']
 
         db.session.add(topic)
         db.session.commit()

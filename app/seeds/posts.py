@@ -23,12 +23,35 @@ def seed_posts():
         user_id= 1,
         topic_id= 3,
         topic_profile_id = 2,
-        created_at= "2024-12-02 20:08:39.184674")
+        created_at= "2024-12-02 20:08:39.184674"
+    )
+
+    # testPost4 = Post(
+
+    # )
+    
+    testHistoricalPost1 = Post(
+        body = "Jimmy, being a well known trail trotter, knows better than to drink water from a puddle in the road just because he is thirsty. (Intelligent roll = 10)",
+        user_id = 2,
+        topic_id = 4,
+        topic_profile_id = 3,
+        created_at = "2024-12-02 20:08:39.184674"
+    )
+
+    testHistoricalPost2 = Post(
+        body = "Sally too, understood not to drink water off the ground. Unfortuantely for her, she fell forward into a puddle, drank a little by accident, then died of dysantry",
+        user_id = 2,
+        topic_id = 4,
+        topic_profile_id = 4,
+        created_at = "2024-12-02 20:08:39.184674"
+    )
         
 
     db.session.add(testPost1)
     db.session.add(testPost2)
     db.session.add(testPost3)
+    db.session.add(testHistoricalPost1)
+    db.session.add(testHistoricalPost2)
     db.session.commit()
 
 

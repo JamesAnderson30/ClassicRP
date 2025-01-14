@@ -9,6 +9,7 @@ function SignupForm({signupHidden}){
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState({});
+    const opacityClass = signupHidden ? "noOpacity" : "opacity";
     const dispatch = useDispatch()
 
 
@@ -39,8 +40,8 @@ function SignupForm({signupHidden}){
     }
 
     return(
-            <div hidden={signupHidden} className="SignupForm">
-                <form onSubmit={handleSubmit}>
+            <div hidden={signupHidden} className={`SignupForm ${opacityClass}`}>
+                <form id={"LoginForm"} onSubmit={handleSubmit}>
                     <label>
                         Email
                         <input
