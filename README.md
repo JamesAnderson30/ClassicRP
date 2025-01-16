@@ -1,7 +1,9 @@
 # ClassicRP
 
 A platform to facilitate the cooperative writing hobby on forums of old. There's still a lot of interest but not a lot of good options for those who enjoy.
-This project should build a platform that is specificially tailored to facilitate many kinds of cooperative writing or roleplay. 
+This project should build a platform that is specificially tailored to facilitate many kinds of cooperative writing or roleplay.
+
+-----
 
 ![React](https://img.shields.io/badge/React-61DAFB.svg?style=for-the-badge&logo=React&logoColor=black)
 ![Redux](https://img.shields.io/badge/Redux-764ABC.svg?style=for-the-badge&logo=Redux&logoColor=white)
@@ -14,11 +16,7 @@ This project should build a platform that is specificially tailored to facilitat
 ![CSS](https://img.shields.io/badge/CSS3-1572B6.svg?style=for-the-badge&logo=CSS3&logoColor=white)
 
 <a href="https://capstone-s96n.onrender.com">
-	Live Site hosted on 
-	<picture>
-	  <source media="(min-width:650px)" srcset="https://img.shields.io/badge/Render-000000.svg?style=for-the-badge&logo=Render&logoColor=white">
-	  <img src="https://img.shields.io/badge/Render-000000.svg?style=for-the-badge&logo=Render&logoColor=white)" alt="Render" style="width:auto;">
-	</picture>
+	Live Site hosted on Render
 </a>
 
 ## API
