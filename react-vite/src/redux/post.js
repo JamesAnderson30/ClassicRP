@@ -70,7 +70,6 @@ export const sendPost = (post) => async (dispatch) => {
         let Topic_Profile = await Topic_Profile_Res.json()
         newPost['Topic_Profile'] = Topic_Profile;
     }
-    console.log("newPost", newPost)
     newPost["username"] = newPost.user.username;
     dispatch(createPost(newPost))
     dispatch(storeTopicPost(newPost))
@@ -106,18 +105,20 @@ const postReducer = (state = initialState, action) =>{
         case CREATE_POST:
             newPostState.byId[action.post.id] = {...action.post, user_id: action.post.user.id};
             newPostState.all = [...newPostState.all, {...action.post, user_id: action.post.user.id}]
+
             return {...state, posts: newPostState}
         case SAVE_POSTS:
-            for(let post of action.posts){
-                newPostState.byId[post.id] = post;
-            }
-            newPostState.all = [...(new Set(newPostState.all.concat(action.posts)))]
+            // for(let post of action.posts){
+            //     newPostState.byId[post.id] = post;
+            // }
+            // newPostState.all = [...(new Set(newPostState.all.concat(action.posts)))]
             return {...state, posts: newPostState}
         case UPDATE_POST:
             newPostState.byId[action.post.id].body = action.post.body;
             return {...state, posts: newPostState}
         case DELETE_POST:
             delete newPostState.byId[action.id];
+            newPostState.all = newPostState.all.filter((post) => post.id != action.id);
             return {...state, posts: newPostState}
         default:
             return state;

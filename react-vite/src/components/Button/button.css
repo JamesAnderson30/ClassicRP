@@ -1,6 +1,11 @@
 .button{
     /* margin-right:5px;
     margin-left:5px; */
+    
+}
+
+.bigInputButton{
+    margin-top:35px;
 }
 
 .ConfirmDelete{
@@ -10,6 +15,9 @@
     width: 100%;
 }
 
+.bigMarginTop{
+    margin-top:35px;
+}
 .ConfirmDelete button{
     /* margin-left: 3px;
     margin-right: 2px; */

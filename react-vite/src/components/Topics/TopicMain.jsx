@@ -12,6 +12,7 @@ import topicStyling from './Topic.module.css'
 import Button from "../Button/Button";
 import DeleteConfirmButton from "../Button/DeleteConfirmButton";
 import BigInput from "../Input/BigInput";
+import { deleteTopic } from "../../redux/topic";
 //https://forumweb.hosting/876-what-is-the-best-forum-template-have-you-ever-seen.html4
 function TopicMain(){
     const {id} = useParams();
@@ -25,6 +26,7 @@ function TopicMain(){
     const [timeSeconds, setTimeSeconds] = useState("")
     const [allowPost, setAllowPost] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
+    const postList = post.filter((p) => p.topic_id == id)
 
     const uNavigate = useNavigate()
 
@@ -81,7 +83,8 @@ function TopicMain(){
     }
 
     function handleDelete(){
-        console.log("Delete!");
+        dispatch(deleteTopic(topic))
+        uNavigate(`/categories/${topic.category_id}`)
     }
     
     let OuterContainer = document.getElementById("OuterContainer");
@@ -144,7 +147,7 @@ function TopicMain(){
             <Loading />
         )
     } else {
-
+        if(topic){
         return (
             <>
             <div className="TopicHeader">
@@ -185,10 +188,11 @@ function TopicMain(){
             </div>
             {/* NEW POST FORM/BUTTON */}
             {user != null && <NewPostForm topic_id={id} />}
-            {isPostLoaded && topic && topic.Posts && <div id="TopicPosts"><TopicPosts posts={topic.Posts}/></div>}
+            {isPostLoaded && topic && topic.Posts && <div id="TopicPosts"><TopicPosts posts={postList}/></div>}
             {isPostLoaded || <Loading />}
             </>
         )
+    }
     }
 }
 

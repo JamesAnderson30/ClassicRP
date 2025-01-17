@@ -12,7 +12,6 @@ import BigInput from "../../Input/BigInput";
 import { editPost } from "../../../redux/post";
 
 function TopicPost(id){
-    console.log("id: ", id)
     id = id.id.substring(4); // We expect the id to be 'post1' so we just want the number
     const byIdStart = useSelector((state) => state.post.posts.byId);
     const user = useSelector(state=> state.session.user);
@@ -23,7 +22,6 @@ function TopicPost(id){
     
     let date = new Date(post.created_at).toLocaleString();
     if(date == "Invalid Date") date = new Date().toLocaleString();
-    console.log("date: ", date);
 
     async function handleDelete(){
         await dispatch(deletePost(post.id))
