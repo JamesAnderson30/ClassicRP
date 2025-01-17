@@ -20,7 +20,7 @@ This project should build a platform that is specificially tailored to facilitat
 </a>
 
 ## FEATURES
-[Topics](#topics) - [Posts](#posts)  - [Documents](#documents)
+[Topics](#topics) - [Posts](#posts)  - [Documents](#documents) - [Install and Run](#
 ### TOPICS
 Topics allow for users to create a story with a specific set of characters and rules. 
 ![Topics](https://i.ibb.co/ZNhhTBW/Animation.gif)
@@ -29,6 +29,9 @@ Posts are how users engage with one another, play games, and conduct their hobby
 ![Posts](https://i.ibb.co/RjCZLWG/Post.gif)
 ### DOCUMENTS
 ![Documents](https://i.ibb.co/RjCZLWG/Post.gif)
+
+### Upcoming
+
 
 ## API
 
