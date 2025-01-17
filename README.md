@@ -19,6 +19,15 @@ This project should build a platform that is specificially tailored to facilitat
 	Live Site hosted on Render
 </a>
 
+## FEATURES
+[Topics](#topics)
+### TOPICS
+
+### POSTS
+
+### DOCUMENTS
+Topics allow for users to create a story with a specific set of characters and rules. 
+
 ## API
 
 ## Auth
