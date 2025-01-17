@@ -171,9 +171,6 @@ function NewPostForm({topic_id}){
                             <label>Character Name:</label>
                             <input required type="text" value={aName} onChange={(e)=>setaName(e.target.value)} />
 
-                            <label>Character Description: </label>
-                            <input  required type="text" value={aBody} onChange={(e)=>setaBody(e.target.value)} />
-
                             <label>Outline Color</label>
                             <select value={aColor} onChange={(e)=>setaColor(e.target.value)} >
                                 <option value={"orange"}>Orange</option>
