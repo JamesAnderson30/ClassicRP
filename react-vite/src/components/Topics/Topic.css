@@ -8,13 +8,15 @@
 
 .topicLine{
     display: grid;
-    grid-template-rows: 1fr 2fr;
+    grid-template-rows: 2em 4em;
+    margin: 1em 1em 1em 0em;
+    padding-bottom: 1em;
     gap: 0px 0px;
     grid-template-areas:
         "Image Subject Subject"
         "Image Bottom Bottom";
     justify-content: start;
-    border-bottom: 3px groove rgba(0,0,0,0.63);
+    border-bottom: 3px groove rgba(0, 0, 0, 0.63);
 }
 
 .topicLineSubject{
