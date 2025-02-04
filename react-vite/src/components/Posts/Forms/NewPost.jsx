@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { getTopic, registerProfile } from "../../../redux/topic";
 import './NewPost.css'
 import BigInput from "../../Input/BigInput";
+import ColorPicker from "../../Picker/ColorPicker";
 function NewPostForm({topic_id}){
     const user = useSelector(state=> state.session.user);
     const topics = useSelector((store) => store.topic.topics);
@@ -22,6 +23,7 @@ function NewPostForm({topic_id}){
     const [profileName, setProfileName] = useState(user.username)
     let userAvatar = user.profilePicture;
     const [profileAvatar, setProfileAvatar] = useState(userAvatar)
+    const [postColor, setPostColor] = useState("default")
 
     // Sign up form variables
     const [aName, setaName] = useState("");
@@ -29,6 +31,10 @@ function NewPostForm({topic_id}){
     const [aColor, setaColor] = useState("");
     const [aAvatar, setaAvatar] = useState("");
     const [showSignupForm, setShowSignUpForm] = useState(false)
+
+    // color array
+    
+      
     
     function handleShowFormButton(){
         setShowForm(!showForm)
@@ -64,10 +70,11 @@ function NewPostForm({topic_id}){
 
         let newErrors = []
         if(body.length < 1) newErrors.push("Post body cannot be empty!")
+        if(postColor == "Pick a Color!") newErrors.push("Pick a color")
         if(newErrors.length > 1) setErrorsHidden(false);
         else {
             setErrorsHidden(true)
-            await dispatch(sendPost({body, topic_id, user, 'topic_profile_id': profileId}))
+            await dispatch(sendPost({body, topic_id, user, postColor, 'topic_profile_id': profileId}))
             await dispatch(getPosts(topic_id))
             setBody("")
             let element = document.querySelector('.PostBody:last-of-type')
@@ -149,6 +156,7 @@ function NewPostForm({topic_id}){
                                         })}
                                     </select>
                                 </label>
+                                <ColorPicker value={postColor} callBack={setPostColor(e.target.value)} />
                                 <button id="postButton" disabled={isDisabled} type="submit">Post!</button>
                             </div>
                             

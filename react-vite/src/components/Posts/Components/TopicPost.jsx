@@ -32,6 +32,10 @@ function TopicPost(id){
         setIsEditing(!isEditing);
     }
 
+    async function startReply(){
+        console.log("clicked")
+    }
+
     async function handleEdit(e){
         e.preventDefault();
         if(await dispatch(editPost({'body': postBody, 'topic_id': post.topic_id, 'id': post.id}))){
@@ -63,7 +67,9 @@ function TopicPost(id){
                 <div className="PostArea">
                     {!isEditing && <PostBody post={post} />}
                     {isEditing && <><BigInput value={postBody} extraClass="minusBigButton" setValue={setPostBody} required={true} /><Button extraClass="wide bigButton" text="Submit Edits" callBack={handleEdit} /></>}
-                    
+                    {user && 
+                        <Button text="Reply" callBack={startReply} />
+                    }
                 </div>
             </div>
         )
