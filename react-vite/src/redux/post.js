@@ -109,11 +109,8 @@ const postReducer = (state = initialState, action) =>{
             return {...state, posts: newPostState}
         case SAVE_POSTS:
             let ids = new Set(newPostState.all.map((post)=>{return post.id}))
-            console.log("ids: ", ids)
-            console.log("action: ", action)
             for(let post of action.posts){
                 newPostState.byId[post.id] = post;
-                console.log("id: ", post.id)
                 if(ids.has(post.id) == false){
                     newPostState.all.push(post)
                     ids.add(post.id)
