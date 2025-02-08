@@ -17,6 +17,23 @@ def seed_posts():
         topic_id= 1,
         topic_profile_id = 1,
         created_at= "2024-11-17 14:46:59.176038")
+
+    testPostReplyTo1 = Post(
+        body= 'This is a reply to the first post',
+        user_id= 2,
+        topic_id= 1,
+        created_at= "2024-11-16 11:17:49.755796",
+        replied_to= 1
+    )
+
+    testPostReplyToReply = Post(
+        body= 'This is a reply to the reply post',
+        user_id= 1,
+        topic_id= 1,
+        topic_profile_id = 1,
+        created_at= "2024-11-16 11:17:49.755796",
+        replied_to= 1
+    )
     
     testPost3 = Post(
         body= 'The guard leans against his big spear',
@@ -50,6 +67,8 @@ def seed_posts():
     db.session.add(testPost1)
     db.session.add(testPost2)
     db.session.add(testPost3)
+    db.session.add(testPostReplyTo1)
+    db.session.add(testPostReplyToReply)
     db.session.add(testHistoricalPost1)
     db.session.add(testHistoricalPost2)
     db.session.commit()

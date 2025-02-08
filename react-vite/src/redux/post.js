@@ -108,10 +108,17 @@ const postReducer = (state = initialState, action) =>{
 
             return {...state, posts: newPostState}
         case SAVE_POSTS:
-            // for(let post of action.posts){
-            //     newPostState.byId[post.id] = post;
-            // }
-            // newPostState.all = [...(new Set(newPostState.all.concat(action.posts)))]
+            let ids = new Set(newPostState.all.map((post)=>{return post.id}))
+            console.log("ids: ", ids)
+            console.log("action: ", action)
+            for(let post of action.posts){
+                newPostState.byId[post.id] = post;
+                console.log("id: ", post.id)
+                if(ids.has(post.id) == false){
+                    newPostState.all.push(post)
+                    ids.add(post.id)
+                }
+            }
             return {...state, posts: newPostState}
         case UPDATE_POST:
             newPostState.byId[action.post.id].body = action.post.body;
