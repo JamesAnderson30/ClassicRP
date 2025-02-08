@@ -1,11 +1,14 @@
 import './button.css'
 import { useState } from 'react';
 
-function DeleteConfirmButton({callBack, reverse = false, classString = "ConfirmDelete", deleteText = "Delete", confirmText = "Yes, Delete", declineText = "No, keep it"}){
+function DeleteConfirmButton({callBack, reverse = false, margin=true, classString = "ConfirmDelete", deleteText = "Delete", confirmText = "Yes, Delete", declineText = "No, keep it"}){
     const [deleteButtonText, setDeleteButtonText] = useState(deleteText);
     const [hideDeleteButton, setHideDeleteButton] = useState(true);
     const [disableEditButton, setDisableEditButton] = useState(false);
     const [confirmDeleteButtonText, setConfirmDeleteButtonText] = useState(confirmText)
+    
+    let marginString = "wideNoMargin";
+    if(margin){marginString="wide"}
 
     const FirstDeleteButton = () =>{
         if(hideDeleteButton){
@@ -30,7 +33,7 @@ function DeleteConfirmButton({callBack, reverse = false, classString = "ConfirmD
                         <button onClick={(e)=>{callBack(e)}} hidden={hideDeleteButton} className="ConfirmDeleteButton wide confirm">
                             {confirmDeleteButtonText}
                         </button>
-                        <button onClick={FirstDeleteButton} className="FirstDeleteButton wide">
+                        <button onClick={FirstDeleteButton} className={`FirstDeleteButton ${marginString}`}>
                             {deleteButtonText}
                         </button>
                     </>
@@ -38,10 +41,10 @@ function DeleteConfirmButton({callBack, reverse = false, classString = "ConfirmD
 
                 {reverse || 
                     <>
-                        <button onClick={FirstDeleteButton} className="FirstDeleteButton">
+                        <button onClick={FirstDeleteButton} className={`FirstDeleteButton ${marginString}`}>
                             {deleteButtonText}
                         </button>
-                        <button onClick={(e)=>{callBack(e)}} hidden={hideDeleteButton} className="ConfirmDeleteButton confirm">
+                        <button onClick={(e)=>{callBack(e)}} hidden={hideDeleteButton} className="ConfirmDeleteButton confirm wide">
                             {confirmDeleteButtonText}
                         </button>
                     </>

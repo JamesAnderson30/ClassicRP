@@ -19,6 +19,9 @@ function TopicPost(id){
     const [postBody, setPostBody] = useState(post.body);
     const [isEditing, setIsEditing] = useState(false)
     const dispatch = useDispatch()
+    
+    let date = new Date(post.created_at).toLocaleString();
+    if(date == "Invalid Date") date = new Date().toLocaleString();
 
     async function handleDelete(){
         await dispatch(deletePost(post.id))
@@ -27,6 +30,10 @@ function TopicPost(id){
 
     async function showEditForm(){
         setIsEditing(!isEditing);
+    }
+
+    async function startReply(){
+        console.log("clicked")
     }
 
     async function handleEdit(e){
@@ -41,7 +48,6 @@ function TopicPost(id){
     }
 
     
-    
     if(byIdStart[id]){
         //get user status
         return (
@@ -51,17 +57,19 @@ function TopicPost(id){
                     {user && post && user.id == post.user_id && 
                         <div className="PostUserControl">
                             <Button text="Edit Post" extraClass={"wide"} callBack={showEditForm} />
-                            <DeleteConfirmButton reverse={true} deleteText="Delete Document" callBack={handleDelete}/>
+                            <DeleteConfirmButton reverse={false} extraClass={"wideNoMargin"} deleteText="Delete Post" callBack={handleDelete}/>
                         </div>
                     }
                 </div>
                 <div className="PostInfo suppressedText">
-                    {post && new Date(post.created_at).toLocaleString()}
+                    {post && date}
                 </div>
                 <div className="PostArea">
                     {!isEditing && <PostBody post={post} />}
                     {isEditing && <><BigInput value={postBody} extraClass="minusBigButton" setValue={setPostBody} required={true} /><Button extraClass="wide bigButton" text="Submit Edits" callBack={handleEdit} /></>}
-                    
+                    {user && 
+                        <Button text="Reply" callBack={startReply} />
+                    }
                 </div>
             </div>
         )

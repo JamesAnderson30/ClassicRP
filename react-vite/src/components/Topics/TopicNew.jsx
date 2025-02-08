@@ -54,7 +54,7 @@ function TopicNew(){
                             <BigInput value={body} setValue={setBody} />
                             {/* <textarea className={"BigInput"} value={body} onChange={(e)=>{setBody(e.target.body)}} /> */}
                         </div>
-                        <BigButton text="Create New Topic" callback={handleClick} />
+                        <BigButton extraClass="bigMarginTop"text="Create New Topic" callback={handleClick} />
         </>
         )
     }

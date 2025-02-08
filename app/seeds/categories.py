@@ -9,9 +9,17 @@ def seed_categories():
     
     Fantasy = Category(
         name='Fantasy', description="Forum RP centered around a fantastical past")
+    
+    Historical = Category(
+        name='Historical', description="Forum RP centered around a mundane, but real past")
+    
+    NonRP = Category(
+        name='Non-RP', description="Forum about any discussions other than RP")
 
     db.session.add(Scifi)
     db.session.add(Fantasy)
+    db.session.add(Historical)
+    # db.session.add(NonRP)
     db.session.commit()
 
 

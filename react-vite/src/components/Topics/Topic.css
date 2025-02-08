@@ -8,13 +8,15 @@
 
 .topicLine{
     display: grid;
-    grid-template-rows: 1fr 2fr;
+    grid-template-rows: 2em 4em;
+    margin: 1em 1em 1em 0em;
+    padding-bottom: 1em;
     gap: 0px 0px;
     grid-template-areas:
         "Image Subject Subject"
         "Image Bottom Bottom";
     justify-content: start;
-    border-bottom: 3px groove rgba(0,0,0,0.63);
+    border-bottom: 3px groove rgba(0, 0, 0, 0.63);
 }
 
 .topicLineSubject{
@@ -23,6 +25,7 @@
 
 .topicLineBottom{
     grid-area: Bottom;
+    overflow:hidden;
 }
 
 .TopicList{
@@ -47,10 +50,14 @@
         margin-bottom: 10px;
         /* min-height: 301px; */
         min-height: 294px;
-        background-color:white
+        background-color:white;
+        align-items: start;
 }
 .TopicUserControls{
     grid-area: TopicUserControls;
+    padding: 10px;
+    background-color: #b2a487;
+    border-top: black 1px solid;
 
 }
 
@@ -62,7 +69,8 @@
 
 
 .TopicOwner{
-    display: flex;
+    display: flex
+;
     flex-direction: column;
     align-items: center;
     grid-area: User;
@@ -71,13 +79,21 @@
     padding-top: 10px;
     position: relative;
     border-radius: 7px 0px 0px 7px;
+    /* height: 97%; */
+    height: calc(100% - 10px);
 }
 .TopicMain{
     grid-area: Post;
     border-left: 1px black solid;
     padding-left: 10px;
     padding-top:10px;
+    height: 90%;
 }
+
+.TopicMain .BigInput{
+    width: calc(100% - 10px);
+}
+
 .TopicDetails{
     grid-area:details;
     /* border-bottom: 6px double #b394c8 !important; */

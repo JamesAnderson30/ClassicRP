@@ -1,6 +1,6 @@
-function LeftButton({text, callback}){
+function LeftButton({text, callback, extraClass=""}){
     return(
-        <button className="LeftButton button" onClick={(e)=>{callback()}}>
+        <button className={`LeftButton button ${extraClass}`} onClick={(e)=>{callback()}}>
             {text}
         </button>
     )

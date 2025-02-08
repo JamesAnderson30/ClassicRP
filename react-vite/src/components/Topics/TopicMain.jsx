@@ -3,12 +3,16 @@ import Loading from '../loading'
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getTopic } from "../../redux/topic";
+import { editTopic, getTopic, storeTopics } from "../../redux/topic";
 import { getPosts } from "../../redux/post";
 import NewPostForm from "../Posts/Forms/NewPost";
 import TopicPosts from "../Posts/TopicPosts";
 import TopicListUsertControl from "./Components/TopicUserControl";
 import topicStyling from './Topic.module.css'
+import Button from "../Button/Button";
+import DeleteConfirmButton from "../Button/DeleteConfirmButton";
+import BigInput from "../Input/BigInput";
+import { deleteTopic } from "../../redux/topic";
 //https://forumweb.hosting/876-what-is-the-best-forum-template-have-you-ever-seen.html4
 function TopicMain(){
     const {id} = useParams();
@@ -21,6 +25,9 @@ function TopicMain(){
     const [isPostLoaded, setIsPostLoaded] = useState(false);
     const [timeSeconds, setTimeSeconds] = useState("")
     const [allowPost, setAllowPost] = useState(false)
+    const [isEditing, setIsEditing] = useState(false)
+    const postList = post.filter((p) => p.topic_id == id)
+
     const uNavigate = useNavigate()
 
     function getTimeFormated(times){
@@ -58,6 +65,27 @@ function TopicMain(){
         setBody(body);
         setSubject(subject);
     }
+
+    function showEditForm(){
+        setIsEditing(!isEditing);
+    }
+
+      async function handleEdit(e){
+            e.preventDefault();
+            let response = await dispatch(editTopic({body, id, subject}))
+            console.log("response: ", response)
+            if(response){
+                storeTopics([{...topic, body, id}]);
+                setIsEditing(false);
+            } else {
+                alert("Your topic could not be edited");
+            }
+    }
+
+    function handleDelete(){
+        dispatch(deleteTopic(topic))
+        uNavigate(`/categories/${topic.category_id}`)
+    }
     
     let OuterContainer = document.getElementById("OuterContainer");
     let InnerContainer = document.getElementById("InnerContainer")
@@ -83,7 +111,9 @@ function TopicMain(){
     useEffect(()=>{
         let getTopicThunk = async (id) => {
             //Just scroll function
-            if(await dispatch(getTopic(id))){
+            let res = await dispatch(getTopic(id))
+
+            if(res){
                 setIsTopicLoaded(true)
                 setBody(topic.body);
                 setSubject(topic.subject);
@@ -117,7 +147,7 @@ function TopicMain(){
             <Loading />
         )
     } else {
-
+        if(topic){
         return (
             <>
             <div className="TopicHeader">
@@ -132,7 +162,10 @@ function TopicMain(){
             </div>
             <div id="TopicHeader" className="beigeBorder">
                 <div className="TopicMain">
-                    {body}
+                {!isEditing && <>{body}</>}
+                {isEditing && <><BigInput value={body} extraClass="minusBigButton" setValue={setBody} required={true} />
+                    <Button extraClass="wide littleMarginBottom bigButton" text="Submit Edits" callBack={handleEdit} />
+                </>}
                 </div>
                 <div className="TopicOwner">
                     <span class="littleArrowLeft"></span>
@@ -142,14 +175,24 @@ function TopicMain(){
                     <img className="Avatar" src={topic.topic_specific_profile_picture} />}
                     <div className="userName">{topic.username}</div>
                 </div>
-                {user != null && topic && user.id == topic.user_id && <TopicListUsertControl setTopic={setTopic} topic={topic} />}
+
+                {/* IF THE USER OWNS THE TOPIC, LET THEM EDIT OR DELETE THE TOPIC */}
+                {user != null && topic && user.id == topic.user_id && 
+                    <div className="TopicUserControls">
+                        <div className="squeeze spaceContents">
+                            <Button text="Edit Topic" extraClass=""  callBack={showEditForm} />
+                            <DeleteConfirmButton reverse={false} margin={false} deleteText="Delete Topic" callBack={handleDelete}/>
+                        </div>
+                    </div>
+                }
             </div>
             {/* NEW POST FORM/BUTTON */}
             {user != null && <NewPostForm topic_id={id} />}
-            {isPostLoaded && topic && topic.Posts && <div id="TopicPosts"><TopicPosts posts={topic.Posts}/></div>}
+            {isPostLoaded && topic && topic.Posts && <div id="TopicPosts"><TopicPosts posts={postList}/></div>}
             {isPostLoaded || <Loading />}
             </>
         )
+    }
     }
 }
 

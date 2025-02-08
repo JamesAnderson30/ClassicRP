@@ -47,15 +47,17 @@ function PostUserControls({post, setPost}){
 
     return(
         <div className="PostUserControls">
-            <button onClick={editClick} className="userControlButton">
-                Edit
-            </button>
-            <button onClick={firstDeleteButton} className="userControlButton">
-                {deleteButtonText}
-            </button>
-            <button onClick={confirmDelete} hidden={hideDeleteButton} className="userControlButton confirm">
-                Yes, Delete!
-            </button>
+                <button onClick={editClick} className="userControlButton">
+                    Edit
+                </button>
+                
+                <button onClick={firstDeleteButton} className="userControlButton">
+                    {deleteButtonText}
+                </button>
+                <button onClick={confirmDelete} hidden={hideDeleteButton} className="userControlButton confirm">
+                    Yes, Delete!
+                </button>
+            
             <form hidden={hideForm} onSubmit={(e)=>handleSubmit(e)}>
                 <input type="hidden" name="topic_id" value={post.topic_id} />
                 <input type="hidden" name="id" value={post.id} />

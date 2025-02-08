@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux";
-import { sendPost } from "../../../redux/post";
+import { getPosts, sendPost } from "../../../redux/post";
 import { useDispatch } from "react-redux";
 import { getTopic, registerProfile } from "../../../redux/topic";
 import './NewPost.css'
+import BigInput from "../../Input/BigInput";
+import ColorPicker from "../../Picker/ColorPicker";
 function NewPostForm({topic_id}){
     const user = useSelector(state=> state.session.user);
     const topics = useSelector((store) => store.topic.topics);
@@ -21,6 +23,7 @@ function NewPostForm({topic_id}){
     const [profileName, setProfileName] = useState(user.username)
     let userAvatar = user.profilePicture;
     const [profileAvatar, setProfileAvatar] = useState(userAvatar)
+    const [postColor, setPostColor] = useState("default")
 
     // Sign up form variables
     const [aName, setaName] = useState("");
@@ -28,6 +31,10 @@ function NewPostForm({topic_id}){
     const [aColor, setaColor] = useState("");
     const [aAvatar, setaAvatar] = useState("");
     const [showSignupForm, setShowSignUpForm] = useState(false)
+
+    // color array
+    
+      
     
     function handleShowFormButton(){
         setShowForm(!showForm)
@@ -63,10 +70,12 @@ function NewPostForm({topic_id}){
 
         let newErrors = []
         if(body.length < 1) newErrors.push("Post body cannot be empty!")
+        if(postColor == "Pick a Color!") newErrors.push("Pick a color")
         if(newErrors.length > 1) setErrorsHidden(false);
         else {
             setErrorsHidden(true)
-            await dispatch(sendPost({body, topic_id, user, 'topic_profile_id': profileId}))
+            await dispatch(sendPost({body, topic_id, user, postColor, 'topic_profile_id': profileId}))
+            await dispatch(getPosts(topic_id))
             setBody("")
             let element = document.querySelector('.PostBody:last-of-type')
             element.scrollIntoView()
@@ -117,13 +126,15 @@ function NewPostForm({topic_id}){
     if(isLoaded){
         
         return(
-                <>
-                    <button className={"newButtons"} onClick={(e)=>handleShowFormButton(e)}>Make a new post!</button>
-                    <button className={"newButtons"} onClick={(e)=>handleShowSignupButton(e)}>                                
-                        {topics.byId[topic_id].privacy_level == 2 && "Submit character application"}
-                        {topics.byId[topic_id].privacy_level < 2 && "Submit character profile"}
-                    </button>
-
+                <><div className={"NewPostButtons spaceContents beigeBorder"}>
+                    <div className={"squeeze spaceContents"}>
+                        <button onClick={(e)=>handleShowFormButton(e)}>Make a new post!</button>
+                        <button onClick={(e)=>handleShowSignupButton(e)}>                                
+                            {topics.byId[topic_id].privacy_level == 2 && "Submit character application"}
+                            {topics.byId[topic_id].privacy_level < 2 && "Submit character profile"}
+                        </button>
+                    </div>
+                    
                     {showForm && 
                     <>
                         <h2>Submit a new post:</h2>
@@ -145,12 +156,14 @@ function NewPostForm({topic_id}){
                                         })}
                                     </select>
                                 </label>
+                                <ColorPicker value={postColor} callBack={setPostColor(e.target.value)} />
                                 <button id="postButton" disabled={isDisabled} type="submit">Post!</button>
                             </div>
                             
-                            <div className="postBodyArea">
+                            <div className="postBodyArea beigeBorder">
                                 <input type="hidden" name="topic_id" value={topic_id} />
-                                    <textarea value={body} onChange={(e)=>setBody(e.target.value)} />
+                                    {/* <textarea value={body} onChange={(e)=>setBody(e.target.value)} /> */}
+                                    <BigInput value={body} setValue={setBody} />
                                 
                             </div>
                             
@@ -165,9 +178,6 @@ function NewPostForm({topic_id}){
 
                             <label>Character Name:</label>
                             <input required type="text" value={aName} onChange={(e)=>setaName(e.target.value)} />
-
-                            <label>Character Description: </label>
-                            <input  required type="text" value={aBody} onChange={(e)=>setaBody(e.target.value)} />
 
                             <label>Outline Color</label>
                             <select value={aColor} onChange={(e)=>setaColor(e.target.value)} >
@@ -188,7 +198,7 @@ function NewPostForm({topic_id}){
                             <span hidden={errorsHidden}>{errors.map((error)=>{return <span>{error}</span>})}</span>
                         </form>
                     }
-                    
+                    </div>
                 </>
         )
     }

@@ -78,7 +78,8 @@ function DocEdit(){
 						<BigInput value={body} setValue={setBody} />
 						{/* <textarea className={"BigInput"} value={body} onChange={(e)=>{setBody(e.target.body)}} /> */}
 					</div>
-					<LeftButton text="Save Document" callback={handleClick} />
+                    <br></br><br></br>
+					<LeftButton text="Save Document" extraClass="wide" callback={handleClick} /><hr/>
                     <DeleteConfirmButton reverse={true} deleteText="Delete Document" callBack={handleDelete}/>
       </>
     )

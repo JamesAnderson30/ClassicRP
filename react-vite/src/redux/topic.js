@@ -119,8 +119,9 @@ export const editTopic = (topic) => async (dispatch) =>{
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(topic)
   });
-
-  dispatch(updateTopic(await response.json()));
+  let res = await response.json();
+  dispatch(updateTopic(res));
+  return res;
 }
 
 export const getCategoryTopics = (category_id) => async (dispatch) => {
@@ -218,6 +219,7 @@ const topicReducer = (state = initialState, action) =>{
             newTopicState.byId[action.topic.id] = action.topic;
             return {...state, topics: newTopicState}
         case UPDATE_TOPIC:
+            console.log("action.topic: ", action.topic)
             newTopicState.byId[action.topic.id].body = action.topic.body;
             newTopicState.byId[action.topic.id].subject = action.topic.subject;
             let categoryArray = newTopicState.byCategoryId[action.topic.category_id];

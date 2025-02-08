@@ -34,10 +34,20 @@ def seed_topic():
         privacy_level=2
     )
 
+    HistoricalTopic1 = Topic(
+        subject= "The Oregan Trail",
+        body = "Can you survive the journey across the west? Will you die of dysntary? Let's find out! This game will begin a week after this is posted, so be sure to submit character profiles before that time! Outcomes will mostly be determined by dice rolls, so you just have to provide the floruish and character. It'll be great fun! Game will reset everytime the party fails, or makes it!",
+        user_id = 1,
+        category_id = 3,
+        created_at = "2024-12-02 20:08:39.184674",
+        privacy_level = 3    
+    
+    )
 
     db.session.add(testTopic1)
     db.session.add(testTopic2)
     db.session.add(testTopic3)
+    db.session.add(HistoricalTopic1)
     db.session.commit()
 
 

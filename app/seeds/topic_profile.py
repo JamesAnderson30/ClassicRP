@@ -26,9 +26,33 @@ def seed_topic_profile():
         avatar = "https://imgcdn.stablediffusionweb.com/2024/3/6/87d67223-0469-4f5c-9a71-4f3ea6593d6b.jpg",
         created_at= datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y") )
     
+    topic_profile_historical_1 = Topic_Profile(
+        body = "Just a young lad, ready to make it to a completely flat and featurely plain where he will go insane",
+        name = "Jimmy",
+        color = "Brown",
+        user_id = 1, 
+        approved = 1,
+        topic_id = 4,
+        avatar = "https://i.pinimg.com/236x/23/7b/34/237b34fd878812878fc1588aaa6a1cf1.jpg",
+        created_at = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
+    )
+
+    topic_profile_historical_2 = Topic_Profile(
+        body = "Just a young lass, trust me. She's not a grown woman from another town that's wanted. She insists we leave for the trail right away",
+        name = "Sally",
+        color = "Green", 
+        user_id = 2,
+        approved = 1, 
+        topic_id = 4,
+        avatar = "https://clipart-library.com/2023/kisspng-american-frontier-horse-cartoon-clip-art-5b2fa5c6def234.0126638515298492869132.jpg",
+        created_at = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
+    )
+    
 
     db.session.add(topic_profile)
     db.session.add(topic_profile2)
+    db.session.add(topic_profile_historical_1)
+    db.session.add(topic_profile_historical_2)
     db.session.commit()
 
 
