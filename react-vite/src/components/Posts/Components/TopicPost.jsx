@@ -11,8 +11,8 @@ import Button from "../../Button/Button";
 import BigInput from "../../Input/BigInput";
 import { editPost } from "../../../redux/post";
 
-function TopicPost(id){
-    id = id.id.substring(4); // We expect the id to be 'post1' so we just want the number
+function TopicPost(props){
+    const id = props.id.substring(4); // We expect the id to be 'post1' so we just want the number
     const byIdStart = useSelector((state) => state.post.posts.byId);
     const user = useSelector(state=> state.session.user);
     const [post, setPost] = useState(byIdStart[id]);
@@ -22,6 +22,8 @@ function TopicPost(id){
     
     let date = new Date(post.created_at).toLocaleString();
     if(date == "Invalid Date") date = new Date().toLocaleString();
+
+    console.log("conversation: ", props.conversation)
 
     async function handleDelete(){
         await dispatch(deletePost(post.id))

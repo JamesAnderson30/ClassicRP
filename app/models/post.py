@@ -34,6 +34,7 @@ class Post(db.Model):
             'topic_id': self.topic_id,
             'created_at': self.created_at,
             'topic_profile_id': self.topic_profile_id,
+            'replied_to': self.replied_to
             
         }
     # # Uncomment When Quesion Comments is added

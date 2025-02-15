@@ -32,7 +32,7 @@ def seed_posts():
         topic_id= 1,
         topic_profile_id = 1,
         created_at= "2024-11-16 11:17:49.755796",
-        replied_to= 1
+        replied_to= 4
     )
     
     testPost3 = Post(

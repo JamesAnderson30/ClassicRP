@@ -13,11 +13,13 @@ import Button from "../Button/Button";
 import DeleteConfirmButton from "../Button/DeleteConfirmButton";
 import BigInput from "../Input/BigInput";
 import { deleteTopic } from "../../redux/topic";
+import TopicPost from "../Posts/Components/TopicPost";
 //https://forumweb.hosting/876-what-is-the-best-forum-template-have-you-ever-seen.html4
 function TopicMain(){
     const {id} = useParams();
     const topic = useSelector(state => state.topic.topics.byId[id]);
     const post = useSelector(state=> state.post.posts.all);
+    const postById = useSelector(state=> state.post.posts.byId)
     const user = useSelector(state=> state.session.user);
     const [isTopicLoaded, setIsTopicLoaded] = useState(false);
     const [body, setBody] = useState('');
@@ -27,6 +29,9 @@ function TopicMain(){
     const [allowPost, setAllowPost] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const postList = post.filter((p) => p.topic_id == id)
+
+    // Conversation maker
+    let conversations = new Map()
 
     const uNavigate = useNavigate()
 
@@ -188,7 +193,31 @@ function TopicMain(){
             </div>
             {/* NEW POST FORM/BUTTON */}
             {user != null && <NewPostForm topic_id={id} />}
-            {isPostLoaded && topic && topic.Posts && <div id="TopicPosts"><TopicPosts posts={postList}/></div>}
+            {isPostLoaded && topic && topic.Posts && <div id="TopicPosts">
+                {/* POSTS */}
+                {
+                    postList.map((post)=>{
+                    //check if part of conversation
+                    let conversation = null
+                    if(post.replied_to){
+                        if(postById[post.replied_to] && postById[post.replied_to].replied_to){
+                            let replied_to = postById[post.replied_to].replied_to
+                            while(postById[replied_to].replied_to){
+                                if(postById[replied_to].replied_to)replied_to = postById[replied_to].replied_to
+                                // else conversation = replied_to
+                                
+                            }
+                            conversation = replied_to
+                        } else {
+
+                            conversation = postById[post.replied_to].id;
+                        }
+                    }
+                    if(post) return (
+                        <TopicPost conversation={conversation} id={`post${post.id}`} key={`post${post.id}`} />
+                    )
+                })}
+            </div>}
             {isPostLoaded || <Loading />}
             </>
         )
