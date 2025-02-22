@@ -9,6 +9,7 @@ def seed_posts():
         body= 'This is the first seed post. It should belong to a topic, under a category, and belong to a user',
         user_id= 1,
         topic_id= 1,
+        topic_profile_id = 1,
         created_at= "2024-11-16 11:17:49.755796")
     
     testPost2 = Post(

@@ -198,9 +198,8 @@ function TopicMain(){
                 {
                     postList.map((post)=>{
                     //check if part of conversation
-                    
                     if(post) return (
-                        <TopicPost conversation={conversation} id={`post${post.id}`} key={`post${post.id}`} />
+                        <TopicPost  post={post} id={`post${post.id}`} key={`post${post.id}`} />
                     )
                 })}
             </div>}

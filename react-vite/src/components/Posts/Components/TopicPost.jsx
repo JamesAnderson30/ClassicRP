@@ -10,6 +10,7 @@ import { deletePost } from "../../../redux/post";
 import Button from "../../Button/Button";
 import BigInput from "../../Input/BigInput";
 import { editPost } from "../../../redux/post";
+import PostReplyTag from "./PostReplyTag";
 
 function TopicPost(props){
     const id = props.id.substring(4); // We expect the id to be 'post1' so we just want the number
@@ -23,7 +24,6 @@ function TopicPost(props){
     let date = new Date(post.created_at).toLocaleString();
     if(date == "Invalid Date") date = new Date().toLocaleString();
 
-    console.log("conversation: ", props.conversation)
 
     async function handleDelete(){
         await dispatch(deletePost(post.id))
@@ -52,6 +52,17 @@ function TopicPost(props){
     
     if(byIdStart[id]){
         //get user status
+
+        //Handle Reply Case
+        let extraClass = ""
+        let replyTag = () => <></>
+        if(post.replied_to){
+            extraClass = 'isReply'
+            if(byIdStart[post.replied_to]){
+                let parentPost = byIdStart[post.replied_to]
+                replyTag = () => <PostReplyTag parentPost={parentPost}/>
+            }
+        }
         return (
             <div id={`post${id}`} className="PostBody beigeBorder">
                 <div className="UserArea">
@@ -67,6 +78,7 @@ function TopicPost(props){
                     {post && date}
                 </div>
                 <div className="PostArea">
+                    {replyTag()}
                     {!isEditing && <PostBody post={post} />}
                     {isEditing && <><BigInput value={postBody} extraClass="minusBigButton" setValue={setPostBody} required={true} /><Button extraClass="wide bigButton" text="Submit Edits" callBack={handleEdit} /></>}
                     {user && 
