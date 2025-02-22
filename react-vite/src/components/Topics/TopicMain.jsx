@@ -198,21 +198,7 @@ function TopicMain(){
                 {
                     postList.map((post)=>{
                     //check if part of conversation
-                    let conversation = null
-                    if(post.replied_to){
-                        if(postById[post.replied_to] && postById[post.replied_to].replied_to){
-                            let replied_to = postById[post.replied_to].replied_to
-                            while(postById[replied_to].replied_to){
-                                if(postById[replied_to].replied_to)replied_to = postById[replied_to].replied_to
-                                // else conversation = replied_to
-                                
-                            }
-                            conversation = replied_to
-                        } else {
-
-                            conversation = postById[post.replied_to].id;
-                        }
-                    }
+                    
                     if(post) return (
                         <TopicPost conversation={conversation} id={`post${post.id}`} key={`post${post.id}`} />
                     )
