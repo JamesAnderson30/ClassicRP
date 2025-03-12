@@ -27,6 +27,7 @@ function TopicMain(){
     const [allowPost, setAllowPost] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
     const postList = post.filter((p) => p.topic_id == id)
+    console.log("postList: ", postList)
 
     const uNavigate = useNavigate()
 
@@ -113,8 +114,9 @@ function TopicMain(){
             //Just scroll function
             let res = await dispatch(getTopic(id))
 
-            if(res){
+            if(topic){
                 setIsTopicLoaded(true)
+                console.log("topic.body: ", topic)
                 setBody(topic.body);
                 setSubject(topic.subject);
                 setTimeSeconds(getTimeFormated(Math.trunc((Date.now() / 1000) - topic.created_at)))               
@@ -128,7 +130,7 @@ function TopicMain(){
                     console.log("else: ", location.hash)
                 }
             } else {
-                uNavigate('/')
+                //uNavigate('/')
             }
         }
         let getPostThunk = async (id) => {
@@ -137,6 +139,7 @@ function TopicMain(){
         }
 
         if(!isTopicLoaded)getTopicThunk(id)
+            console.log("isPostLoaded", isPostLoaded)
         if(!isPostLoaded)getPostThunk(id)
 
         
@@ -168,7 +171,7 @@ function TopicMain(){
                 </>}
                 </div>
                 <div className="TopicOwner">
-                    <span class="littleArrowLeft"></span>
+                    <span className="littleArrowLeft"></span>
                     
                     {(topic.topic_specific_profile_picture && topic.topic_specific_profile_picture == "default") ? 
                     <img className="Avatar" src={topic.user_profile_picture} /> :
