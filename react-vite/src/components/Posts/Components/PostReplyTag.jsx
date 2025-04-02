@@ -1,6 +1,8 @@
 
 function PostReplyTag({parentPost}){
-    console.log("parentPost: ", parentPost)
+    return (
+        <div>Test</div>
+    )
 }
 
 export default PostReplyTag;

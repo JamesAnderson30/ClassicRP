@@ -78,7 +78,7 @@ function TopicPost(props){
                     {post && date}
                 </div>
                 <div className="PostArea">
-                    {replyTag()}
+                    {<PostReplyTag />}
                     {!isEditing && <PostBody post={post} />}
                     {isEditing && <><BigInput value={postBody} extraClass="minusBigButton" setValue={setPostBody} required={true} /><Button extraClass="wide bigButton" text="Submit Edits" callBack={handleEdit} /></>}
                     {user && 
