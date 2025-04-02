@@ -51,7 +51,6 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('topic_id', sa.Integer(), nullable=False),
     sa.Column('replied_to', sa.String(length=200), nullable=True),
-    sa.Column('replies', sa.String(length=400), nullable=True),
     sa.Column('topic_profile_id', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
