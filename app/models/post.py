@@ -31,7 +31,7 @@ class Post(db.Model):
             'user_id': self.user_id,
             'username': self.User.username,
             'topic_id': self.topic_id,
-            'replied_to': self.replied_to
+            'replied_to': self.replied_to,
             'created_at': self.created_at,
             'topic_profile_id': self.topic_profile_id,
             
