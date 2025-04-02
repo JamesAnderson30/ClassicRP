@@ -16,7 +16,6 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     topic_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("topic.id")), nullable=False)
     replied_to = db.Column(db.String(200), nullable=True)
-    replies = db.Column(db.String(400), nullable=True)
     created_at = db.Column(db.String(250))
     topic_profile_id = db.Column(db.String(250), db.ForeignKey(add_prefix_for_prod("topic_profile.id")))
 
